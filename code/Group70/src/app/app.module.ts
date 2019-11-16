@@ -11,12 +11,20 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { HomePageComponent } from './Pages/home-page/home-page.component';
 import { PageNotFoundComponent } from './Pages/page-not-found/page-not-found.component';
+import { HeaderBarComponent } from './Components/header-bar/header-bar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    HeaderBarComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +33,9 @@ import { PageNotFoundComponent } from './Pages/page-not-found/page-not-found.com
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

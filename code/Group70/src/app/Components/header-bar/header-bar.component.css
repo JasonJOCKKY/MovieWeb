@@ -1,0 +1,10 @@
+.title{
+    margin: 0 auto;
+    font-size: larger;
+}
+
+.fixRight{
+    position: fixed;
+    right: 1%;
+    font-size: medium;
+}
