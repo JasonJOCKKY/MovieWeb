@@ -13,12 +13,16 @@ import { HomePageComponent } from './Pages/home-page/home-page.component';
 import { PageNotFoundComponent } from './Pages/page-not-found/page-not-found.component';
 import { HeaderBarComponent } from './Components/header-bar/header-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MovieDetailsPageComponent } from './Pages/movie-details-page/movie-details-page.component';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatCardModule} from '@angular/material/card';
+import {MatListModule} from '@angular/material/list';
+import {MatDividerModule} from '@angular/material/divider';
+
 
 
 @NgModule({
@@ -26,7 +30,8 @@ import {MatMenuModule} from '@angular/material/menu';
     AppComponent,
     HomePageComponent,
     PageNotFoundComponent,
-    HeaderBarComponent
+    HeaderBarComponent,
+    MovieDetailsPageComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +44,10 @@ import {MatMenuModule} from '@angular/material/menu';
     MatToolbarModule,
     MatGridListModule,
     MatButtonModule,
-    MatMenuModule
+    MatMenuModule,
+    MatCardModule,
+    MatListModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

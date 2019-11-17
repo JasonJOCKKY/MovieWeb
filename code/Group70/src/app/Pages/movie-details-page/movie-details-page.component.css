@@ -1,0 +1,47 @@
+
+@media (min-width: 576px) {  }
+
+
+@media (min-width: 768px) {  }
+
+
+@media (min-width: 992px) {  }
+
+
+@media (min-width: 1200px) {
+   
+}
+
+
+.card{
+    border: none;
+    max-width: 1000px;
+    margin-top: 50px;
+}
+
+.info{
+    background-color: silver;
+}
+
+.wrapper{
+    width: 1000px;
+    height: 1700px;
+    background-color: whitesmoke;
+    margin: auto;
+}
+
+.actor img{
+    width: 100px;
+    height: 100px;
+}
+
+.actor{
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.actors{
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 20px;
+}

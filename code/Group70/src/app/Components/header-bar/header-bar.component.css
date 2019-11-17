@@ -4,7 +4,7 @@
 }
 
 .fixRight{
-    position: fixed;
+    position: absolute;
     right: 2%;
     font-size: medium;
 }
