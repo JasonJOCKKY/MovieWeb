@@ -5,6 +5,10 @@
 
 .fixRight{
     position: fixed;
-    right: 1%;
+    right: 2%;
     font-size: medium;
 }
+
+/* .user{
+    font-size: small;
+} */
