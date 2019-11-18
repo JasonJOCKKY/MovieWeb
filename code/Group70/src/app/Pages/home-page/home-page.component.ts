@@ -75,7 +75,7 @@ export class HomePageComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(PreviewComponent, {
-      width: '250px'
+      width: '500px'
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -1,8 +1,8 @@
 <p style="text-align: center;">[header here]</p>
 
-<form [formGroup]="searchForm" (ngSubmit)="onSubmit()" >
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="search-form">
 
-    <input matInput placeholder="Search by title..."  [matAutocomplete]="auto" [formControl]="movieCtrl">
+    <input matInput class="search-options" placeholder="Search by title..."  [matAutocomplete]="auto" [formControl]="movieCtrl">
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let movie of filteredMovies | async" [value]="movie.title">
         <!--<img class="example-option-img" aria-hidden [src]="state.flag" height="25">-->
@@ -11,7 +11,7 @@
       </mat-option>
     </mat-autocomplete>
 
-    <mat-expansion-panel>
+    <mat-expansion-panel class="search-options">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <mat-icon>filter_list</mat-icon>
@@ -28,7 +28,7 @@
               <input matInput placeholder="Year" formControlName="year">
             </mat-form-field>
           </mat-expansion-panel>
-    <button class="button" type="submit" [disabled]="!searchForm.valid">Search</button>
+    <button class="search-button btn" type="submit" [disabled]="!searchForm.valid">Search</button>
 </form>
 
 <div class="movie-container">
