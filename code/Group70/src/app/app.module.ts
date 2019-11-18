@@ -23,15 +23,19 @@ import {MatInputModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatIconModule} from '@angular/material/icon';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { PreviewComponent } from './Pages/preview/preview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    PreviewComponent
   ],
+  entryComponents: [PreviewComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -49,7 +53,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     MatGridListModule,
     MatExpansionModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule
 
   ],
   providers: [],

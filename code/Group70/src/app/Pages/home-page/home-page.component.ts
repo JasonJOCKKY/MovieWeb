@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import { PreviewComponent } from '../preview/preview.component';
 
 export interface Movie {
   title: string;
@@ -15,13 +18,29 @@ export interface Movie {
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog) { 
+    this.filteredMovies = this.movieCtrl.valueChanges
+      .pipe(
+        startWith(''),
+        map(movie => movie ? this._filterMovies(movie) : this.movies.slice())
+      );
+  }
+
+  private _filterMovies(value: string): Movie[] {
+    const filterValue = value.toLowerCase();
+
+    return this.movies.filter(movie => movie.title.toLowerCase().indexOf(filterValue) === 0);
+  }
 
   searchForm = new FormGroup({
     title: new FormControl(''),
     director: new FormControl(''),
     year: new FormControl(''),
   });
+
+  
+  movieCtrl = new FormControl();
+  filteredMovies: Observable<Movie[]>;
 
   movies: Movie[] = [
     {title: "Citizen Kane", director: "Orson Welles", year: 1941},
@@ -52,6 +71,16 @@ export class HomePageComponent implements OnInit {
   }
   selectFilm(){
     window.alert("hi");
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PreviewComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }

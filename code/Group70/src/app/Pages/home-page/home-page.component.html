@@ -1,47 +1,45 @@
-<p>[header here]</p>
+<p style="text-align: center;">[header here]</p>
 
-<form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class='search-form'>
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()" >
 
-    <input matInput placeholder="Title" aria-label="Title" [matAutocomplete]="auto" [formControl]="title">
+    <input matInput placeholder="Search by title..."  [matAutocomplete]="auto" [formControl]="movieCtrl">
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let movie of movies | async" [value]="movie.title">
+      <mat-option *ngFor="let movie of filteredMovies | async" [value]="movie.title">
         <!--<img class="example-option-img" aria-hidden [src]="state.flag" height="25">-->
         <span>{{movie.title}}</span> |
         <small>Director: {{movie.director}}</small>
       </mat-option>
     </mat-autocomplete>
 
-    <label>
-        Title:
-        <input type="text" formControlName="title">
-    </label>
     <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Filters
-              </mat-panel-title>
+                <mat-icon>filter_list</mat-icon>
+                &nbsp;
+                more filters
+            </mat-panel-title>
             </mat-expansion-panel-header>
         
             <mat-form-field>
               <input matInput placeholder="Director" formControlName="director">
             </mat-form-field>
-        
+            <br>
             <mat-form-field>
               <input matInput placeholder="Year" formControlName="year">
             </mat-form-field>
           </mat-expansion-panel>
-    <button type="submit" [disabled]="!searchForm.valid">Search</button>
+    <button class="button" type="submit" [disabled]="!searchForm.valid">Search</button>
 </form>
 
 <div class="movie-container">
   <mat-card class="movie-card" *ngFor="let movie of searchResults">
           <mat-card-header class="movie-title">
-                  <mat-card-title >{{movie.title}}</mat-card-title>
-                  <mat-card-subtitle  >{{movie.director}}</mat-card-subtitle>
+                  <mat-card-title>{{movie.title}}</mat-card-title>
+                  <mat-card-subtitle>{{movie.director}}</mat-card-subtitle>
           </mat-card-header>
           <img mat-card-image  src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
           <mat-card-actions>
-                  <button mat-button (click)="selectFilm()">view more</button>
+                  <button mat-button (click)="openDialog()">view more</button>
           </mat-card-actions>
   </mat-card>
 </div>
