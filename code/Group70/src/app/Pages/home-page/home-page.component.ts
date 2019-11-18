@@ -28,6 +28,11 @@ export class HomePageComponent implements OnInit {
     {title: "The Dark Knight", director: "Christopher Nolan", year: 2008},
     {title: "The Dark Knight 2", director: "Christopher Nolan", year: 2009},
     {title: "The Dark Knight 3", director: "Christopher Nolan", year: 2010},
+    {title: "The Dark Knight 4", director: "Christopher Nolan", year: 2010},
+    {title: "The Dark Knight 5", director: "Christopher Nolan", year: 2010},
+    {title: "The Dark Knight 6", director: "Christopher Nolan", year: 2010},
+    {title: "The Dark Knight 7", director: "Christopher Nolan", year: 2010},
+    {title: "The Dark Knight 8", director: "Christopher Nolan", year: 2010},
   ];
 
   searchResults: Movie[] = this.movies;
