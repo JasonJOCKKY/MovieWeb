@@ -1,8 +1,22 @@
-.example-card {
-    max-width: 200px;
-  padding: 3px 3px 3px 3px;
-}
+
 
 .movie-contatiner{
     width:100%;
+    margin: 5px;
+    text-align: center;
+}
+.movie-card { 
+    background-color: silver;
+    position: relative;
+    display: inline-block;
+    width: 300px;
+    margin: 5px;
+    text-align: center;
+}
+.movie-title{
+}
+
+.search-form{
+    background: silver;
+    margin: 5px;
 }
