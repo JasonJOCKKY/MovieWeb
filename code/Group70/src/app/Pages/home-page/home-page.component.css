@@ -9,10 +9,12 @@
     background-color: silver;
     position: relative;
     display: inline-block;
-    width: 21%;
-    /*width:250px;*/ 
-    margin: 2%;
+    /*width: 21%;*/
+    width:250px;
+    margin: 10px;
+    /*margin: 2%;*/
     text-align: center;
+    height:400px;
 }
 .movie-title{
 }
