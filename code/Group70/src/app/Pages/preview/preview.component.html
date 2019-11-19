@@ -1,14 +1,33 @@
 <h1 mat-dialog-title>{{movie.title}}</h1>
 <div mat-dialog-content>
-        <mat-card>
+        <mat-card class="detail"> 
                 <mat-card-header>
-                        <mat-card-title>{{movie.director}}</mat-card-title>
-                        <mat-card-subtitle>{{movie.year}}</mat-card-subtitle>
+                        <mat-card-title class="detail">{{movie.director}}</mat-card-title>
+                        <mat-card-subtitle class="detail">{{movie.year}}</mat-card-subtitle>
                 </mat-card-header>
-                <img mat-card-image  src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                <img mat-card-image  class="poster" src="https://images-na.ssl-images-amazon.com/images/I/81AJdOIEIhL._SL1500_.jpg" alt="batman">
+                <mat-card-content>
+                        <h3>Last Three Reviews:</h3>
+                        <p>
+                                "You will feel utterly numb after the screening of The 
+                                Dark Knight. The film is bleak and brilliant."
+                                -James Christopher
+                        </p>
+                        <p>
+                                "To talk of Heath Ledger's performance is difficult, 
+                                merely because, as gigantic as it is, it is only one 
+                                important feature of an intricately wrought canvas."
+                                -Tiru Thiruvilangam
+                        </p>
+                        <p>
+                                "An exceptionally smart, brooding picture with some 
+                                terrific performances."
+                                -Tom Charity
+                        </p>
+                      </mat-card-content>
         </mat-card>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onCloseClick()">close</button>
-  <button mat-button (click)="onCloseClick()">view more</button>
+  <button mat-button (click)="onCloseClick()">Close</button>
+  <button mat-button (click)="onCloseClick()">View More</button>
 </div>
