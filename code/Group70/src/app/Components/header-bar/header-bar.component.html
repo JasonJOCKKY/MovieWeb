@@ -1,5 +1,6 @@
 <mat-toolbar color="primary" role="heading">
     <span class="title">Application</span>
+    <span class="example-fill-remaining-space"></span>
     <div class="fixRight">
         <div *ngIf="authService.afAuth.authState | async as user; else showLogin">
             <button mat-flat-button [matMenuTriggerFor]="account" class="user">{{ user.displayName }}</button>
@@ -9,7 +10,7 @@
         </div>
         <div class="loginButton">
             <ng-template #showLogin>
-                <button mat-flat-button (click)="login()">Login with Google</button>
+                <button mat-flat-button (click)="login()">Login</button>
             </ng-template>
         </div>
     </div>

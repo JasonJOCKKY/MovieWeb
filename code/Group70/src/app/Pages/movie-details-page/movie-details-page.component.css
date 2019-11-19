@@ -1,5 +1,166 @@
 
-@media (min-width: 576px) {  }
+ .wrapper{
+    width: 90%;
+    height: 1700px;
+    /* background-color: whitesmoke; */
+    margin: auto;
+}
+
+.card{
+    margin-top: 20px;
+}
+
+.poster img{
+    width: 130px;
+    height: 200px;
+    margin: 0 0 0 20px;
+}
+
+.actor{
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.actor img{
+    width: 50px;
+    height: 50px;
+}
+
+.actors{
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+
+@media (min-width: 576px) {
+    .card{
+        border: none;
+        max-width: 1200px;
+        margin-top: 50px;
+    }
+    
+    .info{
+    }
+    
+    .wrapper{
+        width: 1000px;
+        height: 1700px;
+        /* background-color: whitesmoke; */
+        margin: auto;
+    }
+    
+    .actor img{
+        width: 100px;
+        height: 100px;
+    }
+    
+    .actor{
+        display: inline-block;
+        margin: 0 10px;
+    }
+    
+    .actors{
+        width: 600px;
+        margin: 0 auto;
+        margin-top: 20px;
+    }
+    
+    .comments{
+        font-size: medium;
+    }
+    
+    .poster img{
+        width: 220px;
+        height: 350px;
+        margin-top: 20px;
+    }
+
+    .review{
+        padding: 15px;
+    }
+
+    .rating{
+        width: 200px;
+    }
+    .rating-card{
+        width: 200px;
+        height: 400px;
+        margin-left: 25px;
+    }
+
+    .rate{
+        font-size: large;
+        margin-right: 10px;
+    }
+
+    .barChart{
+        display: block; 
+        max-width: 200px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .addReview{
+        width: 150px;
+        margin-left: 10px;
+    }
+
+    .modalCard{
+        height: 350px;
+        /* background-color: silver; */
+    }
+    
+    .modalPoster{
+        /* background-color: gold; */
+    }
+
+    .modalForm{
+        /* background-color: mediumslateblue; */
+    }
+
+    .modalPoster img{
+        /* position: absolute;
+        top: 0; */
+        width: 100%;
+    }
+
+    .closeButton{
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .formWrapper{
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        width:90%;
+    }
+
+    .title{
+        width: 100%;
+    }
+    
+    .comment{
+        width: 100%;
+    }
+
+    textarea {
+        resize: none !important;
+     }
+
+
+    ::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0px !important;}
+    ::ng-deep .mat-form-field-label-wrapper { top: -1.5em; }
+
+    ::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.75);
+    width: 133.33333%; 
+    }
+
+
+
+  }
 
 
 @media (min-width: 768px) {  }
@@ -8,40 +169,7 @@
 @media (min-width: 992px) {  }
 
 
-@media (min-width: 1200px) {
-   
-}
+@media (min-width: 1200px) {  }
 
 
-.card{
-    border: none;
-    max-width: 1000px;
-    margin-top: 50px;
-}
 
-.info{
-    background-color: silver;
-}
-
-.wrapper{
-    width: 1000px;
-    height: 1700px;
-    background-color: whitesmoke;
-    margin: auto;
-}
-
-.actor img{
-    width: 100px;
-    height: 100px;
-}
-
-.actor{
-    display: inline-block;
-    margin: 0 10px;
-}
-
-.actors{
-    width: 600px;
-    margin: 0 auto;
-    margin-top: 20px;
-}
