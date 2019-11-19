@@ -9,5 +9,8 @@ export const environment = {
     messagingSenderId: "360596105603",
     appId: "1:360596105603:web:54e8110b6af20698856eb6",
     measurementId: "G-ET18K52JH0"
+  },
+  tmdb: {
+    apiKey: "59a4d94af159f2d5a71a45127ee989e1"
   }
 };
