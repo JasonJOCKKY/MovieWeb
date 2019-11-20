@@ -1,0 +1,40 @@
+
+
+.example-fill-remaining-space {
+    /* This fills the remaining space, by using flexbox. 
+       Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+  }
+
+.title{
+    font-size: medium;
+}
+
+.fixRight{
+    font-size: small;
+}
+
+
+
+@media (min-width: 576px) { 
+    .title{
+        margin: 0 auto;
+        font-size: larger;
+    }
+    .fixRight{
+        position: absolute;
+        right: 2%;
+        font-size: medium;
+    } 
+    .example-fill-remaining-space {
+        flex: none;
+    }
+}
+
+
+@media (min-width: 768px) { }
+
+
+@media (min-width: 992px) {  }
+
+
