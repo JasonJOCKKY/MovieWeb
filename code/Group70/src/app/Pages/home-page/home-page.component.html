@@ -1,1 +1,45 @@
-<p>home-page works!</p>
+<p style="text-align: center;">[header here]</p>
+
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="search-form">
+
+    <input matInput class="search-options" placeholder="Search by title..."  [matAutocomplete]="auto" [formControl]="movieCtrl">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let movie of filteredMovies | async" [value]="movie.title">
+        <!--<img class="example-option-img" aria-hidden [src]="state.flag" height="25">-->
+        <span>{{movie.title}}</span> |
+        <small>Director: {{movie.director}}</small>
+      </mat-option>
+    </mat-autocomplete>
+
+    <mat-expansion-panel class="search-options">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>filter_list</mat-icon>
+                &nbsp;
+                more filters
+            </mat-panel-title>
+            </mat-expansion-panel-header>
+        
+            <mat-form-field>
+              <input matInput placeholder="Director" formControlName="director">
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <input matInput placeholder="Year" formControlName="year">
+            </mat-form-field>
+          </mat-expansion-panel>
+    <button class="search-button btn" type="submit" [disabled]="!searchForm.valid">Search</button>
+</form>
+
+<div class="movie-container">
+  <mat-card class="movie-card" *ngFor="let movie of searchResults">
+          <mat-card-header class="movie-title">
+                  <mat-card-title>{{movie.title}}</mat-card-title>
+                  <mat-card-subtitle>{{movie.director}}</mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image  class="poster" src="https://images-na.ssl-images-amazon.com/images/I/81AJdOIEIhL._SL1500_.jpg" alt="batman">
+          <mat-card-actions>
+                  <button mat-button (click)="openPreview(movie)">view more</button>
+          </mat-card-actions>
+  </mat-card>
+</div>
