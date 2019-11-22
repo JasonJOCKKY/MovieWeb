@@ -19,9 +19,11 @@ We used Angular 8 to organize and seperate our code neatly into components. We a
 ### Typescript
 We used typscript to communicate the front-end to the backend and dynamically present content. We all worked with Typescript. Jingsong used it to make the API calls, access Firebase storage, and create the services. Joseph and Weiyu used typescript to call these functions from the services into their components. For example, typescript was used by a service to retrieve and parse a JSON object of movies from the API, then another typescript function retrieves the movie objects from that service and uses an ngFor to display the movies on the home page. 
 ## Angular Material
-Angular Material UI components were used to quickly create professional-looking front-end, 
+Angular Material UI components were used to quickly create professional-looking front-end. Joseph and Weiyu used this technology to contruct their front-end components.
 ### Firebase
-### Movie API
+Firebase was used for the database to make the application persistent. Firestore was used as it is the recommended database to use. Jingsong used Firebase to store user information and movie reviews. 
+### Amazon Web Services EC2
+An AWS EC2 instance was used to serve the running code. 
 
 ## Knowledge Gained
 Pointers, knowledge, tricks to inform the rest of the class
