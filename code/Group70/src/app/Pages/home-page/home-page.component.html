@@ -1,13 +1,15 @@
 <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="search-form">
 
-    <input matInput class="search-options" placeholder="Search by title..."  [matAutocomplete]="auto" [formControl]="movieCtrl">
+    <input matInput class="search-options" placeholder="Search by title..." formControlName="title">
+    <!--
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let movie of filteredMovies | async" [value]="movie.title">
-        <!--<img class="example-option-img" aria-hidden [src]="state.flag" height="25">-->
+        <!-<img class="example-option-img" aria-hidden [src]="state.flag" height="25">->
         <span>{{movie.title}}</span> |
-        <!--<small>Director: {{movie.director}}</small>-->
+        <!-<small>Director: {{movie.director}}</small>->
       </mat-option>
     </mat-autocomplete>
+    -->
 
     <mat-expansion-panel class="search-options">
             <mat-expansion-panel-header>
@@ -19,11 +21,11 @@
             </mat-expansion-panel-header>
         
             <mat-form-field>
-              <input matInput placeholder="Director" formControlName="director">
+              <input matInput placeholder="Year" formControlName="year">
             </mat-form-field>
             <br>
             <mat-form-field>
-              <input matInput placeholder="Year" formControlName="year">
+              <input matInput placeholder="Genre" formControlName="genre">
             </mat-form-field>
           </mat-expansion-panel>
     <button class="search-button btn" type="submit" [disabled]="!searchForm.valid">Search</button>
