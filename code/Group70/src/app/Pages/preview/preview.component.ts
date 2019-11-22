@@ -2,9 +2,11 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 export interface Movie {
-  title: string;
-  director: string;
-  year: number;
+  id: number,
+  title: string,
+  description: string,
+  releaseDate: string,
+  posterSrc: string
 }
 
 @Component({

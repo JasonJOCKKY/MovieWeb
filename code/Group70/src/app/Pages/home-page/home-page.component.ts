@@ -6,9 +6,11 @@ import {map, startWith} from 'rxjs/operators';
 import { PreviewComponent } from '../preview/preview.component';
 
 export interface Movie {
-  title: string;
-  director: string;
-  year: number;
+  id: number,
+  title: string,
+  description: string,
+  releaseDate: string,
+  posterSrc: string
 }
 
 @Component({
@@ -36,15 +38,15 @@ export class HomePageComponent implements OnInit {
   movieCtrl = new FormControl();
   filteredMovies: Observable<Movie[]>;
   movies: Movie[] = [
-    {title: "Citizen Kane", director: "Orson Welles", year: 1941},
-    {title: "The Dark Knight", director: "Christopher Nolan", year: 2008},
-    {title: "The Dark Knight 2", director: "Christopher Nolan", year: 2009},
-    {title: "The Dark Knight 3", director: "Christopher Nolan", year: 2010},
-    {title: "The Dark Knight 4", director: "Christopher Nolan", year: 2010},
-    {title: "The Dark Knight 5", director: "Christopher Nolan", year: 2010},
-    {title: "The Dark Knight 6", director: "Christopher Nolan", year: 2010},
-    {title: "The Dark Knight 7", director: "Christopher Nolan", year: 2010},
-    {title: "The Dark Knight 8", director: "Christopher Nolan", year: 2010},
+    {title: "Citizen Kane", id:0, description:"sample description.", releaseDate:"1941", posterSrc:"https://images-na.ssl-images-amazon.com/images/I/81AJdOIEIhL._SL1500_.jpg"},
+    {title: "Citizen Kane 2", id:0, description:"sample description.", releaseDate:"1941", posterSrc:"https://images-na.ssl-images-amazon.com/images/I/81AJdOIEIhL._SL1500_.jpg"},
+    {title: "Citizen Kane 3", id:0, description:"sample description.", releaseDate:"1941", posterSrc:"https://images-na.ssl-images-amazon.com/images/I/81AJdOIEIhL._SL1500_.jpg"},
+    {title: "Citizen Kane 4", id:0, description:"sample description.", releaseDate:"1941", posterSrc:"https://images-na.ssl-images-amazon.com/images/I/81AJdOIEIhL._SL1500_.jpg"},
+    {title: "Citizen Kane 5", id:0, description:"sample description.", releaseDate:"1941", posterSrc:"https://images-na.ssl-images-amazon.com/images/I/81AJdOIEIhL._SL1500_.jpg"},
+    {title: "Citizen Kane 6", id:0, description:"sample description.", releaseDate:"1941", posterSrc:"https://images-na.ssl-images-amazon.com/images/I/81AJdOIEIhL._SL1500_.jpg"},
+    {title: "Citizen Kane 7", id:0, description:"sample description.", releaseDate:"1941", posterSrc:"https://images-na.ssl-images-amazon.com/images/I/81AJdOIEIhL._SL1500_.jpg"},
+    {title: "Citizen Kane 8", id:0, description:"sample description.", releaseDate:"1941", posterSrc:"https://images-na.ssl-images-amazon.com/images/I/81AJdOIEIhL._SL1500_.jpg"},
+
   ];
   searchResults: Movie[] = this.movies;
 
@@ -75,7 +77,7 @@ export class HomePageComponent implements OnInit {
   openPreview(movie:Movie): void {
     const dialogRef = this.dialog.open(PreviewComponent, {
       width: '500px',
-      data: {title: movie.title, director: movie.director, year: movie.year}
+      data: {title: movie.title, id: movie.id, releaseDate: movie.releaseDate}
     });
 
     dialogRef.afterClosed().subscribe(result => {

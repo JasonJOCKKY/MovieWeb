@@ -21,19 +21,10 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 // For MDB Angular Free
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ChartsModule, WavesModule } from 'angular-bootstrap-md'
-
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatGridListModule} from '@angular/material/grid-list';
 import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
-import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -45,8 +36,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
 
-import { ReactiveFormsModule } from '@angular/forms';
 import { PreviewComponent } from './Pages/preview/preview.component';
+import { LoginComponent } from './Pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +46,8 @@ import { PreviewComponent } from './Pages/preview/preview.component';
     PageNotFoundComponent,
     HeaderBarComponent,
     MovieDetailsPageComponent,
-    PreviewComponent
+    PreviewComponent,
+    LoginComponent
   ],
   entryComponents: [PreviewComponent],
   imports: [
