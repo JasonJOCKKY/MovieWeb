@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 
 import { Movie, Movie_Detail, Person, Genre, Certification } from '../../type';
-import { MovieDetailsPageComponent } from '../Pages/movie-details-page/movie-details-page.component';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +25,8 @@ export class TmdbServiceService {
     });
 
     this.getAllGenres().subscribe(res => {
-      this.genreList = res['genres '];
+      this.genreList = res['genres'];
+      console.log(this.genreList);
     });
 
     this.getAllCertifications().subscribe((res => {
@@ -36,11 +36,13 @@ export class TmdbServiceService {
 
   /*** Private helper functions ***/
   private constructUrl(urlPath: string, parameters: string) {
-    return this.apiUrl + urlPath + '?apikey='+ this.apiKey + '&' + parameters;
+    return this.apiUrl + urlPath + '?api_key='+ this.apiKey + '&' + parameters;
   }
 
   private getImgBaseUrl() {
     let url = this.constructUrl('/configuration', '');
+
+    console.log('currentUrl: ' + url);
     return this.http.get(url);
   }
 
@@ -96,6 +98,7 @@ export class TmdbServiceService {
     return this.img_baseurl + '/w' + width + filePath;
   }
 
+  // Return a genre name given a genre id
   getGenre(id: number): Genre {
     this.genres.forEach((genre) => {
       if (genre.id == id) {
@@ -106,22 +109,22 @@ export class TmdbServiceService {
     return null;
   }
 
+  // Search for movie and people
   searchDB(query: string) {
     let url = this.constructUrl('/search/multi', 'query=' + query);
 
     return this.http.get(url);
   }
 
+  // Get a list of popular movies
   getPopular() {
-    // Get a list of popular movies
     let url = this.constructUrl('/movie/popular', '');
 
     return this.getMovieList(url);
   }
 
+  // Explore movies given filters and sort by release date
   exploreMovies_ReleaseDate(year: number, genres: number[], certification: string) {
-    // Return an observable
-    // The observable will emit an array of movies once the serch is complete
     let genreString = '';
 
     genres.forEach((genre_id) => {
@@ -138,10 +141,7 @@ export class TmdbServiceService {
     return this.getMovieList(url);
   }
 
-  // exploreMovies_Rating(year: number, genres: number[], certification: string) {
-  //   // Return data from firebase
-  // }
-
+  // Get movie details given an id
   getMovieDetail(movie_id: string) {
     let res = new Subject();
     let url = this.constructUrl('/movie/' + movie_id, 'append_to_response=credits');
