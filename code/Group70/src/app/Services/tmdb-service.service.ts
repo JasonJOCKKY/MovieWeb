@@ -3,7 +3,8 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 
-import { Movie, Person, Genre, Certification } from '../../type';
+import { Movie, Movie_Detail, Person, Genre, Certification } from '../../type';
+import { MovieDetailsPageComponent } from '../Pages/movie-details-page/movie-details-page.component';
 
 @Injectable({
   providedIn: 'root'
@@ -137,11 +138,53 @@ export class TmdbServiceService {
     return this.getMovieList(url);
   }
 
-  exploreMovies_Rating(year: number, genres: number[], certification: string) {
-    // Return data from firebase
-  }
+  // exploreMovies_Rating(year: number, genres: number[], certification: string) {
+  //   // Return data from firebase
+  // }
 
-  getMovieDetail() {
+  getMovieDetail(movie_id: string) {
+    let res = new Subject();
+    let url = this.constructUrl('/movie/' + movie_id, 'append_to_response=credits');
 
+    this.http.get(url).subscribe((detail) => {
+      let casts: Person[] = [];
+      let crews: Person[] = [];
+
+      detail['credits']['cast'].foreach((cast) => {
+        casts.push({
+          name: cast['name'],
+          poster: this.getPosterUrl(185, cast['profile_path']),
+          role: cast['character']
+        });
+      });
+
+      detail['credits']['crew'].foreach((crew) => {
+        crews.push({
+          name: crew['name'],
+          poster: this.getPosterUrl(185, crew['profile_path']),
+          role: crew['job']
+        });
+      });
+
+      let detailGenres: number[] = [];
+      detail['genres'].foreach((genre) => {
+        detailGenres.push(genre['id']);
+      });
+
+      let movieDetail: Movie_Detail = {
+        id: detail['id'],
+        title: detail['title'],
+        genre_ids: detailGenres,
+        poster: detail['poster_path'],
+        description: detail['overview'],
+        release_date: detail['release_date'],
+        casts: casts,
+        crews: crews
+      }
+
+      res.next(movieDetail);
+    });
+
+    return res;
   }
 }
