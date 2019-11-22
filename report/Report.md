@@ -1,5 +1,5 @@
 # Report
-A document is to be written that a) provides the link to the web application and provides any instructions how to use your application, b) discusses the points listed below, and c) describes how you met the criteria provided in this document. You should be able to point to instances in your web application where the criteria have been met. This document is for your protection!! If the grader/instructor has to search your application to find the places where you met the criteria, then they may miss where you met the criteria. This document should be like you looking over the shoulder of the grader and saying, "Yeah, right there is where I demonstrate error handling or well-structured code." By explicitly identifying how you met the criteria the grader/instructor can be sure they are not missing something. Easy to find things = makes grader happy = good grade.
+
 ## Link to Running Code
 [link here]
 
