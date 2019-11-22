@@ -18,7 +18,7 @@ export class TestPageComponent implements OnInit {
   ngOnInit() {
     this.tmdbService.getPopular().subscribe((result: Movie[]) => {
       this.movieList = result;
-      console.log(this.movieList);
+      console.log(result);
     });
   }
 
