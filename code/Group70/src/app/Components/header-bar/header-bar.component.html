@@ -1,5 +1,9 @@
 <mat-toolbar color="primary" role="heading">
-    <span class="title">Application</span>
+    <button mat-flat-button routerLink="/home">
+        <mat-icon >home</mat-icon>
+    </button>
+    
+    <span class="title">Movie Review Application</span>
     <span class="example-fill-remaining-space"></span>
     <div class="fixRight">
         <div *ngIf="authService.afAuth.authState | async as user; else showLogin">
