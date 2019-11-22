@@ -37,7 +37,6 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
 
 import { PreviewComponent } from './Pages/preview/preview.component';
-import { LoginComponent } from './Pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -46,8 +45,7 @@ import { LoginComponent } from './Pages/login/login.component';
     PageNotFoundComponent,
     HeaderBarComponent,
     MovieDetailsPageComponent,
-    PreviewComponent,
-    LoginComponent
+    PreviewComponent
   ],
   entryComponents: [PreviewComponent],
   imports: [
