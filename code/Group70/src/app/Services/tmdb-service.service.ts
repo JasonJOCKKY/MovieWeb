@@ -26,7 +26,6 @@ export class TmdbServiceService {
 
     this.getAllGenres().subscribe(res => {
       this.genreList = res['genres'];
-      console.log(this.genreList);
     });
 
     this.getAllCertifications().subscribe((res => {
@@ -41,8 +40,6 @@ export class TmdbServiceService {
 
   private getImgBaseUrl() {
     let url = this.constructUrl('/configuration', '');
-
-    console.log('currentUrl: ' + url);
     return this.http.get(url);
   }
 
@@ -59,10 +56,10 @@ export class TmdbServiceService {
   private getMovieList(url: string) {
     let res = new Subject();
 
-    this.http.get(url).subscribe((result: any[]) => {
+    this.http.get(url).subscribe((result) => {
       let movieList: Movie[] = [];
 
-      result.forEach((element) => {
+      result['results'].forEach((element) => {
         let movie: Movie = {
           id: element['id'],
           title: element['title'],
