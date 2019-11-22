@@ -1,13 +1,15 @@
 export interface Movie {
   id: number,
   title: string,
-  genres: number[],
-  casts: Person[],
-  crews: Person[],
+  genre_ids: number[],
   poster: string,
   description: string,
-  release_date: string,
-  rating: string
+  release_date: string
+}
+
+export interface Movie_Detail extends Movie {
+  casts: Person[],
+  crews: Person[],
 }
 
 export interface Person {
@@ -29,4 +31,15 @@ export interface Reply {
   user: string,
   body: string,
   replies: Reply[]
+}
+
+export interface Genre {
+  id: number,
+  name: string
+}
+
+export interface Certification {
+  certification: string,
+  meaning : string,
+  order: string
 }
