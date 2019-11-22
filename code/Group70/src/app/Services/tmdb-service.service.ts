@@ -12,18 +12,14 @@ export class TmdbServiceService {
   private apiKey = environment.tmdb.apiKey;
   private apiUrl = environment.tmdb.url;
   private country = environment.tmdb.country;
+  private img_baseurl = environment.tmdb.img_baseurl;
 
-  private img_baseurl: string = null;
   private genreList: Genre[] = null;
   private certificationList: Certification[] = null;
 
   constructor(
     private http: HttpClient
   ) {
-    this.getImgBaseUrl().subscribe(res => {
-      this.img_baseurl = res['secure_base_url'];
-    });
-
     this.getAllGenres().subscribe(res => {
       this.genreList = res['genres'];
     });
@@ -36,11 +32,6 @@ export class TmdbServiceService {
   /*** Private helper functions ***/
   private constructUrl(urlPath: string, parameters: string) {
     return this.apiUrl + urlPath + '?api_key='+ this.apiKey + '&' + parameters;
-  }
-
-  private getImgBaseUrl() {
-    let url = this.constructUrl('/configuration', '');
-    return this.http.get(url);
   }
 
   private getAllGenres() {
@@ -59,12 +50,15 @@ export class TmdbServiceService {
     this.http.get(url).subscribe((result) => {
       let movieList: Movie[] = [];
 
+      while (!this.img_baseurl) {
+
+      }
       result['results'].forEach((element) => {
         let movie: Movie = {
           id: element['id'],
           title: element['title'],
           genre_ids: element['genre_ids'],
-          poster: this.getPosterUrl(200, element['poster_path']),
+          poster: this.getPosterUrl(500, element['poster_path']),
           description: element['overview'],
           release_date: element['release_date']
         }
@@ -88,10 +82,6 @@ export class TmdbServiceService {
   }
 
   getPosterUrl(width: number, filePath: string): string {
-    if (!this.img_baseurl) {
-      return null;
-    }
-
     return this.img_baseurl + '/w' + width + filePath;
   }
 

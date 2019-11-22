@@ -1,3 +1,6 @@
 <p>test-page works!</p>
 
-<p *ngFor="let movie of movieList">{{ movie.title }}</p>
+<div *ngFor="let movie of movieList">
+  <img src="{{ movie.poster }}">
+  <p>{{ movie.title }}</p>
+</div>
