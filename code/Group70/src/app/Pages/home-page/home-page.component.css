@@ -37,6 +37,19 @@
     margin: 5px;
 }
 
+.pop-button{
+    background: white;
+    padding:2px;
+    margin:5px;
+}
+
+.pop-container{
+    background: silver;
+    margin: 5px;
+    width:165px;
+    text-align: center;
+}
+
 .poster{
     width: 175px;
 }

@@ -31,6 +31,10 @@
     <button class="search-button btn" type="submit" [disabled]="!searchForm.valid">Search</button>
 </form>
 
+<div class="pop-container">
+    <button class="pop-button btn" (click)="searchPopular()">Find Popular Movies</button>
+</div>
+
 <div class="movie-container">
   <mat-card class="movie-card" *ngFor="let movie of searchResults">
           <mat-card-header class="movie-title">
