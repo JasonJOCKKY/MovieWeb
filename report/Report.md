@@ -35,6 +35,10 @@ What needs to be finished before the due date
 
 ## Grading Criteria
 ### Consistent Design and User Experience  
+The pages/sections that make up the web application must have a consistent design/interface. There should be elements of each page/section that they share in common such as a header, menu, footer, etc. You have flexibility in how you implement your design, but it should not just be a random set of page/section designs. The user should have a consistent and understandable experience when moving from page to page, section to section, or application function to application function.
+The UI must utilize multiple pages and at least one of the pages should have the contents of the page changed based on the application state.
+Having a dynamic page not just static pages 
+
 ### Well-Structured 
 ### Authentication 
 ### Architecture
