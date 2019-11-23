@@ -22,7 +22,8 @@ export interface Review {
   user: string,
   score: number,
   date: string,
-  body: string,
+  title: string,
+  comment: string,
   replies: Reply[]
 }
 

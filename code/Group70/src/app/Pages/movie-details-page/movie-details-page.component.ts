@@ -3,16 +3,21 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Person, Review, Reply, Movie_Detail } from 'src/type';
 import { ReviewService } from 'src/app/Services/review.service';
+
+import { DatePipe } from '@angular/common';
+import { AddReviewComponent } from 'src/app/Components/add-review/add-review.component';
+
 import { TmdbServiceService } from 'src/app/Services/tmdb-service.service';
 
 import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-movie-details-page',
   templateUrl: './movie-details-page.component.html',
   styleUrls: ['./movie-details-page.component.css'],
   // add NgbModalConfig and NgbModal to the component providers
-  providers: [NgbModalConfig, NgbModal]
+  providers: [NgbModalConfig, NgbModal, DatePipe]
 })
 export class MovieDetailsPageComponent implements OnInit {
 
@@ -20,17 +25,18 @@ export class MovieDetailsPageComponent implements OnInit {
   reviewRate = 4;
 
   movie: Movie_Detail;
-  person1: Person;
-  person2: Person;
-  review: Review;
-  reply: Reply;
+
 
 
   reviewForm = new FormGroup({
     title: new FormControl('',[Validators.required, Validators.pattern("[a-zA-Z\\s]+")]),
     comment: new FormControl('',[Validators.required]),
-    rating: new FormControl('')
+    user: new FormControl(''),
+    score: new FormControl(''),
+    date: new FormControl(''),
+    replies: new FormControl('')
   });
+
 
   movie: Movie_Detail;
   reviews: Review[];
@@ -58,23 +64,29 @@ export class MovieDetailsPageComponent implements OnInit {
       this.movie = movie;
     });
 
+
     this.reviews = [];
   }
 
   // retrieve data
   retrieveData(){
+    this.reviewService.retrieveMovieReview(1);
   }
 
   // form and data
   onSubmit() {
-    this.reviewForm.patchValue({rating: this.reviewRate});
-    this.reviewService.createMovieReview(this.reviewForm.value, 1);
+
+    let myDate = new Date().toString();
+    myDate = this.datePipe.transform(myDate, 'yyyy-MM-dd');
+    this.reviewForm.patchValue({user: "Weiyu", score: this.reviewRate, date: myDate, replies: []});
+    console.log(this.reviewForm.value);
+   //this.reviewService.createMovieReview(this.reviewForm.value, 1);
   }
 
 
   // modal
-  open(content) {
-    this.modalService.open(content);
+  open() {
+    const modalRef = this.modalService.open(AddReviewComponent);
   }
 
 
