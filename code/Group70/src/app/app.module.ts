@@ -19,7 +19,7 @@ import { MovieDetailsPageComponent } from './Pages/movie-details-page/movie-deta
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // For MDB Angular Free
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ChartsModule, WavesModule } from 'angular-bootstrap-md'
@@ -77,7 +77,7 @@ import { TestPageComponent } from './test/test-page/test-page.component';
     MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     MatToolbarModule,
     MatAutocompleteModule,
