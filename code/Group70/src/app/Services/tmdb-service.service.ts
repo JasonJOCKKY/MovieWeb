@@ -61,13 +61,25 @@ export class TmdbServiceService {
 
   /*** Public functions ***/
   getAllGenres() {
+    let res = new Subject<Genre[]>();
     let url = "https://api.themoviedb.org/3/genre/movie/list?api_key=59a4d94af159f2d5a71a45127ee989e1&language=en-US";
-    return this.http.get<Genre[]>(url);
+
+    this.http.get(url).subscribe(result => {
+      res.next(result['genres']);
+    });
+
+    return res;
   }
 
   getAllCertifications() {
+    let res = new Subject();
     let url = this.constructUrl('/certification/movie/list', '');
-    return this.http.get<Certification[]>(url);
+
+    this.http.get(url).subscribe(result => {
+      res.next(result['certifications'][this.country]);
+    });
+
+    return res;
   }
 
   getPosterUrl(width: number, filePath: string): string {

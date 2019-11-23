@@ -18,7 +18,11 @@ export class TestPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.tmdbService.searchDB('Charlies').subscribe(result => {
+    this.tmdbService.getAllGenres().subscribe(result => {
+      console.log(result);
+    });
+
+    this.tmdbService.getAllCertifications().subscribe(result => {
       console.log(result);
     });
   }
