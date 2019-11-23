@@ -19,30 +19,13 @@ export class TmdbServiceService {
 
   constructor(
     private http: HttpClient
-  ) {
-    this.getAllGenres().subscribe(res => {
-      this.genreList = res['genres'];
-    });
-
-    this.getAllCertifications().subscribe((res => {
-      this.certificationList = res['certifications'][this.country];
-    }));
-  }
+  ) {}
 
   /*** Private helper functions ***/
   private constructUrl(urlPath: string, parameters: string) {
     return this.apiUrl + urlPath + '?api_key='+ this.apiKey + '&' + parameters;
   }
 
-  private getAllGenres() {
-    let url = "https://api.themoviedb.org/3/genre/movie/list?api_key=59a4d94af159f2d5a71a45127ee989e1&language=en-US";
-    return this.http.get(url);
-  }
-
-  private getAllCertifications() {
-    let url = this.constructUrl('/certification/movie/list', '');
-    return this.http.get(url);
-  }
 
   private getMovieList(url: string) {
     let res = new Subject();
@@ -73,12 +56,14 @@ export class TmdbServiceService {
   }
 
   /*** Public functions ***/
-  get genres() {
-    return this.genreList;
+  getAllGenres() {
+    let url = "https://api.themoviedb.org/3/genre/movie/list?api_key=59a4d94af159f2d5a71a45127ee989e1&language=en-US";
+    return this.http.get(url);
   }
 
-  get certifications() {
-    return this.certificationList;
+  getAllCertifications() {
+    let url = this.constructUrl('/certification/movie/list', '');
+    return this.http.get(url);
   }
 
   getPosterUrl(width: number, filePath: string): string {
@@ -86,15 +71,15 @@ export class TmdbServiceService {
   }
 
   // Return a genre name given a genre id
-  getGenre(id: number): Genre {
-    this.genres.forEach((genre) => {
-      if (genre.id == id) {
-        return genre;
-      }
-    })
+  // getGenre(id: number): Genre {
+  //   this.genres.forEach((genre) => {
+  //     if (genre.id == id) {
+  //       return genre;
+  //     }
+  //   })
 
-    return null;
-  }
+  //   return null;
+  // }
 
   // Search for movie and people
   searchDB(query: string) {
@@ -115,7 +100,7 @@ export class TmdbServiceService {
     let genreString = '';
 
     genres.forEach((genre_id) => {
-      genreString += this.getGenre(genre_id) + ',';
+      genreString += genre_id + ',';
     });
 
     let url = this.constructUrl('/discover/movie',
@@ -132,12 +117,14 @@ export class TmdbServiceService {
   getMovieDetail(movie_id: string) {
     let res = new Subject();
     let url = this.constructUrl('/movie/' + movie_id, 'append_to_response=credits');
+    console.log(url);
 
     this.http.get(url).subscribe((detail) => {
       let casts: Person[] = [];
       let crews: Person[] = [];
 
-      detail['credits']['cast'].foreach((cast) => {
+      console.log(detail);
+      detail['credits']['cast'].forEach((cast) => {
         casts.push({
           name: cast['name'],
           poster: this.getPosterUrl(185, cast['profile_path']),
@@ -145,7 +132,7 @@ export class TmdbServiceService {
         });
       });
 
-      detail['credits']['crew'].foreach((crew) => {
+      detail['credits']['crew'].forEach((crew) => {
         crews.push({
           name: crew['name'],
           poster: this.getPosterUrl(185, crew['profile_path']),
@@ -154,7 +141,7 @@ export class TmdbServiceService {
       });
 
       let detailGenres: number[] = [];
-      detail['genres'].foreach((genre) => {
+      detail['genres'].forEach((genre) => {
         detailGenres.push(genre['id']);
       });
 
@@ -162,7 +149,7 @@ export class TmdbServiceService {
         id: detail['id'],
         title: detail['title'],
         genre_ids: detailGenres,
-        poster: detail['poster_path'],
+        poster: this.getPosterUrl(500, detail['poster_path']),
         description: detail['overview'],
         release_date: detail['release_date'],
         casts: casts,
