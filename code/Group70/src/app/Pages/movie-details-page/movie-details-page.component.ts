@@ -20,24 +20,6 @@ import { ActivatedRoute } from '@angular/router';
   providers: [NgbModalConfig, NgbModal, DatePipe]
 })
 export class MovieDetailsPageComponent implements OnInit {
-
-
-  reviewRate = 4;
-
-  movie: Movie_Detail;
-
-
-
-  reviewForm = new FormGroup({
-    title: new FormControl('',[Validators.required, Validators.pattern("[a-zA-Z\\s]+")]),
-    comment: new FormControl('',[Validators.required]),
-    user: new FormControl(''),
-    score: new FormControl(''),
-    date: new FormControl(''),
-    replies: new FormControl('')
-  });
-
-
   movie: Movie_Detail;
   reviews: Review[];
 
@@ -64,25 +46,10 @@ export class MovieDetailsPageComponent implements OnInit {
       this.movie = movie;
     });
 
-
-    this.reviews = [];
+    // this.reviews = this.reviewService.retrieveMovieReview(movie_id).subscribe(result => {
+    //   this.reviews = result;
+    // });
   }
-
-  // retrieve data
-  retrieveData(){
-    this.reviewService.retrieveMovieReview(1);
-  }
-
-  // form and data
-  onSubmit() {
-
-    let myDate = new Date().toString();
-    myDate = this.datePipe.transform(myDate, 'yyyy-MM-dd');
-    this.reviewForm.patchValue({user: "Weiyu", score: this.reviewRate, date: myDate, replies: []});
-    console.log(this.reviewForm.value);
-   //this.reviewService.createMovieReview(this.reviewForm.value, 1);
-  }
-
 
   // modal
   open() {
