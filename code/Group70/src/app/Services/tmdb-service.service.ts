@@ -19,7 +19,11 @@ export class TmdbServiceService {
 
   constructor(
     private http: HttpClient
-  ) {}
+  ) {
+    this.getAllGenres().subscribe((result) => {
+      this.genreList = result['genres'];
+    });
+  }
 
   /*** Private helper functions ***/
   private constructUrl(urlPath: string, parameters: string) {
@@ -57,13 +61,25 @@ export class TmdbServiceService {
 
   /*** Public functions ***/
   getAllGenres() {
+    let res = new Subject<Genre[]>();
     let url = "https://api.themoviedb.org/3/genre/movie/list?api_key=59a4d94af159f2d5a71a45127ee989e1&language=en-US";
-    return this.http.get(url);
+
+    this.http.get(url).subscribe(result => {
+      res.next(result['genres']);
+    });
+
+    return res;
   }
 
   getAllCertifications() {
+    let res = new Subject();
     let url = this.constructUrl('/certification/movie/list', '');
-    return this.http.get(url);
+
+    this.http.get(url).subscribe(result => {
+      res.next(result['certifications'][this.country]);
+    });
+
+    return res;
   }
 
   getPosterUrl(width: number, filePath: string): string {
@@ -71,21 +87,21 @@ export class TmdbServiceService {
   }
 
   // Return a genre name given a genre id
-  // getGenre(id: number): Genre {
-  //   this.genres.forEach((genre) => {
-  //     if (genre.id == id) {
-  //       return genre;
-  //     }
-  //   })
+  getGenre(id: number): Genre {
+    this.genreList.forEach((genre) => {
+      if (genre.id == id) {
+        return genre;
+      }
+    })
 
-  //   return null;
-  // }
+    return null;
+  }
 
   // Search for movie and people
   searchDB(query: string) {
-    let url = this.constructUrl('/search/multi', 'query=' + query);
+    let url = this.constructUrl('/search/movie', 'query=' + query);
 
-    return this.http.get(url);
+    return this.getMovieList(url);
   }
 
   // Get a list of popular movies
