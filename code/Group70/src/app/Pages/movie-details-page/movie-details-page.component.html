@@ -31,7 +31,7 @@
                             <mat-divider></mat-divider>
                             <strong class="rate">{{review.score}}</strong>
                             <span>
-                                <ngb-rating rate="{{review.score}}"></ngb-rating>
+                                <ngb-rating max = 5 readonly = true rate="{{review.score}}"></ngb-rating>
                             </span>
 
                             <div class="barChart">
@@ -100,8 +100,7 @@
                     </div>
                 </div>
             </div>
-
-
+            
         </div>
     </div>
 </div>
@@ -125,6 +124,14 @@
                     </button>
                     <div class="formWrapper">
                     <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+
+                        <input class="hidden" formControlName="rating">
+                        <ngb-rating [(rate)]="reviewRate" max=5 class="reviewRating">
+                            <ng-template let-fill="fill" let-index="index">
+                                <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                            </ng-template>
+                        </ngb-rating>
+
                         <mat-form-field appearance="outline" class="title">
                             <mat-label>Title</mat-label>
                                 <input matInput placeholder="Title" formControlName="title">
@@ -133,24 +140,14 @@
                         <br>
                         <mat-form-field appearance="outline" class="comment">
                             <mat-label>Comment</mat-label>
-                            <textarea matInput rows="8" placeholder="Comment" formControlName="comment"></textarea>
+                            <textarea matInput rows="5" placeholder="Comment" formControlName="comment"></textarea>
                             <!-- <mat-hint>Hint</mat-hint> -->
                         </mat-form-field>
+                        <button mat-raised-button type="submit" class="submitButton">Submit</button>
                     </form>
                     </div>
                 </mat-grid-tile>
             </mat-grid-list>
         </mat-card>
 
-    <!-- <div class="modal-header">
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <p>Hello, World!</p>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
-    </div> -->
 </ng-template>

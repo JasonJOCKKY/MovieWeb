@@ -43,6 +43,7 @@ import {MatIconModule} from '@angular/material/icon';
 
 import { PreviewComponent } from './Pages/preview/preview.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
