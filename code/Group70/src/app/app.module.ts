@@ -39,7 +39,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 
-import { PreviewComponent } from './Pages/preview/preview.component';
+import { PreviewComponent } from './Components/preview/preview.component';
 import { TestPageComponent } from './test/test-page/test-page.component';
 
 @NgModule({

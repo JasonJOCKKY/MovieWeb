@@ -2,9 +2,9 @@
 <div mat-dialog-content>
         <mat-card class="detail"> 
                 <mat-card-header>
-                        <mat-card-title class="detail">{{movie.releaseDate}}</mat-card-title>
+                        <mat-card-title class="detail">{{movie.release_date}}</mat-card-title>
                 </mat-card-header>
-                <img mat-card-image  class="poster" src="https://images-na.ssl-images-amazon.com/images/I/81AJdOIEIhL._SL1500_.jpg" alt="batman">
+                <img mat-card-image  class="poster" src="{{movie.poster}}" alt="poster">
                 <mat-card-content>
                         <h3>Last Three Reviews:</h3>
                         <p>

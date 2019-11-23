@@ -3,7 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Observable, Subject} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import { PreviewComponent } from '../preview/preview.component';
+import { PreviewComponent } from '../../Components/preview/preview.component';
 import { TmdbServiceService } from '../../Services/tmdb-service.service';
 import { CloseScrollStrategy } from '@angular/cdk/overlay';
 
@@ -30,8 +30,11 @@ export interface Genre {
 export class HomePageComponent{
   searchForm = new FormGroup({
     title: new FormControl(''),
+  });
+  exploreForm = new FormGroup({
     year: new FormControl(''),
     genre: new FormControl(''),
+    rating: new FormControl(''),
   });
   movies: Movie[] = [
     {title: "Citizen Kane", id:0, description:"sample description.", release_date:"1941", poster:"https://images-na.ssl-images-amazon.com/images/I/81AJdOIEIhL._SL1500_.jpg", genre_ids: []},
@@ -54,16 +57,35 @@ export class HomePageComponent{
     public movieService: TmdbServiceService,
     ) { 
     this.searchResults = [];
+    /*
     this.movieService.getAllGenres().subscribe(g =>{
       console.log(g[0]);
     });
+    */
+    this.loadGenres();
   }
 
+  loadGenres(){
+    let res = new Subject();
+    res = this.movieService.getAllGenres()
+    res.subscribe({
+      next: (g : Genre[]) => this.movieGenres = g
+    });
+  }
 
-  onSubmit() {
-    // TODO: Use EventEmitter with form value
-    //console.log(this.searchForm.value);
-    this.searchResults = this.movies;
+  searchTitle() {
+    if(this.searchForm.value.title != ""){
+      this.searchResults=[];
+      let res = new Subject();
+      res = this.movieService.searchDB(this.searchForm.value.title);
+      res.subscribe({
+        next: (v : Movie[]) => this.searchResults = v
+      });
+    }
+    else{
+      console.log("enter title please");
+    }
+    
   }
 
   searchPopular(){
@@ -79,15 +101,34 @@ export class HomePageComponent{
 
   }
 
-  openPreview(movie:Movie): void {
-    const dialogRef = this.dialog.open(PreviewComponent, {
-      width: '500px',
-      data: {title: movie.title, id: movie.id, releaseDate: movie.release_date}
+  explore(){
+    this.searchResults=[];
+    let year: number = this.exploreForm.value.year;
+    let certification: string = this.exploreForm.value.rating;
+    let genres: number[] = [];
+    if(this.exploreForm.value.genre!=""){
+      genres = [this.exploreForm.value.genre];
+    }
+    else{
+      this.movieGenres.forEach(function(g){
+        genres.push(g.id);
+      });
+    }
+    let res = new Subject();
+    console.log(genres);
+    res = this.movieService.exploreMovies_ReleaseDate(year, genres, certification);
+    res.subscribe({
+      next: (v : Movie[]) => this.searchResults = v
     });
   }
 
-  loadGenres(){
-   console.log("hi");
+  openPreview(movie:Movie): void {
+    const dialogRef = this.dialog.open(PreviewComponent, {
+      width: '500px',
+      data: {title: movie.title, id: movie.id, releaseDate: movie.release_date, poster: movie.poster}
+    });
   }
+
+ 
 }
 

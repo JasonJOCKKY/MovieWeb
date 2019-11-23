@@ -4,9 +4,10 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 export interface Movie {
   id: number,
   title: string,
+  genre_ids: number[],
+  poster: string,
   description: string,
-  releaseDate: string,
-  posterSrc: string
+  release_date: string
 }
 
 @Component({
