@@ -19,7 +19,7 @@ import { MovieDetailsPageComponent } from './Pages/movie-details-page/movie-deta
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // For MDB Angular Free
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ChartsModule, WavesModule } from 'angular-bootstrap-md'
@@ -45,6 +45,9 @@ import {MatIconModule} from '@angular/material/icon';
 import { PreviewComponent } from './Pages/preview/preview.component';
 import { AddReviewComponent } from './Components/add-review/add-review.component';
 
+import { TestPageComponent } from './test/test-page/test-page.component';
+
+
 
 @NgModule({
   declarations: [
@@ -54,7 +57,8 @@ import { AddReviewComponent } from './Components/add-review/add-review.component
     HeaderBarComponent,
     MovieDetailsPageComponent,
     PreviewComponent,
-    AddReviewComponent
+    AddReviewComponent,
+    TestPageComponent
   ],
   entryComponents: [PreviewComponent],
   imports: [
@@ -78,7 +82,7 @@ import { AddReviewComponent } from './Components/add-review/add-review.component
     MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     MatToolbarModule,
     MatAutocompleteModule,

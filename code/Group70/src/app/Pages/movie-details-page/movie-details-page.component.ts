@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Movie, Person, Review, Reply, Movie_Detail } from 'src/type';
+import { Person, Review, Reply, Movie_Detail } from 'src/type';
 import { ReviewService } from 'src/app/Services/review.service';
+
 import { DatePipe } from '@angular/common';
 import { AddReviewComponent } from 'src/app/Components/add-review/add-review.component';
+
+import { TmdbServiceService } from 'src/app/Services/tmdb-service.service';
+
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-movie-details-page',
@@ -32,25 +37,35 @@ export class MovieDetailsPageComponent implements OnInit {
     replies: new FormControl('')
   });
 
-  
-  constructor(private config: NgbRatingConfig, private modalConfig: NgbModalConfig, private modalService: NgbModal, private datePipe: DatePipe, private reviewService: ReviewService) {
-    // customize default values of ratings used by this component tree
-    // config.max = 5;
-    // config.readonly = true;
 
-     // customize default values of modals used by this component tree
+  movie: Movie_Detail;
+  reviews: Review[];
+
+  constructor(
+    private modalConfig: NgbModalConfig,
+    private modalService: NgbModal,
+    private reviewService: ReviewService,
+    private tmdbService: TmdbServiceService,
+    private route: ActivatedRoute
+    ) {
      this.modalConfig.backdrop = 'static';
      this.modalConfig.keyboard = false;
      this.modalConfig.backdropClass = "backDrop";
      this.modalConfig.centered = true;
      this.modalConfig.size = "lg";
      this.modalConfig.scrollable = true;
-     
+
   }
 
 
   ngOnInit() {
+    const movie_id = this.route.snapshot.paramMap.get('movie_id');
+    this.tmdbService.getMovieDetail(movie_id).subscribe((movie: Movie_Detail) => {
+      this.movie = movie;
+    });
 
+
+    this.reviews = [];
   }
 
   // retrieve data
@@ -107,8 +122,8 @@ export class MovieDetailsPageComponent implements OnInit {
   public chartOptions: any = {
     responsive: true
   };
+
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
-  
 
 }
