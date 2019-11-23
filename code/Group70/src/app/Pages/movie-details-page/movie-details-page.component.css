@@ -38,37 +38,38 @@
         max-width: 1200px;
         margin-top: 50px;
     }
-    
+
     .info{
+
     }
-    
+
     .wrapper{
         width: 1000px;
         height: 1700px;
         /* background-color: whitesmoke; */
         margin: auto;
     }
-    
+
     .actor img{
         width: 100px;
         height: 100px;
     }
-    
+
     .actor{
         display: inline-block;
         margin: 0 10px;
     }
-    
+
     .actors{
         width: 600px;
         margin: 0 auto;
         margin-top: 20px;
     }
-    
+
     .comments{
         font-size: medium;
     }
-    
+
     .poster img{
         width: 220px;
         height: 350px;
@@ -94,7 +95,7 @@
     }
 
     .barChart{
-        display: block; 
+        display: block;
         max-width: 200px;
         margin-top: 10px;
         margin-bottom: 20px;
@@ -109,7 +110,7 @@
         height: 350px;
         /* background-color: silver; */
     }
-    
+
     .modalPoster{
         /* background-color: gold; */
     }
@@ -140,7 +141,7 @@
     .title{
         width: 100%;
     }
-    
+
     .comment{
         width: 100%;
     }
@@ -170,7 +171,7 @@
 
     ::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
         transform: translateY(-1.1em) scale(.75);
-        width: 133.33333%; 
+        width: 133.33333%;
     }
 
 

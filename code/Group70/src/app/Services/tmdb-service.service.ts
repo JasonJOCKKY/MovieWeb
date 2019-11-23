@@ -115,15 +115,17 @@ export class TmdbServiceService {
   exploreMovies_ReleaseDate(year: number, genres: number[], certification: string) {
     let genreString = '';
 
-    genres.forEach((genre_id) => {
-      genreString += genre_id + ',';
-    });
+    if (genres) {
+      genres.forEach((genre_id) => {
+        genreString += genre_id + ',';
+      });
+    }
 
     let url = this.constructUrl('/discover/movie',
     'sort_by=release_date.desc' +
     '&certification_country=' + this.country +
-    '&certification=' + certification +
-    '&year=' + year +
+    '&certification=' + (certification ? certification : '') +
+    '&year=' + (year ? year : '') +
     '&with_genres=' + genreString);
 
     return this.getMovieList(url);
