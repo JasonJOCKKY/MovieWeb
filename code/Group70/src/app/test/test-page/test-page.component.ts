@@ -18,14 +18,9 @@ export class TestPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.tmdbService.getPopular().subscribe((result: Movie[]) => {
-      this.movieList = result;
+    this.tmdbService.searchDB('Charlies').subscribe(result => {
       console.log(result);
     });
-
-    this.tmdbService.getMovieDetail('475557').subscribe((result: Movie_Detail) => {
-      console.log(result);
-    });;
   }
 
 }
