@@ -46,6 +46,7 @@ export class HomePageComponent{
     public movieService: TmdbServiceService,
     ) { 
     this.searchResults = [];
+    console.log("genres: ",this.movieService.genres);
   }
 
   onSubmit() {
@@ -62,7 +63,6 @@ export class HomePageComponent{
     console.log("res: ",res);
     res.subscribe({
       next: (v : Movie[]) => this.searchResults = v
-      
     });
   }
 
