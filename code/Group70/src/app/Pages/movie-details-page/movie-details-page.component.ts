@@ -19,6 +19,13 @@ export class MovieDetailsPageComponent implements OnInit {
 
   reviewRate = 4;
 
+  movie: Movie_Detail;
+  person1: Person;
+  person2: Person;
+  review: Review;
+  reply: Reply;
+
+
   reviewForm = new FormGroup({
     title: new FormControl('',[Validators.required, Validators.pattern("[a-zA-Z\\s]+")]),
     comment: new FormControl('',[Validators.required]),
@@ -54,10 +61,13 @@ export class MovieDetailsPageComponent implements OnInit {
     this.reviews = [];
   }
 
+  // retrieve data
+  retrieveData(){
+  }
+
   // form and data
   onSubmit() {
     this.reviewForm.patchValue({rating: this.reviewRate});
-    console.log(this.reviewForm.value);
     this.reviewService.createMovieReview(this.reviewForm.value, 1);
   }
 
