@@ -1,50 +1,37 @@
 <div class="container">
     <div class="wrapper">
+        <!-- Movie -->
         <div class="card-sm-3">
             <div class="row no-gutters">
+                 <!-- Movie Poster -->
                 <div class="col-sm-3 poster">
-                    <img src="https://img.moviepostershop.com/replicas-movie-poster-2019-1000778791.jpg"
-                        class="card-img" alt="...">
+                    <img src="{{movie.poster}}" class="card-img" alt="...">
                 </div>
+                 <!-- Movie Info -->
                 <div class="col-sm-6">
                     <div class="card-body info">
-                        <h5 class="card-title">Name</h5>
-                        <p class="card-text">Year: 2019</p>
-                        <p class="card-text">Director: Alex</p>
-                        <p class="card-text">Abstract: This is a wider card with supporting text below as a natural
-                            lead-in to
-                            additional content. This content is a little bit longer.</p>
+                        <h5 class="card-title">Name: {{movie.title}}</h5>
+                        <p class="card-text">Year: {{movie.release_date}}</p>
+                        <p class="card-text">Director: {{movie.crews[0].name}}</p>
+                        <p class="card-text">Abstract: {{movie.description}}</p>
                         <mat-divider></mat-divider>
                         <h4>Actors</h4>
                         <div class="actors">
-                            <div class="actor">
-                                <img src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
-                                    alt="..." class="rounded-circle">
-                            </div>
-                            <div class="actor">
-                                <img src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
-                                    alt="..." class="rounded-circle">
-                            </div>
-                            <div class="actor">
-                                <img src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
-                                    alt="..." class="rounded-circle">
-                            </div>
-                            <div class="actor">
-                                <img src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
-                                    alt="..." class="rounded-circle">
+                            <div class="actor" *ngFor="let person of movie.crews">
+                                <img src="{{person.poster}}" alt="..." class="rounded-circle">
                             </div>
                         </div>
                     </div>
                 </div>
-
+                <!-- rating card -->
                 <div class="col-sm-3 mt-3 rating">
                     <mat-card class="rating-card">
                         <mat-card-content>
                             <h5 class="rate">Ratings</h5>
                             <mat-divider></mat-divider>
-                            <strong class="rate">4.6</strong>
+                            <strong class="rate">{{review.score}}</strong>
                             <span>
-                                <ngb-rating [rate]="5"></ngb-rating>
+                                <ngb-rating max = 5 readonly = true rate="{{review.score}}"></ngb-rating>
                             </span>
 
                             <div class="barChart">
@@ -60,12 +47,11 @@
                         </mat-card-content>
                     </mat-card>
                 </div>
-
-
+                
             </div>
         </div>
 
-
+        <!-- Review -->
         <div class="my-3 bg-white rounded box-shadow review">
             <h2 class="border-bottom border-gray pb-2 mb-0">Review</h2>
             <div class="media text-muted pt-3">
@@ -114,11 +100,14 @@
                     </div>
                 </div>
             </div>
-
-
+            
         </div>
     </div>
 </div>
+
+
+
+
 
 
 <!-- modal -->
@@ -135,6 +124,14 @@
                     </button>
                     <div class="formWrapper">
                     <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+
+                        <input class="hidden" formControlName="rating">
+                        <ngb-rating [(rate)]="reviewRate" max=5 class="reviewRating">
+                            <ng-template let-fill="fill" let-index="index">
+                                <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                            </ng-template>
+                        </ngb-rating>
+
                         <mat-form-field appearance="outline" class="title">
                             <mat-label>Title</mat-label>
                                 <input matInput placeholder="Title" formControlName="title">
@@ -143,24 +140,14 @@
                         <br>
                         <mat-form-field appearance="outline" class="comment">
                             <mat-label>Comment</mat-label>
-                            <textarea matInput rows="8" placeholder="Comment" formControlName="comment"></textarea>
+                            <textarea matInput rows="5" placeholder="Comment" formControlName="comment"></textarea>
                             <!-- <mat-hint>Hint</mat-hint> -->
                         </mat-form-field>
+                        <button mat-raised-button type="submit" class="submitButton">Submit</button>
                     </form>
                     </div>
                 </mat-grid-tile>
             </mat-grid-list>
         </mat-card>
 
-    <!-- <div class="modal-header">
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <p>Hello, World!</p>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
-    </div> -->
 </ng-template>
