@@ -17,6 +17,13 @@ export class MovieDetailsPageComponent implements OnInit {
 
   reviewRate = 4;
 
+  movie: Movie_Detail;
+  person1: Person;
+  person2: Person;
+  review: Review;
+  reply: Reply;
+
+
   reviewForm = new FormGroup({
     title: new FormControl('',[Validators.required, Validators.pattern("[a-zA-Z\\s]+")]),
     comment: new FormControl('',[Validators.required]),
@@ -24,12 +31,6 @@ export class MovieDetailsPageComponent implements OnInit {
   });
 
   
-  movie: Movie_Detail;
-  person1: Person;
-  person2: Person;
-  review: Review;
-  reply: Reply;
-
   constructor(private config: NgbRatingConfig, private modalConfig: NgbModalConfig, private modalService: NgbModal, private reviewService: ReviewService) {
     // customize default values of ratings used by this component tree
     // config.max = 5;
@@ -47,7 +48,6 @@ export class MovieDetailsPageComponent implements OnInit {
 
 
   ngOnInit() {
-
 
     // for test
     this.person1 = {
@@ -84,10 +84,13 @@ export class MovieDetailsPageComponent implements OnInit {
 
   }
 
+  // retrieve data
+  retrieveData(){
+  }
+
   // form and data
   onSubmit() {
     this.reviewForm.patchValue({rating: this.reviewRate});
-    console.log(this.reviewForm.value);
     this.reviewService.createMovieReview(this.reviewForm.value, 1);
   }
 
