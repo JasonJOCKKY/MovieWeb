@@ -45,6 +45,8 @@ export class HomePageComponent{
   ];
   searchResults: Movie[];
   movieGenres: Genre[];
+  allGenres: Observable<Genre[]>;
+
 
 
   constructor(
@@ -52,8 +54,9 @@ export class HomePageComponent{
     public movieService: TmdbServiceService,
     ) { 
     this.searchResults = [];
-    console.log("genres: ",this.movieService.genres);
-    this.movieGenres = this.movieService.genres;
+    this.movieService.getAllGenres().subscribe(g =>{
+      console.log(g[0]);
+    });
   }
 
 
@@ -84,7 +87,7 @@ export class HomePageComponent{
   }
 
   loadGenres(){
-    this.movieGenres = this.movieService.genres;
+   console.log("hi");
   }
 }
 
