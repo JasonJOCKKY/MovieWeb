@@ -17,6 +17,11 @@ export interface Movie {
   release_date: string
 }
 
+export interface Genre {
+  id: number,
+  name: string
+}
+
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -39,6 +44,7 @@ export class HomePageComponent{
     {title: "Citizen Kane 8", id:0, description:"sample description.", release_date:"1941", poster:"https://images-na.ssl-images-amazon.com/images/I/81AJdOIEIhL._SL1500_.jpg", genre_ids: []},
   ];
   searchResults: Movie[];
+  movieGenres: Genre[];
 
 
   constructor(
@@ -47,7 +53,9 @@ export class HomePageComponent{
     ) { 
     this.searchResults = [];
     console.log("genres: ",this.movieService.genres);
+    this.movieGenres = this.movieService.genres;
   }
+
 
   onSubmit() {
     // TODO: Use EventEmitter with form value
@@ -64,6 +72,8 @@ export class HomePageComponent{
     res.subscribe({
       next: (v : Movie[]) => this.searchResults = v
     });
+
+
   }
 
   openPreview(movie:Movie): void {
@@ -71,6 +81,10 @@ export class HomePageComponent{
       width: '500px',
       data: {title: movie.title, id: movie.id, releaseDate: movie.release_date}
     });
+  }
+
+  loadGenres(){
+    this.movieGenres = this.movieService.genres;
   }
 }
 

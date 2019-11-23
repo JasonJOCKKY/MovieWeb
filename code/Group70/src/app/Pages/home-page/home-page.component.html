@@ -12,7 +12,7 @@
     -->
 
     <mat-expansion-panel class="search-options">
-            <mat-expansion-panel-header>
+            <mat-expansion-panel-header (click)="loadGenres()">
               <mat-panel-title>
                 <mat-icon>filter_list</mat-icon>
                 &nbsp;
@@ -25,8 +25,14 @@
             </mat-form-field>
             <br>
             <mat-form-field>
-              <input matInput placeholder="Genre" formControlName="genre">
-            </mat-form-field>
+              <mat-label>Genre</mat-label>
+              <mat-select>
+                  <mat-option *ngFor="let genre of movieGenres" [value]="genre.name">
+                    {{genre.name}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+            <br>
           </mat-expansion-panel>
     <button class="search-button btn" type="submit" [disabled]="!searchForm.valid">Search</button>
 </form>

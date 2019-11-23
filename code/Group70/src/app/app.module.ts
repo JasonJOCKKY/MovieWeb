@@ -37,6 +37,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
 
 import { PreviewComponent } from './Pages/preview/preview.component';
 import { TestPageComponent } from './test/test-page/test-page.component';
@@ -86,7 +87,8 @@ import { TestPageComponent } from './test/test-page/test-page.component';
     MatExpansionModule,
     ReactiveFormsModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
