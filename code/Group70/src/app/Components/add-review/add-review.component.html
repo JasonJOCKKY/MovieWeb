@@ -1,0 +1,37 @@
+<!-- modal -->
+<mat-card color="primary" class="modalCard">
+    <mat-grid-list cols="4" rowHeight="100%">
+        <mat-grid-tile class="modalPoster">
+            <img src="https://img.moviepostershop.com/replicas-movie-poster-2019-1000778791.jpg" alt="...">
+        </mat-grid-tile>
+        <mat-grid-tile class="modalForm" colspan="3">
+            <button type="button" class="close closeButton" aria-label="Close"
+                (click)="activeModal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="formWrapper">
+                <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+
+                    <ngb-rating [(rate)]="reviewRate" max=5 class="reviewRating">
+                        <ng-template let-fill="fill" let-index="index">
+                            <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                        </ng-template>
+                    </ngb-rating>
+
+                    <mat-form-field appearance="outline" class="title">
+                        <mat-label>Title</mat-label>
+                        <input matInput placeholder="Title" formControlName="title">
+                        <!-- <mat-hint>Hint</mat-hint> -->
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field appearance="outline" class="comment">
+                        <mat-label>Comment</mat-label>
+                        <textarea matInput rows="5" placeholder="Comment" formControlName="comment"></textarea>
+                        <!-- <mat-hint>Hint</mat-hint> -->
+                    </mat-form-field>
+                    <button mat-raised-button type="submit" class="submitButton">Submit</button>
+                </form>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</mat-card>

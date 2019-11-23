@@ -41,7 +41,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
 
+
 import { PreviewComponent } from './Pages/preview/preview.component';
+import { AddReviewComponent } from './Components/add-review/add-review.component';
 
 
 @NgModule({
@@ -51,7 +53,8 @@ import { PreviewComponent } from './Pages/preview/preview.component';
     PageNotFoundComponent,
     HeaderBarComponent,
     MovieDetailsPageComponent,
-    PreviewComponent
+    PreviewComponent,
+    AddReviewComponent
   ],
   entryComponents: [PreviewComponent],
   imports: [

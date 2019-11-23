@@ -4,13 +4,15 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Movie, Person, Review, Reply, Movie_Detail } from 'src/type';
 import { ReviewService } from 'src/app/Services/review.service';
+import { DatePipe } from '@angular/common';
+import { AddReviewComponent } from 'src/app/Components/add-review/add-review.component';
 
 @Component({
   selector: 'app-movie-details-page',
   templateUrl: './movie-details-page.component.html',
   styleUrls: ['./movie-details-page.component.css'],
   // add NgbModalConfig and NgbModal to the component providers
-  providers: [NgbModalConfig, NgbModal]
+  providers: [NgbModalConfig, NgbModal, DatePipe]
 })
 export class MovieDetailsPageComponent implements OnInit {
 
@@ -18,20 +20,20 @@ export class MovieDetailsPageComponent implements OnInit {
   reviewRate = 4;
 
   movie: Movie_Detail;
-  person1: Person;
-  person2: Person;
-  review: Review;
-  reply: Reply;
+
 
 
   reviewForm = new FormGroup({
     title: new FormControl('',[Validators.required, Validators.pattern("[a-zA-Z\\s]+")]),
     comment: new FormControl('',[Validators.required]),
-    rating: new FormControl('')
+    user: new FormControl(''),
+    score: new FormControl(''),
+    date: new FormControl(''),
+    replies: new FormControl('')
   });
 
   
-  constructor(private config: NgbRatingConfig, private modalConfig: NgbModalConfig, private modalService: NgbModal, private reviewService: ReviewService) {
+  constructor(private config: NgbRatingConfig, private modalConfig: NgbModalConfig, private modalService: NgbModal, private datePipe: DatePipe, private reviewService: ReviewService) {
     // customize default values of ratings used by this component tree
     // config.max = 5;
     // config.readonly = true;
@@ -49,55 +51,27 @@ export class MovieDetailsPageComponent implements OnInit {
 
   ngOnInit() {
 
-    // for test
-    this.person1 = {
-      name: "Alex",
-      poster: "https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg",
-      role: "Director"
-    }
-
-    this.person2 = {
-      name: "Jim",
-      poster: "https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg",
-      role: "Director"
-    }
-    
-
-    this.movie = {
-      id: 1, 
-      title: "Inception",
-      genre_ids: [0],
-      casts: [this.person1, this.person2],
-      crews: [this.person1, this.person2],
-      poster: "https://img.moviepostershop.com/replicas-movie-poster-2019-1000778791.jpg",
-      description: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-      release_date: "2019"
-    }
-
-    this.review = {
-      user: "Weiyu Feng",
-      score: 3,
-      date: "11/15/2019",
-      body: "Good",
-      replies: []
-    }
-
   }
 
   // retrieve data
   retrieveData(){
+    this.reviewService.retrieveMovieReview(1);
   }
 
   // form and data
   onSubmit() {
-    this.reviewForm.patchValue({rating: this.reviewRate});
-    this.reviewService.createMovieReview(this.reviewForm.value, 1);
+
+    let myDate = new Date().toString();
+    myDate = this.datePipe.transform(myDate, 'yyyy-MM-dd');
+    this.reviewForm.patchValue({user: "Weiyu", score: this.reviewRate, date: myDate, replies: []});
+    console.log(this.reviewForm.value);
+   //this.reviewService.createMovieReview(this.reviewForm.value, 1);
   }
 
 
   // modal
-  open(content) {
-    this.modalService.open(content);
+  open() {
+    const modalRef = this.modalService.open(AddReviewComponent);
   }
 
 
