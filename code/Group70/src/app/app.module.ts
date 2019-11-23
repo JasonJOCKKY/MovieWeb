@@ -60,7 +60,9 @@ import { TestPageComponent } from './test/test-page/test-page.component';
     AddReviewComponent,
     TestPageComponent
   ],
-  entryComponents: [PreviewComponent],
+  entryComponents: [
+    PreviewComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
