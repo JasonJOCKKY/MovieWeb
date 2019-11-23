@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TmdbServiceService } from '../../Services/tmdb-service.service';
-import { Movie } from 'src/type';
+import { Movie, Movie_Detail } from 'src/type';
 
 @Component({
   selector: 'app-test-page',
@@ -11,6 +11,8 @@ export class TestPageComponent implements OnInit {
 
   movieList: Movie[] = [];
 
+  testMovie: Movie = null;
+
   constructor(
     private tmdbService: TmdbServiceService
   ) { }
@@ -20,6 +22,10 @@ export class TestPageComponent implements OnInit {
       this.movieList = result;
       console.log(result);
     });
+
+    this.tmdbService.getMovieDetail('475557').subscribe((result: Movie_Detail) => {
+      console.log(result);
+    });;
   }
 
 }
