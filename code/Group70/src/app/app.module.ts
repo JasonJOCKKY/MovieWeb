@@ -41,8 +41,12 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
 
+
 import { PreviewComponent } from './Pages/preview/preview.component';
+import { AddReviewComponent } from './Components/add-review/add-review.component';
+
 import { TestPageComponent } from './test/test-page/test-page.component';
+
 
 
 @NgModule({
@@ -53,6 +57,7 @@ import { TestPageComponent } from './test/test-page/test-page.component';
     HeaderBarComponent,
     MovieDetailsPageComponent,
     PreviewComponent,
+    AddReviewComponent,
     TestPageComponent
   ],
   entryComponents: [PreviewComponent],

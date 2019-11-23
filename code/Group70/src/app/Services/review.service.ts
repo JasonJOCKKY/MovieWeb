@@ -10,8 +10,11 @@ import { map } from 'rxjs/operators';
 export class ReviewService {
 
   private movieReviewCollection: AngularFirestoreCollection<Review>;
+  private movieReviewDocument: AngularFirestoreDocument<Review>;
   
-  private movieReviews: Observable<Review[]>;
+  private allMovieReviews: Observable<Review[]>;
+
+  private movieReview: Observable<Review>;
 
   constructor(private afs: AngularFirestore) {
     this.movieReviewCollection = this.afs.collection<Review>('Group70Movies');
@@ -22,14 +25,20 @@ export class ReviewService {
   }
 
   retrieveAllMovieReviews(): Observable<Review[]>{
-    this.movieReviews = this.movieReviewCollection.snapshotChanges().pipe(
+    this.allMovieReviews = this.movieReviewCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Review;
         const id = a.payload.doc.id;
         return { id, ...data };
       }))
     );
-    return this.movieReviews;
+    return this.allMovieReviews;
+  }
+
+  retrieveMovieReview(movieID: number): Observable<Review>{
+    this.movieReviewDocument = this.afs.doc<Review>(movieID.toString());
+    this.movieReview = this.movieReviewDocument.valueChanges();
+    return this.movieReview;
   }
 
 }
