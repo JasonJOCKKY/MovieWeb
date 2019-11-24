@@ -1,57 +1,19 @@
-
-
 .movie-contatiner{
     width:100%;
     margin: 5px;
     text-align: center;
 }
+
 .movie-card { 
-    background-color: silver;
     position: relative;
     display: inline-block;
-    /*width: 21%;*/
-    width:300px;
-    margin: 10px;
-    /*margin: 2%;*/
+    width:200px;
     text-align: center;
-    height:400px;
-}
-.movie-title{
+    margin: 1%;
 }
 
-.form{
-    background: silver;
-    margin: 5px;
-}
-
-.search-options{
-    background: white;
-    margin:5px;
-    padding:2px;
-    width: 99%;
-}
-
-.search-button{
-    background: white;
-    padding:2px;
-    margin: 5px;
-}
-
-.pop-button{
-    background: white;
-    padding:2px;
-    margin:5px;
-}
-
-.pop-container{
-    background: silver;
-    margin: 5px;
-    width:165px;
-    text-align: center;
-}
-
-.poster{
-    width: 175px;
+.movie-poster{
+    width: 150px;
 }
 
 .search-wrapper{
@@ -70,4 +32,8 @@
 .popular-movies{
     margin:5px;
     text-align: center;
+}
+
+.search-title{
+    width:100%
 }
