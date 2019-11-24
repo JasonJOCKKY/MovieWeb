@@ -1,7 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+import { ReviewService } from 'src/app/Services/review.service';
+
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Movie_Detail, Review } from 'src/type';
+
 
 
 @Component({
@@ -25,9 +29,11 @@ export class AddReviewComponent implements OnInit {
 
 
   constructor(
+    private reviewService: ReviewService,
     private dialogRef:MatDialogRef<AddReviewComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {}
+
 
   ngOnInit() {
     this.movie = this.data['movie'];
@@ -41,7 +47,8 @@ export class AddReviewComponent implements OnInit {
     // console.log(this.reviewForm.value);
     // console.log(this.reviewForm.get('title').value);
 
-    //this.reviewService.createMovieReview(this.reviewForm.value, 1);
+    this.reviewService.createMovieReview(this.reviewForm.value, "1");
+    this.closeDialog();
 
     // Return the new review when closing the dialog
     const newReview: Review = {
