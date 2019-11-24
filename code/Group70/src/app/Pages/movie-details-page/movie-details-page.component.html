@@ -15,12 +15,6 @@
                   <p class="card-text">Director: {{ movie.crews[0].name }}</p>
                   <p class="card-text">Abstract: {{ movie.description }}</p>
                   <mat-divider></mat-divider>
-                  <h4>Actors</h4>
-                  <div class="actors">
-                      <div class="actor" *ngFor="let person of movie.casts">
-                          <img src="{{ person.poster }}" alt="..." class="rounded-circle">
-                      </div>
-                  </div>
               </div>
           </div>
           <!-- rating card -->
@@ -50,6 +44,25 @@
 
       </div>
     </div>
+
+    <!-- Actors -->
+    <h2>Actors</h2>
+
+    <div class="w-75">
+        <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Casts</mat-panel-title>
+                <mat-panel-description>
+                  <mat-icon>folder</mat-icon>
+                  The casts of this movie.
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <img src="{{ movie.poster }}">
+            </mat-expansion-panel>
+          </mat-accordion>
+    </div>
+
 
     <!-- Review -->
     <div class="my-3 bg-white rounded box-shadow review">

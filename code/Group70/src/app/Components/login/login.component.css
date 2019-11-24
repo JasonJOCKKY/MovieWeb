@@ -1,0 +1,11 @@
+.icon {
+  width: 30px;
+}
+
+form button {
+  display: block;
+  width: 70%;
+  margin: auto;
+  margin-bottom: 1em;
+  padding: 0.5em;
+}
