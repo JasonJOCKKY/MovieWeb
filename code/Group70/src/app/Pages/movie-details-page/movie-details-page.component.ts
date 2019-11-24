@@ -1,12 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Person, Review, Reply, Movie_Detail } from 'src/type';
+import { Person, Reply, Movie_Detail, Reviews } from 'src/type';
 import { ReviewService } from 'src/app/Services/review.service';
 
 import { AddReviewComponent } from 'src/app/Components/add-review/add-review.component';
 import { TmdbServiceService } from 'src/app/Services/tmdb-service.service';
 import { ActivatedRoute } from '@angular/router';
+
+import { CdkRowDef } from '@angular/cdk/table';
+import { BreadcrumbModule } from 'angular-bootstrap-md';
+import { Movie } from '../preview/preview.component';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { MatDialog } from '@angular/material';
+import { LoginComponent } from 'src/app/Components/login/login.component';
+
 
 
 @Component({
@@ -18,32 +25,46 @@ import { MatDialog } from '@angular/material';
 export class MovieDetailsPageComponent implements OnInit {
 
   movie: Movie_Detail;
-  reviews: Review[];
+  reviews: Reviews;
   crewFirstRow: Person[];
   castFirstRow: Person[];
   crewRest: Person[];
   castRest: Person[];
+  
+  movie_id: string;
+  
   peopleCol = 5;
+
 
   constructor(
     private reviewService: ReviewService,
     private tmdbService: TmdbServiceService,
     private route: ActivatedRoute,
+    private authService: AuthenticationService,
     private dialog: MatDialog
     ) {}
 
 
+
   ngOnInit() {
-    const movie_id = this.route.snapshot.paramMap.get('movie_id');
-    this.tmdbService.getMovieDetail(movie_id).subscribe((movie: Movie_Detail) => {
+    this.movie_id = this.route.snapshot.paramMap.get('movie_id');
+    this.tmdbService.getMovieDetail(this.movie_id).subscribe((movie: Movie_Detail) => {
       this.movie = movie;
       this.deleteDuplicate();
       this.getPeople();
+      this.retrieveReviews();
     });
 
 
-    this.reviews = [];
+    this.reviews = null;
   }
+
+  retrieveReviews(){
+    this.reviewService.retrieveMovieReviews(this.movie_id).subscribe(reviews => {this.reviews = reviews;});
+    console.log(this.reviews);
+  }
+
+
 
   deleteDuplicate(){
     let newCrew: Person[] = [];
@@ -111,11 +132,20 @@ export class MovieDetailsPageComponent implements OnInit {
     }
   }
 
+
   // Add Review
   onAddReview() {
+  if(this.authService.authState){
     this.dialog.open(AddReviewComponent, {
       width: '900px'
     });
+  }
+   else{
+      this.dialog.open(LoginComponent, {
+        width: '500px'
+      });
+    }
+
   }
 
 

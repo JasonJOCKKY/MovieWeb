@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Review } from 'src/type';
+import { Reviews } from 'src/type';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -9,25 +9,25 @@ import { map } from 'rxjs/operators';
 })
 export class ReviewService {
 
-  private movieReviewCollection: AngularFirestoreCollection<Review>;
-  private movieReviewDocument: AngularFirestoreDocument<Review>;
+  private movieReviewCollection: AngularFirestoreCollection<Reviews>;
+  private movieReviewDocument: AngularFirestoreDocument<Reviews>;
   
-  private allMovieReviews: Observable<Review[]>;
+  private allMovieReviews: Observable<Reviews[]>;
 
-  private movieReview: Observable<Review>;
+  private movieReviews: Observable<Reviews>;
 
   constructor(private afs: AngularFirestore) {
-    this.movieReviewCollection = this.afs.collection<Review>('Group70Movies');
+    this.movieReviewCollection = this.afs.collection<Reviews>('Group70Movies');
   }
 
-  createMovieReview(data: Review, movieID: string){
+  createMovieReview(data: Reviews, movieID: string){
     this.movieReviewCollection.doc(movieID).set(data);
   }
 
-  retrieveAllMovieReviews(): Observable<Review[]>{
+  retrieveAllMovieReviews(): Observable<Reviews[]>{
     this.allMovieReviews = this.movieReviewCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Review;
+        const data = a.payload.doc.data() as Reviews;
         const id = a.payload.doc.id;
         return { id, ...data };
       }))
@@ -35,10 +35,10 @@ export class ReviewService {
     return this.allMovieReviews;
   }
 
-  retrieveMovieReview(movieID: string): Observable<Review>{
-    this.movieReviewDocument = this.afs.doc<Review>(movieID);
-    this.movieReview = this.movieReviewDocument.valueChanges();
-    return this.movieReview;
+  retrieveMovieReviews(movieID: string): Observable<Reviews>{
+    this.movieReviewDocument = this.afs.doc<Reviews>(movieID);
+    this.movieReviews = this.movieReviewDocument.valueChanges();
+    return this.movieReviews;
   }
 
 }
