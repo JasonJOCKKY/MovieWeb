@@ -20,9 +20,6 @@ import { CdkRowDef } from '@angular/cdk/table';
 })
 export class MovieDetailsPageComponent implements OnInit {
 
-
-  
-
   movie: Movie_Detail;
   reviews: Review[];
   crewFirstRow: Person[];
@@ -54,8 +51,7 @@ export class MovieDetailsPageComponent implements OnInit {
       this.movie = movie;
       this.getFirstRow();
     });
-
-    
+  
 
     this.reviews = [];
   }
@@ -70,8 +66,6 @@ export class MovieDetailsPageComponent implements OnInit {
     console.log(this.crewFirstRow);
     
   }
-
-
 
   // modal
   open() {

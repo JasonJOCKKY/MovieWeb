@@ -28,6 +28,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -48,6 +49,7 @@ import { PreviewComponent } from './Pages/preview/preview.component';
 import { AddReviewComponent } from './Components/add-review/add-review.component';
 
 import { TestPageComponent } from './test/test-page/test-page.component';
+import { LoginComponent } from './Components/login/login.component';
 
 
 
@@ -60,9 +62,15 @@ import { TestPageComponent } from './test/test-page/test-page.component';
     MovieDetailsPageComponent,
     PreviewComponent,
     AddReviewComponent,
-    TestPageComponent
+    TestPageComponent,
+    LoginComponent
   ],
-  entryComponents: [PreviewComponent, AddReviewComponent],
+  entryComponents: [
+    PreviewComponent,
+    LoginComponent,
+    AddReviewComponent 
+  ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
