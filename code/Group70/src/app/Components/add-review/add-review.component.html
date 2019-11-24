@@ -1,37 +1,41 @@
 <!-- modal -->
-<mat-card color="primary" class="modalCard">
-    <mat-grid-list cols="4" rowHeight="100%">
-        <mat-grid-tile class="modalPoster">
-            <img src="https://img.moviepostershop.com/replicas-movie-poster-2019-1000778791.jpg" alt="...">
-        </mat-grid-tile>
-        <mat-grid-tile class="modalForm" colspan="3">
-            <button type="button" class="close closeButton" aria-label="Close"
-                (click)="activeModal.dismiss('Cross click')">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <div class="formWrapper">
-                <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+<div>
+    <!-- <button mat-dialog-close mat-icon-button class="closeButton">
+      <mat-icon>close</mat-icon>
+    </button> -->
+    <mat-grid-list cols="5" class="p-2" gutterSize="1em" rowHeight="500px">
+      <!-- Poster -->
+      <mat-grid-tile class="modalPoster" colspan="2">
+          <img class="w-100 h-100" src="https://img.moviepostershop.com/replicas-movie-poster-2019-1000778791.jpg" alt="...">
+      </mat-grid-tile>
 
-                    <ngb-rating [(rate)]="reviewRate" max=5 class="reviewRating">
-                        <ng-template let-fill="fill" let-index="index">
-                            <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                        </ng-template>
-                    </ngb-rating>
+      <!-- Form -->
+      <mat-grid-tile colspan="3">
+        <div class="w-100 h-100">
+          <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" class="w-100">
 
-                    <mat-form-field appearance="outline" class="title">
-                        <mat-label>Title</mat-label>
-                        <input matInput placeholder="Title" formControlName="title">
-                        <!-- <mat-hint>Hint</mat-hint> -->
-                    </mat-form-field>
-                    <br>
-                    <mat-form-field appearance="outline" class="comment">
-                        <mat-label>Comment</mat-label>
-                        <textarea matInput rows="5" placeholder="Comment" formControlName="comment"></textarea>
-                        <!-- <mat-hint>Hint</mat-hint> -->
-                    </mat-form-field>
-                    <button mat-raised-button type="submit" class="submitButton">Submit</button>
-                </form>
+            <!-- Title -->
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Title</mat-label>
+              <input matInput formControlName="title">
+            </mat-form-field>
+
+            <!-- Rating -->
+            <div>
+              <button mat-icon-button *ngFor="let i of [1, 2, 3, 4, 5]">
+                <mat-icon>star</mat-icon>
+              </button>
             </div>
-        </mat-grid-tile>
+
+            <!-- Comment -->
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Comment</mat-label>
+              <textarea matInput rows="5" formControlName="comment"></textarea>
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="d-block w-100 m-auto">Submit</button>
+          </form>
+        </div>
+      </mat-grid-tile>
     </mat-grid-list>
-</mat-card>
+</div>

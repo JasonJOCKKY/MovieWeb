@@ -1,177 +1,194 @@
-<div *ngIf="movie">
+<!-- <div class="backgroundWrapper w-100 h-"></div> -->
+<mat-grid-list class="backgroundWrapper w-100" cols="1" rowHeight="3:1">
+  <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>
+
+<!-- Loading Progeress -->
+<mat-progress-bar mode="indeterminate" *ngIf="!movie"></mat-progress-bar>
+
+<!-- Movie Content -->
+<div *ngIf="movie" class="textFont">
+  <div class="mainWrapper">
+
     <!-- Movie -->
+    <mat-card class="w-100 shadow p-4">
 
-    <div class="backgroundWrapper"></div>
-    <div class="mainWrapper">
-        <!-- <div class="card-sm-3 movieCard"> -->
-        <mat-card class="w-100">
+      <!-- Top info -->
+      <mat-grid-list cols="3" rowHeight="500:750" gutterSize="2em" class="mb-3">
+        <!-- Poster -->
+        <mat-grid-tile [colspan]=1>
+          <img class="w-100 h-100" src="{{ movie.poster }}" alt="Poster of {{ movie.title }}">
+        </mat-grid-tile>
 
-            <div class="row no-gutters firstPart">
-                <!-- Left Part -->
-                <div class="col-sm-4 poster">
-                    <!-- Movie Poster -->
-                    <img src="{{ movie.poster }}" class="card-img" alt="...">
+        <!-- Movie Info -->
+        <mat-grid-tile [colspan]=2>
+          <div class="w-100 h-100">
+            <h1 class="mt-3 mb-3">{{ movie.title }}</h1>
+            <h4>Director: {{ movie.crews[0].name }}</h4>
+            <h4>Release Date: {{ movie.release_date ? movie.release_date : 'Not Released Yet' }}</h4>
+            <!-- Review Chart -->
+            <h4>
+              Score:
+              <mat-icon *ngFor="let i of [1, 2, 3, 4, 5]">star</mat-icon>
+              <button mat-raised-button class="float-right w-50" color="primary" (click)="onAddReview()">Add Review</button>
+            </h4>
+            <div class="barChart">
+              <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets"
+              [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
+              [legend]="false" (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+            </div>
+          </div>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+
+      <!-- Overview -->
+      <h3>Overview</h3>
+      <p>{{ movie.description }}</p>
+    </mat-card>
+
+    <!-- Crews and Casts -->
+    <div class="shadow rounded mt-3 bg-white">
+      <mat-tab-group>
+        <!-- Casts -->
+        <mat-tab label="Casts">
+          <!-- First Row -->
+          <mat-grid-list cols="{{ peopleCol }}" rowHeight="185:300" class="m-3" gutterSize="1em">
+            <mat-grid-tile *ngFor="let cast of castFirstRow">
+              <div class="profile">
+                <img src="{{ cast.poster ? cast.poster : '../../../assets/anonymous_person.svg' }}" >
+                <h5>{{ cast.name }}</h5>
+                <p>as {{ cast.role }}</p>
               </div>
+            </mat-grid-tile>
+          </mat-grid-list>
 
-                <!-- Right Part -->
-                <div class="col-sm-8 h-100">
-                    <!-- Movie Info -->
-                    <div class="card-body info">
-                        <h1 class="card-title">Name: {{ movie.title }}</h1>
-                        <p class="card-text">Year: {{ movie.release_date }}</p>
-                        <p class="card-text">Director: {{ movie.crews[0].name }}</p>
-                    </div>
+          <!-- Expansion -->
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>See All Casts</mat-panel-title>
+              </mat-expansion-panel-header>
 
-                    <!-- rating card -->
-                    <div class="mt-3 rating">
-                        <mat-card class="rating-card">
-                            <mat-card-content>
-                                <div class="ratingCardHeader">
-                                    <h5 class="rate">Ratings</h5>
-                                    <!-- Add Review-->
-                                    <button mat-stroked-button color="primary" class="addReview"
-                                        (click)="open(content)">Add Review</button>
-                                </div>
-                                <mat-divider></mat-divider>
-                                <strong class="rate">4</strong>
-                                <span>
-                                    <ngb-rating max=5 readonly=true rate="4"></ngb-rating>
-                                </span>
+              <!-- Rest of the casts -->
+              <mat-grid-list cols="{{ peopleCol }}" rowHeight="185:300" gutterSize="1em">
+                <mat-grid-tile *ngFor="let cast of castRest">
+                  <div class="profile">
+                    <img src="{{ cast.poster ? cast.poster : '../../../assets/anonymous_person.svg' }}" >
+                    <h5>{{ cast.name }}</h5>
+                    <p>as {{ cast.role }}</p>
+                  </div>
+                </mat-grid-tile>
+              </mat-grid-list>
 
-                                <div class="barChart">
-                                    <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets"
-                                        [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
-                                        [legend]="false" (chartHover)="chartHovered($event)"
-                                        (chartClick)="chartClicked($event)">
-                                    </canvas>
-                                </div>
-                            </mat-card-content>
-                        </mat-card>
-                    </div>
-                </div>
-            </div>
-            <div class="row no-gutters">
-                <h4>Abstract</h4>
-                <p>{{movie.description}}</p>
-            </div>
-        </mat-card>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-tab>
 
+        <!-- Crews -->
+        <mat-tab label="Crews">
+          <!-- First Row -->
+          <mat-grid-list cols="{{ peopleCol }}" rowHeight="185:300" class="m-3" gutterSize="1em">
+            <mat-grid-tile *ngFor="let crew of crewFirstRow">
+              <div class="profile">
+                <img src="{{ crew.poster ? crew.poster : '../../../assets/anonymous_person.svg' }}" >
+                <h5>{{ crew.name }}</h5>
+                <p>{{ crew.role }}</p>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
 
-        <mat-tab-group>
-            <mat-tab label="Cast">
-                <div class="actors">
+          <!-- Expansion -->
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>See All Casts</mat-panel-title>
+              </mat-expansion-panel-header>
 
-                    <div class="actor" *ngFor="let person of castFirstRow">
-                        <img class="width-100 height-100" src="{{ person.poster }}" alt="...">
-                    </div>
-                </div>
+              <!-- Rest of the crews -->
+              <mat-grid-list cols="{{ peopleCol }}" rowHeight="185:300" gutterSize="1em">
+                <mat-grid-tile *ngFor="let crew of crewRest">
+                  <div class="profile">
+                    <img src="{{ crew.poster ? crew.poster : '../../../assets/anonymous_person.svg' }}" >
+                    <h5>{{ crew.name }}</h5>
+                    <p>{{ crew.role }}</p>
+                  </div>
+                </mat-grid-tile>
+              </mat-grid-list>
 
-                <mat-accordion *ngIf="castRest.length > 0">
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                Show more
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-
-                        <div class="actor" *ngFor="let person of castRest">
-                            <img class="width-100 height-100" src="{{ person.poster }}" alt="...">
-                        </div>
-
-                    </mat-expansion-panel>
-                </mat-accordion>
-            </mat-tab>
-
-            <mat-tab label="Crew">
-                <div class="actors">
-                    <div class="actor" *ngFor="let person of crewFirstRow">
-                        <img class="width-100 height-100" src="{{ person.poster }}" alt="...">
-                    </div>
-                </div>
-
-                <mat-accordion *ngIf="crewRest.length > 0">
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                Show more
-                            </mat-panel-title>
-
-                        </mat-expansion-panel-header>
-                        <div class="actor" *ngFor="let person of crewRest">
-                            <img class="width-100 height-100" src="{{ person.poster }}" alt="...">
-                        </div>
-
-                    </mat-expansion-panel>
-                </mat-accordion>
-            </mat-tab>
-        </mat-tab-group>
-
-
-        <div class="row no-gutters">
-            <!-- Review -->
-            <div class="my-3 bg-white rounded box-shadow review">
-                <h2 class="border-bottom border-gray pb-2 mb-0">Review</h2>
-                <div class="media text-muted pt-3">
-                    <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32"
-                        class="mr-2 rounded"
-                        src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
-                        data-holder-rendered="true" style="width: 32px; height: 32px;">
-                    <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                        <div class="d-flex justify-content-between align-items-center w-100">
-                            <strong class="text-gray-dark">Full Name</strong>
-                        </div>
-                        <div class="d-block comments">Lorem ipsum dolor sit amet, error mediocrem mei an, ut pri
-                            exerci
-                            adipisci.
-                            Soleat iisque sit no. Et cum discere debitis argumentum, eu elitr libris molestiae sed.
-                            Ne diam
-                            platonem disputando per, no dicta dicit est, modus partem vivendum in mel.
-
-                            Nec an nisl adversarium. Nulla utroque eu sed, te dicant praesent vituperata vix, nam eu
-                            brute
-                            delicatissimi. Vix congue nostrum ne, ei duo malorum appetere reformidans, nam tale
-                            exerci
-                            fuisset id. Has cu mundi aliquid offendit, ut libris possim vis, augue error omnium te
-                            sed. Ut
-                            ferri utroque cum.
-                            <a href="">Show more</a>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="media text-muted pt-3">
-                    <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32"
-                        class="mr-2 rounded"
-                        src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
-                        data-holder-rendered="true" style="width: 32px; height: 32px;">
-                    <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                        <div class="d-flex justify-content-between align-items-center w-100">
-                            <strong class="text-gray-dark">Full Name</strong>
-                        </div>
-                        <div class="d-block comments">Lorem ipsum dolor sit amet, error mediocrem mei an, ut pri
-                            exerci
-                            adipisci.
-                            Soleat iisque sit no. Et cum discere debitis argumentum, eu elitr libris molestiae sed.
-                            Ne diam
-                            platonem disputando per, no dicta dicit est, modus partem vivendum in mel.
-
-                            Nec an nisl adversarium. Nulla utroque eu sed, te dicant praesent vituperata vix, nam eu
-                            brute
-                            delicatissimi. Vix congue nostrum ne, ei duo malorum appetere reformidans, nam tale
-                            exerci
-                            fuisset id. Has cu mundi aliquid offendit, ut libris possim vis, augue error omnium te
-                            sed. Ut
-                            ferri utroque cum.
-                            <a href="">Show more</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-tab>
+      </mat-tab-group>
     </div>
 
+    <!-- Reviews -->
+    <div class="mt-5">
+      <h3>Reiviews</h3>
+    </div>
 
+    <!-- <div class="no-gutters">
+        <div class="my-3 bg-white rounded box-shadow review">
+            <h2 class="border-bottom border-gray pb-2 mb-0">Review</h2>
+            <div class="media text-muted pt-3">
+                <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32"
+                    class="mr-2 rounded"
+                    src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
+                    data-holder-rendered="true" style="width: 32px; height: 32px;">
+                <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <div class="d-flex justify-content-between align-items-center w-100">
+                        <strong class="text-gray-dark">Full Name</strong>
+                    </div>
+                    <div class="d-block comments">Lorem ipsum dolor sit amet, error mediocrem mei an, ut pri
+                        exerci
+                        adipisci.
+                        Soleat iisque sit no. Et cum discere debitis argumentum, eu elitr libris molestiae sed.
+                        Ne diam
+                        platonem disputando per, no dicta dicit est, modus partem vivendum in mel.
+
+                        Nec an nisl adversarium. Nulla utroque eu sed, te dicant praesent vituperata vix, nam eu
+                        brute
+                        delicatissimi. Vix congue nostrum ne, ei duo malorum appetere reformidans, nam tale
+                        exerci
+                        fuisset id. Has cu mundi aliquid offendit, ut libris possim vis, augue error omnium te
+                        sed. Ut
+                        ferri utroque cum.
+                        <a href="">Show more</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="media text-muted pt-3">
+                <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32"
+                    class="mr-2 rounded"
+                    src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
+                    data-holder-rendered="true" style="width: 32px; height: 32px;">
+                <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <div class="d-flex justify-content-between align-items-center w-100">
+                        <strong class="text-gray-dark">Full Name</strong>
+                    </div>
+                    <div class="d-block comments">Lorem ipsum dolor sit amet, error mediocrem mei an, ut pri
+                        exerci
+                        adipisci.
+                        Soleat iisque sit no. Et cum discere debitis argumentum, eu elitr libris molestiae sed.
+                        Ne diam
+                        platonem disputando per, no dicta dicit est, modus partem vivendum in mel.
+
+                        Nec an nisl adversarium. Nulla utroque eu sed, te dicant praesent vituperata vix, nam eu
+                        brute
+                        delicatissimi. Vix congue nostrum ne, ei duo malorum appetere reformidans, nam tale
+                        exerci
+                        fuisset id. Has cu mundi aliquid offendit, ut libris possim vis, augue error omnium te
+                        sed. Ut
+                        ferri utroque cum.
+                        <a href="">Show more</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div> -->
+  </div>
 </div>
-

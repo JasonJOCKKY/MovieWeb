@@ -1,13 +1,13 @@
 
 
-@media (min-width: 576px) {
+/* @media (min-width: 576px) {
 
     .backDrop{
         background-color: black;
         opacity: 0.8 !important;
     }
-    
-}
+
+} */
 
 .modalCard{
     height: 350px;
@@ -22,13 +22,13 @@
     /* background-color: mediumslateblue; */
 }
 
-.modalPoster img{
+/* .modalPoster img{ */
     /* position: absolute;
     top: 0; */
-    width: 100%;
-}
+    /* width: 100%;
+} */
 
-.closeButton{
+/* .closeButton{
     position: absolute;
     top: 0;
     right: 0;
@@ -65,8 +65,9 @@ textarea {
 
 .hidden{
     display: none;
-}
+} */
 
+/*
 ::ng-deep .mat-form-field-wrapper{padding: 5px !important;}
 
 ::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0px !important;}
@@ -75,11 +76,11 @@ textarea {
 ::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
     transform: translateY(-1.1em) scale(.75);
     width: 133.33333%;
-}
+} */
 
 
 /* form rating */
-.star {
+/* .star {
     font-size: 1.5rem;
     color: #b0c4de;
 }
@@ -91,4 +92,4 @@ textarea {
 }
 .filled.bad {
     color: #ff1e1e;
-}
+} */

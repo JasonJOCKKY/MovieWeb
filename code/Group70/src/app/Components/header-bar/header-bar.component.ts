@@ -10,7 +10,7 @@ import { LoginComponent } from '../../Components/login/login.component'
   styleUrls: ['./header-bar.component.css']
 })
 export class HeaderBarComponent implements OnInit {
-  isSignedIn: Boolean = true;
+  isSignedIn: Boolean = false;
 
   constructor(
     private dialog: MatDialog
