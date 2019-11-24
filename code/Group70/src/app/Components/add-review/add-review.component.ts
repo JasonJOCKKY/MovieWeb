@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
+import { ReviewService } from 'src/app/Services/review.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class AddReviewComponent implements OnInit {
   });
 
 
-  constructor( private dialogRef:MatDialogRef<AddReviewComponent>) {}
+  constructor(private dialogRef:MatDialogRef<AddReviewComponent>, private reviewService: ReviewService) {}
 
   ngOnInit() {
   }
@@ -34,7 +35,7 @@ export class AddReviewComponent implements OnInit {
     console.log(this.reviewForm.value);
     console.log(this.reviewForm.get('title').value);
 
-    //this.reviewService.createMovieReview(this.reviewForm.value, 1);
+    this.reviewService.createMovieReview(this.reviewForm.value, "1");
     this.closeDialog();
 
    

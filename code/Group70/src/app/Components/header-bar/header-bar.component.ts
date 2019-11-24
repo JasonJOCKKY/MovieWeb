@@ -10,7 +10,8 @@ import { LoginComponent } from '../../Components/login/login.component'
   styleUrls: ['./header-bar.component.css']
 })
 export class HeaderBarComponent implements OnInit {
-  isSignedIn: Boolean = false;
+
+  userName: string = null;
 
   constructor(
     private dialog: MatDialog,
@@ -27,8 +28,11 @@ export class HeaderBarComponent implements OnInit {
   }
 
   getCurrentUser(){
+    if(this.authService.authState)
+      this.userName = this.authService.authState.displayName;
     return this.authService.authState;
   }
+
 
   signOut(){
     this.authService.logout();
