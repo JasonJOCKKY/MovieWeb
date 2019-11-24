@@ -130,7 +130,7 @@ export class HomePageComponent{
   openPreview(movie:Movie): void {
     const dialogRef = this.dialog.open(PreviewComponent, {
       width: '500px',
-      data: {title: movie.title, id: movie.id, releaseDate: movie.release_date, poster: movie.poster}
+      data: {title: movie.title, id: movie.id, release_date: movie.release_date, poster: movie.poster, description: movie.description}
     });
   }
 

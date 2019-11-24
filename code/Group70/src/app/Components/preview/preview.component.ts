@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {ReviewService} from "../../Services/review.service"
-
 import { Movie, Review } from 'src/type';
 
 @Component({
@@ -26,6 +25,5 @@ export class PreviewComponent implements OnInit {
   onCloseClick(){
     this.dialogRef.close();
   }
-
 
 }

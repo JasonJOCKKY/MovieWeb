@@ -1,6 +1,5 @@
 .poster{
-    width: 175px;
-}
-.detail{
-    text-align: center;
+    float:left;
+    width: 125px;
+    margin: 5px;
 }

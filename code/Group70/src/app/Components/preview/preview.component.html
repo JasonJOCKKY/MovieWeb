@@ -1,11 +1,14 @@
 <h1 mat-dialog-title>{{movie.title}}</h1>
+<p>{{movie.release_date}}</p>
 <div mat-dialog-content>
-        <mat-card class="detail"> 
-                <mat-card-header>
-                        <mat-card-title class="detail">{{movie.release_date}}</mat-card-title>
-                </mat-card-header>
-                <img mat-card-image  class="poster" src="{{movie.poster}}" alt="poster">
+        <mat-card> 
                 <mat-card-content>
+                        <div>
+                                <img mat-card-image  class="poster" src="{{movie.poster}}" alt="poster">
+                                <h3>Abstract</h3>
+                                <p>{{movie.description}}</p>
+                        </div>
+                        <br>
                         <h3>Last Three Reviews:</h3>
                         <p>
                                 "You will feel utterly numb after the screening of The 
@@ -26,7 +29,8 @@
                       </mat-card-content>
         </mat-card>
 </div>
-<div mat-dialog-actions >
-  <button mat-button (click)="onCloseClick()">Close</button>
-  <button mat-button (click)="onCloseClick()" [routerLink]="['/details', movie.id]">View More</button>
+
+<div mat-dialog-actions align="center">
+  <button mat-raised-button (click)="onCloseClick()">Close</button>
+  <button mat-raised-button (click)="onCloseClick()" [routerLink]="['/details', movie.id]">View More</button>
 </div>
