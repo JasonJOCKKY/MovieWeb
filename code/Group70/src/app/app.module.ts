@@ -46,8 +46,6 @@ import {MatTabsModule} from '@angular/material/tabs';
 
 import { PreviewComponent } from './Pages/preview/preview.component';
 import { AddReviewComponent } from './Components/add-review/add-review.component';
-
-import { TestPageComponent } from './test/test-page/test-page.component';
 import { LoginComponent } from './Components/login/login.component';
 
 
@@ -61,7 +59,6 @@ import { LoginComponent } from './Components/login/login.component';
     MovieDetailsPageComponent,
     PreviewComponent,
     AddReviewComponent,
-    TestPageComponent,
     LoginComponent
   ],
   entryComponents: [
