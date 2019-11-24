@@ -1,86 +1,127 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component} from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { Observable, Subject} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import { PreviewComponent } from '../preview/preview.component';
-
-export interface Movie {
-  title: string;
-  director: string;
-  year: number;
-}
+import { PreviewComponent } from '../../Components/preview/preview.component';
+import { TmdbServiceService } from '../../Services/tmdb-service.service';
+import { CloseScrollStrategy } from '@angular/cdk/overlay';
+import { Movie, Genre, Certification} from '../../../type'
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent{
+  searchForm = new FormGroup({
+    title: new FormControl('', [Validators.required]),
+  });
+  exploreForm = new FormGroup({
+    year: new FormControl('', [Validators.min(1888), Validators.max(2019)]),
+    genre: new FormControl(''),
+    rating: new FormControl(''),
+  });
+  searchResults: Movie[];
+  movieGenres: Genre[];
+  certifications: Certification[];
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public movieService: TmdbServiceService,
     ) { 
-    this.filteredMovies = this.movieCtrl.valueChanges
-      .pipe(
-        startWith(''),
-        map(movie => movie ? this._filterMovies(movie) : this.movies.slice())
-      );
+    this.searchResults = [];
+    /*
+    this.movieService.getAllGenres().subscribe(g =>{
+      console.log(g[0]);
+    });
+    */
+    this.loadGenres();
+    this.loadCertifications();
   }
 
-  searchForm = new FormGroup({
-    title: new FormControl(''),
-    director: new FormControl(''),
-    year: new FormControl(''),
-  });
-  movieCtrl = new FormControl();
-  filteredMovies: Observable<Movie[]>;
-  movies: Movie[] = [
-    {title: "Citizen Kane", director: "Orson Welles", year: 1941},
-    {title: "The Dark Knight", director: "Christopher Nolan", year: 2008},
-    {title: "The Dark Knight 2", director: "Christopher Nolan", year: 2009},
-    {title: "The Dark Knight 3", director: "Christopher Nolan", year: 2010},
-    {title: "The Dark Knight 4", director: "Christopher Nolan", year: 2010},
-    {title: "The Dark Knight 5", director: "Christopher Nolan", year: 2010},
-    {title: "The Dark Knight 6", director: "Christopher Nolan", year: 2010},
-    {title: "The Dark Knight 7", director: "Christopher Nolan", year: 2010},
-    {title: "The Dark Knight 8", director: "Christopher Nolan", year: 2010},
-  ];
-  searchResults: Movie[] = this.movies;
-
-  ngOnInit() {
-  }
-
-  private _filterMovies(value: string): Movie[] {
-    const filterValue = value.toLowerCase();
-    return this.movies.filter(movie => movie.title.toLowerCase().indexOf(filterValue) === 0);
-  }
-
-  search(){
-    this.movies.forEach(function(movie: Movie){
-       console.log("hi");
+  loadGenres(){
+    let res = new Subject();
+    res = this.movieService.getAllGenres()
+    res.subscribe({
+      next: (g : Genre[]) => this.movieGenres = g
     });
   }
 
-  onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.searchForm.value);
-    this.searchResults = [];
+  loadCertifications(){
+    let res = new Subject();
+    res = this.movieService.getAllCertifications()
+    res.subscribe({
+      next: (c: Certification[]) => this.certifications = c
+    });
   }
 
-  selectFilm(){
-    window.alert("hi");
+  searchTitle() {
+    if(this.searchForm.value.title != ""){
+      let res = new Subject();
+      res = this.movieService.searchDB(this.searchForm.value.title);
+      res.subscribe({
+        next: (v : Movie[]) => this.searchResults = v
+      });
+      res.subscribe({
+        next: (v: Movie[]) => console.log(v)
+      });
+    }
+    else{
+      window.alert("Please enter a title!");
+    }
+    
+  }
+
+  searchPopular(){
+      this.searchResults=[];
+      //console.log("popular movies: ",this.movieService.getPopular());
+      let res = new Subject();
+      res = this.movieService.getPopular();
+      res.subscribe({
+        next: (v : Movie[]) => this.searchResults = v
+      });
+  }
+
+  explore(){
+    this.searchResults=[];
+    let year: number = this.exploreForm.value.year;
+    let certification: string = this.exploreForm.value.rating;
+    let genres: number[];
+    if(this.exploreForm.value.genre == ""){
+      genres = [];
+    }
+    else{
+      genres = [this.exploreForm.value.genre];
+    }
+    let res = new Subject();
+    res = this.movieService.exploreMovies_ReleaseDate(year, genres, certification);
+    res.subscribe({
+      next: (v : Movie[]) => this.searchResults = v
+    });
+  }
+
+  onTabChange(tab){
+    if(tab.index==0){
+      this.searchResults = [];
+    }
+    else if(tab.index==1){
+      this.searchResults = [];
+    }
+    else if(tab.index==2){
+      this.searchPopular();
+    }
   }
 
   openPreview(movie:Movie): void {
     const dialogRef = this.dialog.open(PreviewComponent, {
       width: '500px',
-      data: {title: movie.title, director: movie.director, year: movie.year}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      data: {title: movie.title, id: movie.id, release_date: movie.release_date, poster: movie.poster, description: movie.description}
     });
   }
-}
 
+  fixPoster(url){
+    console.log(url);
+  }
+ 
+}

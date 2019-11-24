@@ -1,43 +1,63 @@
-<form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="search-form">
+<div>
+  <mat-tab-group (selectedTabChange)="onTabChange($event)">
+    <mat-tab label="Search by Title">
+      <mat-card>
+          <form [formGroup]="searchForm" (ngSubmit)="searchTitle()">
+            <mat-form-field  class="search-title">
+                <input matInput placeholder="Title" formControlName="title">
+            </mat-form-field>
+              <button mat-raised-button type="submit" [disabled]="!searchForm.valid">Search</button>
+          </form>
+      </mat-card>
+    </mat-tab>
 
-    <input matInput class="search-options" placeholder="Search by title..."  [matAutocomplete]="auto" [formControl]="movieCtrl">
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let movie of filteredMovies | async" [value]="movie.title">
-        <!--<img class="example-option-img" aria-hidden [src]="state.flag" height="25">-->
-        <span>{{movie.title}}</span> |
-        <small>Director: {{movie.director}}</small>
-      </mat-option>
-    </mat-autocomplete>
-
-    <mat-expansion-panel class="search-options">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <mat-icon>filter_list</mat-icon>
-                &nbsp;
-                more filters
-            </mat-panel-title>
-            </mat-expansion-panel-header>
-        
+    <mat-tab label="Explore Films">
+      <mat-card>
+          <form [formGroup]="exploreForm" (ngSubmit)="explore()"> 
             <mat-form-field>
-              <input matInput placeholder="Director" formControlName="director">
+              <mat-label>Genre</mat-label>
+              <mat-select formControlName='genre'>
+                <mat-option *ngFor="let genre of movieGenres" [value]="genre.id">
+                  {{genre.name}}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
             <br>
             <mat-form-field>
-              <input matInput placeholder="Year" formControlName="year">
+              <mat-label>Rating</mat-label>
+              <mat-select formControlName='rating'>
+                <mat-option *ngFor="let rating of certifications" [value]="rating.certification">
+                  {{rating.certification}}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
-          </mat-expansion-panel>
-    <button class="search-button btn" type="submit" [disabled]="!searchForm.valid">Search</button>
-</form>
+            <br>
+            <mat-form-field>
+                <input matInput placeholder="Year" formControlName="year" type="number" min="1888" max="2019">
+            </mat-form-field>
+            <br>
+            <button mat-raised-button type="submit" [disabled]="!exploreForm.valid">Explore</button>
+          </form>
+      </mat-card>
+    </mat-tab>
+
+    <mat-tab label="View Popular Movies" >
+      <div class="popular-movies">
+          <h1>Popular movies...</h1>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
 
 <div class="movie-container">
-  <mat-card class="movie-card" *ngFor="let movie of searchResults">
-          <mat-card-header class="movie-title">
-                  <mat-card-title>{{movie.title}}</mat-card-title>
-                  <mat-card-subtitle>{{movie.director}}</mat-card-subtitle>
-          </mat-card-header>
-          <img mat-card-image  class="poster" src="https://images-na.ssl-images-amazon.com/images/I/81AJdOIEIhL._SL1500_.jpg" alt="batman">
-          <mat-card-actions>
-                  <button mat-button (click)="openPreview(movie)">view more</button>
-          </mat-card-actions>
+  <mat-card class="movie-card" *ngFor="let movie of searchResults" >
+    <mat-card-header>
+      <mat-card-title>{{movie.title}}</mat-card-title>
+      <mat-card-subtitle>{{movie.release_date}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image  class="movie-poster"  src="{{movie.poster}}" onError="this.src='../../../assets/images/placeholder.png'" alt="...">
+    <mat-card-actions>
+      <button mat-raised-button (click)="openPreview(movie)">view more</button>
+    </mat-card-actions>
   </mat-card>
 </div>

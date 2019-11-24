@@ -9,7 +9,6 @@ import { ActivatedRoute } from '@angular/router';
 
 import { CdkRowDef } from '@angular/cdk/table';
 import { BreadcrumbModule } from 'angular-bootstrap-md';
-import { Movie } from '../preview/preview.component';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { MatDialog } from '@angular/material';
 import { LoginComponent } from 'src/app/Components/login/login.component';
