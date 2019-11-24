@@ -32,7 +32,7 @@ export class HomePageComponent{
     title: new FormControl('', [Validators.required]),
   });
   exploreForm = new FormGroup({
-    year: new FormControl(''),
+    year: new FormControl('', [Validators.min(1888), Validators.max(2019)]),
     genre: new FormControl(''),
     rating: new FormControl(''),
   });
@@ -70,7 +70,6 @@ export class HomePageComponent{
     });
   }
 
- 
   searchTitle() {
     if(this.searchForm.value.title != ""){
       let res = new Subject();
@@ -140,4 +139,3 @@ export class HomePageComponent{
   }
  
 }
-

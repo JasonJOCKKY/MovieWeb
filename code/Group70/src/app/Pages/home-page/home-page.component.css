@@ -16,19 +16,6 @@
     width: 150px;
 }
 
-.search-wrapper{
-    width:100%;
-    margin: 5px;
-    text-align: center;
-}
-
-.search-box{
-    background-color: silver;
-    display: inline-block;
-    width: 25%;
-    margin: 10px;
-}
-
 .popular-movies{
     margin:5px;
     text-align: center;
