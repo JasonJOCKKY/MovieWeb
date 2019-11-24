@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
   selector: 'app-add-review',
   templateUrl: './add-review.component.html',
-  styleUrls: ['./add-review.component.css'],
-  providers: [NgbModalConfig, NgbModal]
+  styleUrls: ['./add-review.component.css']
 })
 export class AddReviewComponent implements OnInit {
 
@@ -24,7 +21,7 @@ export class AddReviewComponent implements OnInit {
   });
 
 
-  constructor(private activeModal: NgbActiveModal) {}
+  constructor() {}
 
   ngOnInit() {
   }
