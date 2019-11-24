@@ -7,17 +7,21 @@
 
   <span class="m-auto">Movie Application</span>
 
-  <span *ngIf="!isSignedIn">
-    <button mat-raised-button (click)="login()">Login</button>
-  </span>
+  <span *ngIf="getCurrentUser() != null; else showLogin">
+      <button mat-button [matMenuTriggerFor]="userMenu" class="pl-2 pr-2">
+        <mat-icon>account_circle</mat-icon>
+        User Name
+      </button>
+      <mat-menu #userMenu="matMenu" xPosition="before">
+        <button mat-menu-item (click)="signOut()">Sign Out</button>
+      </mat-menu>
+    </span>
 
-  <span *ngIf="isSignedIn">
-    <button mat-button [matMenuTriggerFor]="userMenu" class="pl-2 pr-2">
-      <mat-icon>account_circle</mat-icon>
-      User Name
-    </button>
-    <mat-menu #userMenu="matMenu" xPosition="before">
-      <button mat-menu-item>Sign Out</button>
-    </mat-menu>
-  </span>
+  <ng-template #showLogin>
+      <span>
+          <button mat-raised-button (click)="login()">Login</button>
+        </span>
+  </ng-template>
+ 
+  
 </mat-toolbar>

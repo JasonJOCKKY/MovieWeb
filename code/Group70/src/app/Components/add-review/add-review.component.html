@@ -1,19 +1,20 @@
 <!-- modal -->
 <div>
-    <!-- <button mat-dialog-close mat-icon-button class="closeButton">
-      <mat-icon>close</mat-icon>
-    </button> -->
     <mat-grid-list cols="5" class="p-2" gutterSize="1em" rowHeight="500px">
       <!-- Poster -->
       <mat-grid-tile class="modalPoster" colspan="2">
-          <img class="w-100 h-100" src="https://img.moviepostershop.com/replicas-movie-poster-2019-1000778791.jpg" alt="...">
+          <img class="w-100 h-100" src="{{ movie.poster }}" alt="...">
       </mat-grid-tile>
 
       <!-- Form -->
       <mat-grid-tile colspan="3">
         <div class="w-100 h-100">
+          <div>
+            <button mat-dialog-close mat-icon-button class="closeButton" tabindex="-1" class="float-right">
+                <mat-icon>close</mat-icon>
+            </button>
+          </div>
           <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" class="w-100">
-
             <!-- Title -->
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Title</mat-label>
@@ -21,19 +22,25 @@
             </mat-form-field>
 
             <!-- Rating -->
-            <div>
-              <button mat-icon-button *ngFor="let i of [1, 2, 3, 4, 5]">
-                <mat-icon>star</mat-icon>
+            <div class="mb-2">
+              <h5 class="d-inline">Score: </h5>
+              <button type="button" mat-icon-button *ngFor="let i of [1, 2, 3, 4, 5]" color="accent"
+                (click)="setScore(i)"
+                (mouseenter)="setDisplayScore(i)"
+                (mouseleave)="resetDisplayScore()">
+                <mat-icon matTooltip="{{ i }}" matTooltipPosition="above" matTooltipClass="mb-1">
+                  {{ i <= displayScore ? 'star' : 'star_outline' }}
+                </mat-icon>
               </button>
             </div>
 
             <!-- Comment -->
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Comment</mat-label>
-              <textarea matInput rows="5" formControlName="comment"></textarea>
+              <textarea matInput rows="10" formControlName="comment" style="resize: none;"></textarea>
             </mat-form-field>
 
-            <button mat-flat-button color="primary" class="d-block w-100 m-auto">Submit</button>
+            <button type="submit" [disabled]="reviewForm.invalid" mat-flat-button color="primary" class="d-block w-100 m-auto">Submit</button>
           </form>
         </div>
       </mat-grid-tile>

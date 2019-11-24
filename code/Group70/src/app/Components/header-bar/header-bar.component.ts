@@ -13,7 +13,8 @@ export class HeaderBarComponent implements OnInit {
   isSignedIn: Boolean = false;
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private authService: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -23,6 +24,14 @@ export class HeaderBarComponent implements OnInit {
     this.dialog.open(LoginComponent, {
       width: '500px'
     });
+  }
+
+  getCurrentUser(){
+    return this.authService.authState;
+  }
+
+  signOut(){
+    this.authService.logout();
   }
 
 }
