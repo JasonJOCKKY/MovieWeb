@@ -1,41 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 import { Person, Review, Reply, Movie_Detail } from 'src/type';
 import { ReviewService } from 'src/app/Services/review.service';
 
-import { DatePipe } from '@angular/common';
 import { AddReviewComponent } from 'src/app/Components/add-review/add-review.component';
 
 import { TmdbServiceService } from 'src/app/Services/tmdb-service.service';
 
 import { ActivatedRoute } from '@angular/router';
+import { CdkRowDef } from '@angular/cdk/table';
 
 
 @Component({
   selector: 'app-movie-details-page',
   templateUrl: './movie-details-page.component.html',
   styleUrls: ['./movie-details-page.component.css'],
-  // add NgbModalConfig and NgbModal to the component providers
-  providers: [NgbModalConfig, NgbModal, DatePipe]
+  providers: [NgbModalConfig, NgbModal]
 })
 export class MovieDetailsPageComponent implements OnInit {
+
   movie: Movie_Detail;
   reviews: Review[];
+  crewFirstRow: Person[];
+  castFirstRow: Person[];
 
+  
+
+ 
   constructor(
-    private modalConfig: NgbModalConfig,
     private modalService: NgbModal,
     private reviewService: ReviewService,
     private tmdbService: TmdbServiceService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modalConfig: NgbModalConfig
     ) {
-     this.modalConfig.backdrop = 'static';
-     this.modalConfig.keyboard = false;
-     this.modalConfig.backdropClass = "backDrop";
-     this.modalConfig.centered = true;
-     this.modalConfig.size = "lg";
-     this.modalConfig.scrollable = true;
+      this.modalConfig.backdrop = 'static';
+    this.modalConfig.keyboard = false;
+    this.modalConfig.backdropClass = "backDrop";
+    this.modalConfig.centered = true;
+    this.modalConfig.size = "lg";
+    this.modalConfig.scrollable = true;
 
   }
 
@@ -44,11 +49,22 @@ export class MovieDetailsPageComponent implements OnInit {
     const movie_id = this.route.snapshot.paramMap.get('movie_id');
     this.tmdbService.getMovieDetail(movie_id).subscribe((movie: Movie_Detail) => {
       this.movie = movie;
+      this.getFirstRow();
     });
+  
 
-    // this.reviews = this.reviewService.retrieveMovieReview(movie_id).subscribe(result => {
-    //   this.reviews = result;
-    // });
+    this.reviews = [];
+  }
+
+  getFirstRow(){
+    this.crewFirstRow = [];
+    this.castFirstRow = [];
+    for(let i = 0; i < 6; i++){
+      this.crewFirstRow.push(this.movie.crews[i]);
+      this.castFirstRow.push(this.movie.casts[i]);
+    }
+    console.log(this.crewFirstRow);
+    
   }
 
   // modal

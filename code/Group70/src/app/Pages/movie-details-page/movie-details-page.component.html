@@ -1,119 +1,177 @@
-<div class="container">
-  <div *ngIf="movie" class="wrapper">
+<div *ngIf="movie">
     <!-- Movie -->
-    <div class="card-sm-3">
-      <div class="row no-gutters">
-        <!-- Movie Poster -->
-        <div class="col-sm-3 poster">
-            <img src="{{ movie.poster }}" class="card-img" alt="...">
-        </div>
-            <!-- Movie Info -->
-          <div class="col-sm-6">
-              <div class="card-body info">
-                  <h5 class="card-title">Name: {{ movie.title }}</h5>
-                  <p class="card-text">Year: {{ movie.release_date }}</p>
-                  <p class="card-text">Director: {{ movie.crews[0].name }}</p>
-                  <p class="card-text">Abstract: {{ movie.description }}</p>
-                  <mat-divider></mat-divider>
+
+    <div class="backgroundWrapper"></div>
+    <div class="mainWrapper">
+        <!-- <div class="card-sm-3 movieCard"> -->
+        <mat-card class="w-100">
+
+            <div class="row no-gutters firstPart">
+                <!-- Left Part -->
+                <div class="col-sm-4 poster">
+                    <!-- Movie Poster -->
+                    <img src="{{ movie.poster }}" class="card-img" alt="...">
               </div>
-          </div>
-          <!-- rating card -->
-          <div class="col-sm-3 mt-3 rating">
-              <mat-card class="rating-card">
-                  <mat-card-content>
-                      <h5 class="rate">Ratings</h5>
-                      <mat-divider></mat-divider>
-                      <strong class="rate">4</strong>
-                      <span>
-                          <ngb-rating max = 5 readonly = true rate="4"></ngb-rating>
-                      </span>
 
-                      <div class="barChart">
-                          <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets"
-                              [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
-                              [legend]="false" (chartHover)="chartHovered($event)"
-                              (chartClick)="chartClicked($event)">
-                          </canvas>
-                      </div>
+                <!-- Right Part -->
+                <div class="col-sm-8 h-100">
+                    <!-- Movie Info -->
+                    <div class="card-body info">
+                        <h1 class="card-title">Name: {{ movie.title }}</h1>
+                        <p class="card-text">Year: {{ movie.release_date }}</p>
+                        <p class="card-text">Director: {{ movie.crews[0].name }}</p>
+                    </div>
 
-                      <button mat-stroked-button color="primary" class="addReview">Add Review</button>
+                    <!-- rating card -->
+                    <div class="mt-3 rating">
+                        <mat-card class="rating-card">
+                            <mat-card-content>
+                                <div class="ratingCardHeader">
+                                    <h5 class="rate">Ratings</h5>
+                                    <!-- Add Review-->
+                                    <button mat-stroked-button color="primary" class="addReview"
+                                        (click)="open(content)">Add Review</button>
+                                </div>
+                                <mat-divider></mat-divider>
+                                <strong class="rate">4</strong>
+                                <span>
+                                    <ngb-rating max=5 readonly=true rate="4"></ngb-rating>
+                                </span>
 
-                  </mat-card-content>
-              </mat-card>
-          </div>
-
-      </div>
-    </div>
-
-    <!-- Actors -->
-    <h2>Actors</h2>
-
-    <div class="w-75">
-        <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>Casts</mat-panel-title>
-                <mat-panel-description>
-                  <mat-icon>folder</mat-icon>
-                  The casts of this movie.
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-              <img src="{{ movie.poster }}">
-            </mat-expansion-panel>
-          </mat-accordion>
-    </div>
-
-
-    <!-- Review -->
-    <div class="my-3 bg-white rounded box-shadow review">
-        <h2 class="border-bottom border-gray pb-2 mb-0">Review</h2>
-        <div class="media text-muted pt-3">
-            <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32"
-                class="mr-2 rounded"
-                src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
-                data-holder-rendered="true" style="width: 32px; height: 32px;">
-            <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                <div class="d-flex justify-content-between align-items-center w-100">
-                    <strong class="text-gray-dark">Full Name</strong>
-                </div>
-                <div class="d-block comments">Lorem ipsum dolor sit amet, error mediocrem mei an, ut pri exerci
-                    adipisci.
-                    Soleat iisque sit no. Et cum discere debitis argumentum, eu elitr libris molestiae sed. Ne diam
-                    platonem disputando per, no dicta dicit est, modus partem vivendum in mel.
-
-                    Nec an nisl adversarium. Nulla utroque eu sed, te dicant praesent vituperata vix, nam eu brute
-                    delicatissimi. Vix congue nostrum ne, ei duo malorum appetere reformidans, nam tale exerci
-                    fuisset id. Has cu mundi aliquid offendit, ut libris possim vis, augue error omnium te sed. Ut
-                    ferri utroque cum.
-                    <a href="">Show more</a>
+                                <div class="barChart">
+                                    <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets"
+                                        [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
+                                        [legend]="false" (chartHover)="chartHovered($event)"
+                                        (chartClick)="chartClicked($event)">
+                                    </canvas>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="row no-gutters">
+                <h4>Abstract</h4>
+                <p>{{movie.description}}</p>
+            </div>
+        </mat-card>
 
 
-        <div class="media text-muted pt-3">
-            <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32"
-                class="mr-2 rounded"
-                src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
-                data-holder-rendered="true" style="width: 32px; height: 32px;">
-            <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                <div class="d-flex justify-content-between align-items-center w-100">
-                    <strong class="text-gray-dark">Full Name</strong>
+        <mat-tab-group>
+            <mat-tab label="Cast">
+                <div class="actors">
+
+                    <div class="actor" *ngFor="let person of castFirstRow">
+                        <img class="width-100 height-100" src="{{ person.poster }}" alt="...">
+                    </div>
                 </div>
-                <div class="d-block comments">Lorem ipsum dolor sit amet, error mediocrem mei an, ut pri exerci
-                    adipisci.
-                    Soleat iisque sit no. Et cum discere debitis argumentum, eu elitr libris molestiae sed. Ne diam
-                    platonem disputando per, no dicta dicit est, modus partem vivendum in mel.
 
-                    Nec an nisl adversarium. Nulla utroque eu sed, te dicant praesent vituperata vix, nam eu brute
-                    delicatissimi. Vix congue nostrum ne, ei duo malorum appetere reformidans, nam tale exerci
-                    fuisset id. Has cu mundi aliquid offendit, ut libris possim vis, augue error omnium te sed. Ut
-                    ferri utroque cum.
-                    <a href="">Show more</a>
+                <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Show more
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+
+                        <div class="actor" *ngFor="let person of movie.casts">
+                            <img class="width-100 height-100" src="{{ person.poster }}" alt="...">
+                        </div>
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-tab>
+
+            <mat-tab label="Crew">
+                <div class="actors">
+                    <div class="actor" *ngFor="let person of crewFirstRow">
+                        <img class="width-100 height-100" src="{{ person.poster }}" alt="...">
+                    </div>
                 </div>
+
+                <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Show more
+                            </mat-panel-title>
+
+                        </mat-expansion-panel-header>
+                        <div class="actor" *ngFor="let person of movie.crews">
+                            <img class="width-100 height-100" src="{{ person.poster }}" alt="...">
+                        </div>
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-tab>
+        </mat-tab-group>
+
+
+        <div class="row no-gutters">
+            <!-- Review -->
+            <div class="my-3 bg-white rounded box-shadow review">
+                <h2 class="border-bottom border-gray pb-2 mb-0">Review</h2>
+                <div class="media text-muted pt-3">
+                    <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32"
+                        class="mr-2 rounded"
+                        src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
+                        data-holder-rendered="true" style="width: 32px; height: 32px;">
+                    <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                        <div class="d-flex justify-content-between align-items-center w-100">
+                            <strong class="text-gray-dark">Full Name</strong>
+                        </div>
+                        <div class="d-block comments">Lorem ipsum dolor sit amet, error mediocrem mei an, ut pri
+                            exerci
+                            adipisci.
+                            Soleat iisque sit no. Et cum discere debitis argumentum, eu elitr libris molestiae sed.
+                            Ne diam
+                            platonem disputando per, no dicta dicit est, modus partem vivendum in mel.
+
+                            Nec an nisl adversarium. Nulla utroque eu sed, te dicant praesent vituperata vix, nam eu
+                            brute
+                            delicatissimi. Vix congue nostrum ne, ei duo malorum appetere reformidans, nam tale
+                            exerci
+                            fuisset id. Has cu mundi aliquid offendit, ut libris possim vis, augue error omnium te
+                            sed. Ut
+                            ferri utroque cum.
+                            <a href="">Show more</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="media text-muted pt-3">
+                    <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32"
+                        class="mr-2 rounded"
+                        src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
+                        data-holder-rendered="true" style="width: 32px; height: 32px;">
+                    <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                        <div class="d-flex justify-content-between align-items-center w-100">
+                            <strong class="text-gray-dark">Full Name</strong>
+                        </div>
+                        <div class="d-block comments">Lorem ipsum dolor sit amet, error mediocrem mei an, ut pri
+                            exerci
+                            adipisci.
+                            Soleat iisque sit no. Et cum discere debitis argumentum, eu elitr libris molestiae sed.
+                            Ne diam
+                            platonem disputando per, no dicta dicit est, modus partem vivendum in mel.
+
+                            Nec an nisl adversarium. Nulla utroque eu sed, te dicant praesent vituperata vix, nam eu
+                            brute
+                            delicatissimi. Vix congue nostrum ne, ei duo malorum appetere reformidans, nam tale
+                            exerci
+                            fuisset id. Has cu mundi aliquid offendit, ut libris possim vis, augue error omnium te
+                            sed. Ut
+                            ferri utroque cum.
+                            <a href="">Show more</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
-
     </div>
-  </div>
+
+
 </div>
+
