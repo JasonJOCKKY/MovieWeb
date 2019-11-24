@@ -8,7 +8,7 @@ import { TestPageComponent } from './test/test-page/test-page.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
-  { path: 'details', component: MovieDetailsPageComponent },
+  { path: 'details/:movie_id', component: MovieDetailsPageComponent },
   { path: 'test', component: TestPageComponent},
   {
     path: '',

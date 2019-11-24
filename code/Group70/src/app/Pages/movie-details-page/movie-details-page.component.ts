@@ -1,51 +1,63 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Person, Review, Reply, Movie_Detail } from 'src/type';
+import { ReviewService } from 'src/app/Services/review.service';
+
+import { DatePipe } from '@angular/common';
+import { AddReviewComponent } from 'src/app/Components/add-review/add-review.component';
+
+import { TmdbServiceService } from 'src/app/Services/tmdb-service.service';
+
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-movie-details-page',
   templateUrl: './movie-details-page.component.html',
   styleUrls: ['./movie-details-page.component.css'],
   // add NgbModalConfig and NgbModal to the component providers
-  providers: [NgbModalConfig, NgbModal]
+  providers: [NgbModalConfig, NgbModal, DatePipe]
 })
 export class MovieDetailsPageComponent implements OnInit {
+  movie: Movie_Detail;
+  reviews: Review[];
 
+  constructor(
+    private modalConfig: NgbModalConfig,
+    private modalService: NgbModal,
+    private reviewService: ReviewService,
+    private tmdbService: TmdbServiceService,
+    private route: ActivatedRoute
+    ) {
+     this.modalConfig.backdrop = 'static';
+     this.modalConfig.keyboard = false;
+     this.modalConfig.backdropClass = "backDrop";
+     this.modalConfig.centered = true;
+     this.modalConfig.size = "lg";
+     this.modalConfig.scrollable = true;
 
-  reviewForm = new FormGroup({
-    title : new FormControl('',[Validators.required, Validators.pattern("[a-zA-Z\\s]+")]),
-    comment : new FormControl('',[Validators.required])
-  })
-
-
-
-
-  constructor(config: NgbRatingConfig, modalConfig: NgbModalConfig, private modalService: NgbModal) {
-    // customize default values of ratings used by this component tree
-    config.max = 5;
-    config.readonly = true;
-
-     // customize default values of modals used by this component tree
-     modalConfig.backdrop = 'static';
-     modalConfig.keyboard = false;
-     modalConfig.backdropClass = "backDrop";
-     modalConfig.centered = true;
-     modalConfig.size = "lg";
-     modalConfig.scrollable = true;
   }
 
 
   ngOnInit() {
+    const movie_id = this.route.snapshot.paramMap.get('movie_id');
+    this.tmdbService.getMovieDetail(movie_id).subscribe((movie: Movie_Detail) => {
+      this.movie = movie;
+    });
+
+    // this.reviews = this.reviewService.retrieveMovieReview(movie_id).subscribe(result => {
+    //   this.reviews = result;
+    // });
   }
 
   // modal
-  open(content) {
-    this.modalService.open(content);
+  open() {
+    const modalRef = this.modalService.open(AddReviewComponent);
   }
 
 
-
+  // rating chart
   public chartType: string = 'bar';
 
   public chartDatasets: Array<any> = [
@@ -77,8 +89,8 @@ export class MovieDetailsPageComponent implements OnInit {
   public chartOptions: any = {
     responsive: true
   };
+
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
-  
 
 }

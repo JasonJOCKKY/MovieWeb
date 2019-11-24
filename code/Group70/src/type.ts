@@ -19,11 +19,11 @@ export interface Person {
 }
 
 export interface Review {
-  movie_id: number,
   user: string,
   score: number,
   date: string,
-  body: string,
+  title: string,
+  comment: string,
   replies: Reply[]
 }
 

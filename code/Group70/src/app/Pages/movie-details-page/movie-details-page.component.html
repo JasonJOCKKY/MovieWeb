@@ -1,166 +1,106 @@
 <div class="container">
-    <div class="wrapper">
-        <div class="card-sm-3">
-            <div class="row no-gutters">
-                <div class="col-sm-3 poster">
-                    <img src="https://img.moviepostershop.com/replicas-movie-poster-2019-1000778791.jpg"
-                        class="card-img" alt="...">
-                </div>
-                <div class="col-sm-6">
-                    <div class="card-body info">
-                        <h5 class="card-title">Name</h5>
-                        <p class="card-text">Year: 2019</p>
-                        <p class="card-text">Director: Alex</p>
-                        <p class="card-text">Abstract: This is a wider card with supporting text below as a natural
-                            lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <mat-divider></mat-divider>
-                        <h4>Actors</h4>
-                        <div class="actors">
-                            <div class="actor">
-                                <img src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
-                                    alt="..." class="rounded-circle">
-                            </div>
-                            <div class="actor">
-                                <img src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
-                                    alt="..." class="rounded-circle">
-                            </div>
-                            <div class="actor">
-                                <img src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
-                                    alt="..." class="rounded-circle">
-                            </div>
-                            <div class="actor">
-                                <img src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
-                                    alt="..." class="rounded-circle">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-3 mt-3 rating">
-                    <mat-card class="rating-card">
-                        <mat-card-content>
-                            <h5 class="rate">Ratings</h5>
-                            <mat-divider></mat-divider>
-                            <strong class="rate">4.6</strong>
-                            <span>
-                                <ngb-rating [rate]="5"></ngb-rating>
-                            </span>
-
-                            <div class="barChart">
-                                <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets"
-                                    [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
-                                    [legend]="false" (chartHover)="chartHovered($event)"
-                                    (chartClick)="chartClicked($event)">
-                                </canvas>
-                            </div>
-
-                            <button mat-stroked-button color="primary" class="addReview" (click)="open(content)">Add Review</button>
-
-                        </mat-card-content>
-                    </mat-card>
-                </div>
-
-
-            </div>
+  <div *ngIf="movie" class="wrapper">
+    <!-- Movie -->
+    <div class="card-sm-3">
+      <div class="row no-gutters">
+        <!-- Movie Poster -->
+        <div class="col-sm-3 poster">
+            <img src="{{ movie.poster }}" class="card-img" alt="...">
         </div>
+            <!-- Movie Info -->
+          <div class="col-sm-6">
+              <div class="card-body info">
+                  <h5 class="card-title">Name: {{ movie.title }}</h5>
+                  <p class="card-text">Year: {{ movie.release_date }}</p>
+                  <p class="card-text">Director: {{ movie.crews[0].name }}</p>
+                  <p class="card-text">Abstract: {{ movie.description }}</p>
+                  <mat-divider></mat-divider>
+                  <h4>Actors</h4>
+                  <div class="actors">
+                      <div class="actor" *ngFor="let person of movie.casts">
+                          <img src="{{ person.poster }}" alt="..." class="rounded-circle">
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- rating card -->
+          <div class="col-sm-3 mt-3 rating">
+              <mat-card class="rating-card">
+                  <mat-card-content>
+                      <h5 class="rate">Ratings</h5>
+                      <mat-divider></mat-divider>
+                      <strong class="rate">4</strong>
+                      <span>
+                          <ngb-rating max = 5 readonly = true rate="4"></ngb-rating>
+                      </span>
 
+                      <div class="barChart">
+                          <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets"
+                              [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
+                              [legend]="false" (chartHover)="chartHovered($event)"
+                              (chartClick)="chartClicked($event)">
+                          </canvas>
+                      </div>
 
-        <div class="my-3 bg-white rounded box-shadow review">
-            <h2 class="border-bottom border-gray pb-2 mb-0">Review</h2>
-            <div class="media text-muted pt-3">
-                <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32"
-                    class="mr-2 rounded"
-                    src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
-                    data-holder-rendered="true" style="width: 32px; height: 32px;">
-                <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                    <div class="d-flex justify-content-between align-items-center w-100">
-                        <strong class="text-gray-dark">Full Name</strong>
-                    </div>
-                    <div class="d-block comments">Lorem ipsum dolor sit amet, error mediocrem mei an, ut pri exerci
-                        adipisci.
-                        Soleat iisque sit no. Et cum discere debitis argumentum, eu elitr libris molestiae sed. Ne diam
-                        platonem disputando per, no dicta dicit est, modus partem vivendum in mel.
+                      <button mat-stroked-button color="primary" class="addReview">Add Review</button>
 
-                        Nec an nisl adversarium. Nulla utroque eu sed, te dicant praesent vituperata vix, nam eu brute
-                        delicatissimi. Vix congue nostrum ne, ei duo malorum appetere reformidans, nam tale exerci
-                        fuisset id. Has cu mundi aliquid offendit, ut libris possim vis, augue error omnium te sed. Ut
-                        ferri utroque cum.
-                        <a href="">Show more</a>
-                    </div>
-                </div>
-            </div>
+                  </mat-card-content>
+              </mat-card>
+          </div>
 
-
-            <div class="media text-muted pt-3">
-                <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32"
-                    class="mr-2 rounded"
-                    src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
-                    data-holder-rendered="true" style="width: 32px; height: 32px;">
-                <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                    <div class="d-flex justify-content-between align-items-center w-100">
-                        <strong class="text-gray-dark">Full Name</strong>
-                    </div>
-                    <div class="d-block comments">Lorem ipsum dolor sit amet, error mediocrem mei an, ut pri exerci
-                        adipisci.
-                        Soleat iisque sit no. Et cum discere debitis argumentum, eu elitr libris molestiae sed. Ne diam
-                        platonem disputando per, no dicta dicit est, modus partem vivendum in mel.
-
-                        Nec an nisl adversarium. Nulla utroque eu sed, te dicant praesent vituperata vix, nam eu brute
-                        delicatissimi. Vix congue nostrum ne, ei duo malorum appetere reformidans, nam tale exerci
-                        fuisset id. Has cu mundi aliquid offendit, ut libris possim vis, augue error omnium te sed. Ut
-                        ferri utroque cum.
-                        <a href="">Show more</a>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
+      </div>
     </div>
+
+    <!-- Review -->
+    <div class="my-3 bg-white rounded box-shadow review">
+        <h2 class="border-bottom border-gray pb-2 mb-0">Review</h2>
+        <div class="media text-muted pt-3">
+            <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32"
+                class="mr-2 rounded"
+                src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
+                data-holder-rendered="true" style="width: 32px; height: 32px;">
+            <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <div class="d-flex justify-content-between align-items-center w-100">
+                    <strong class="text-gray-dark">Full Name</strong>
+                </div>
+                <div class="d-block comments">Lorem ipsum dolor sit amet, error mediocrem mei an, ut pri exerci
+                    adipisci.
+                    Soleat iisque sit no. Et cum discere debitis argumentum, eu elitr libris molestiae sed. Ne diam
+                    platonem disputando per, no dicta dicit est, modus partem vivendum in mel.
+
+                    Nec an nisl adversarium. Nulla utroque eu sed, te dicant praesent vituperata vix, nam eu brute
+                    delicatissimi. Vix congue nostrum ne, ei duo malorum appetere reformidans, nam tale exerci
+                    fuisset id. Has cu mundi aliquid offendit, ut libris possim vis, augue error omnium te sed. Ut
+                    ferri utroque cum.
+                    <a href="">Show more</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="media text-muted pt-3">
+            <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32"
+                class="mr-2 rounded"
+                src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
+                data-holder-rendered="true" style="width: 32px; height: 32px;">
+            <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <div class="d-flex justify-content-between align-items-center w-100">
+                    <strong class="text-gray-dark">Full Name</strong>
+                </div>
+                <div class="d-block comments">Lorem ipsum dolor sit amet, error mediocrem mei an, ut pri exerci
+                    adipisci.
+                    Soleat iisque sit no. Et cum discere debitis argumentum, eu elitr libris molestiae sed. Ne diam
+                    platonem disputando per, no dicta dicit est, modus partem vivendum in mel.
+
+                    Nec an nisl adversarium. Nulla utroque eu sed, te dicant praesent vituperata vix, nam eu brute
+                    delicatissimi. Vix congue nostrum ne, ei duo malorum appetere reformidans, nam tale exerci
+                    fuisset id. Has cu mundi aliquid offendit, ut libris possim vis, augue error omnium te sed. Ut
+                    ferri utroque cum.
+                    <a href="">Show more</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </div>
 </div>
-
-
-<!-- modal -->
-<ng-template #content let-c="close" let-d="dismiss">
-
-        <mat-card color="primary" class="modalCard">
-            <mat-grid-list cols="4" rowHeight="100%">
-                <mat-grid-tile class="modalPoster">
-                        <img src="https://img.moviepostershop.com/replicas-movie-poster-2019-1000778791.jpg" alt="...">
-                </mat-grid-tile>
-                <mat-grid-tile class="modalForm" colspan="3">
-                    <button type="button" class="close closeButton" aria-label="Close" (click)="d('Cross click')">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <div class="formWrapper">
-                    <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
-                        <mat-form-field appearance="outline" class="title">
-                            <mat-label>Title</mat-label>
-                                <input matInput placeholder="Title" formControlName="title">
-                            <!-- <mat-hint>Hint</mat-hint> -->
-                        </mat-form-field>
-                        <br>
-                        <mat-form-field appearance="outline" class="comment">
-                            <mat-label>Comment</mat-label>
-                            <textarea matInput rows="8" placeholder="Comment" formControlName="comment"></textarea>
-                            <!-- <mat-hint>Hint</mat-hint> -->
-                        </mat-form-field>
-                    </form>
-                    </div>
-                </mat-grid-tile>
-            </mat-grid-list>
-        </mat-card>
-
-    <!-- <div class="modal-header">
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <p>Hello, World!</p>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
-    </div> -->
-</ng-template>

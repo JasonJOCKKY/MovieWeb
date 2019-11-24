@@ -18,11 +18,7 @@ export class TestPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.tmdbService.getAllGenres().subscribe(result => {
-      console.log(result);
-    });
-
-    this.tmdbService.getAllCertifications().subscribe(result => {
+    this.tmdbService.exploreMovies_ReleaseDate(2019, [], null).subscribe(result => {
       console.log(result);
     });
   }
