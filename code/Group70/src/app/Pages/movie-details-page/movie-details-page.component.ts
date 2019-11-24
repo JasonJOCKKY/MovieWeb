@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Person, Reply, Movie_Detail, Reviews } from 'src/type';
+import { Person, Reply, Movie_Detail, Reviews, Review } from 'src/type';
 import { ReviewService } from 'src/app/Services/review.service';
 
 import { AddReviewComponent } from 'src/app/Components/add-review/add-review.component';
@@ -30,9 +30,9 @@ export class MovieDetailsPageComponent implements OnInit {
   castFirstRow: Person[];
   crewRest: Person[];
   castRest: Person[];
-  
+
   movie_id: string;
-  
+
   peopleCol = 5;
 
 
@@ -135,17 +135,23 @@ export class MovieDetailsPageComponent implements OnInit {
 
   // Add Review
   onAddReview() {
-  if(this.authService.authState){
-    this.dialog.open(AddReviewComponent, {
-      width: '900px'
-    });
-  }
-   else{
+    if(this.authService.authState){
+      const addReviewDialog = this.dialog.open(AddReviewComponent, {
+        width: '900px',
+        data: {
+          movie: this.movie,
+        }
+      });
+      addReviewDialog.afterClosed().subscribe((review: Review) => {
+        if (review) {
+          console.log(review);
+        }
+      });
+    } else {
       this.dialog.open(LoginComponent, {
         width: '500px'
       });
     }
-
   }
 
 
