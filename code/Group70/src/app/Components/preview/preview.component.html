@@ -28,5 +28,5 @@
 </div>
 <div mat-dialog-actions >
   <button mat-button (click)="onCloseClick()">Close</button>
-  <button mat-button (click)="onCloseClick()" routerLink="/details">View More</button>
+  <button mat-button (click)="onCloseClick()" [routerLink]="['/details', movie.id]">View More</button>
 </div>

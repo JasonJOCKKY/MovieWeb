@@ -48,9 +48,7 @@ export class HomePageComponent{
   ];
   searchResults: Movie[];
   movieGenres: Genre[];
-  allGenres: Observable<Genre[]>;
-
-
+  certifications: any[];
 
   constructor(
     public dialog: MatDialog,
@@ -63,6 +61,7 @@ export class HomePageComponent{
     });
     */
     this.loadGenres();
+    this.loadCertifications();
   }
 
   loadGenres(){
@@ -73,17 +72,28 @@ export class HomePageComponent{
     });
   }
 
+  loadCertifications(){
+    let res = new Subject();
+    res = this.movieService.getAllCertifications()
+    res.subscribe({
+      next: (c: any[]) => this.certifications = c
+    });
+  }
+
+ 
   searchTitle() {
     if(this.searchForm.value.title != ""){
-      this.searchResults=[];
       let res = new Subject();
       res = this.movieService.searchDB(this.searchForm.value.title);
       res.subscribe({
         next: (v : Movie[]) => this.searchResults = v
       });
+      res.subscribe({
+        next: (v: Movie[]) => console.log(v)
+      });
     }
     else{
-      console.log("enter title please");
+      window.alert("Please enter a title!");
     }
     
   }
@@ -105,17 +115,8 @@ export class HomePageComponent{
     this.searchResults=[];
     let year: number = this.exploreForm.value.year;
     let certification: string = this.exploreForm.value.rating;
-    let genres: number[] = [];
-    if(this.exploreForm.value.genre!=""){
-      genres = [this.exploreForm.value.genre];
-    }
-    else{
-      this.movieGenres.forEach(function(g){
-        genres.push(g.id);
-      });
-    }
+    let genres: number[] = this.exploreForm.value.genre;
     let res = new Subject();
-    console.log(genres);
     res = this.movieService.exploreMovies_ReleaseDate(year, genres, certification);
     res.subscribe({
       next: (v : Movie[]) => this.searchResults = v
@@ -129,6 +130,9 @@ export class HomePageComponent{
     });
   }
 
+  fixPoster(url){
+    console.log(url);
+  }
  
 }
 

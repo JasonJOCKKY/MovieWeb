@@ -39,15 +39,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 
-<<<<<<< HEAD
 import { PreviewComponent } from './Components/preview/preview.component';
-=======
-
-import { PreviewComponent } from './Pages/preview/preview.component';
-import { AddReviewComponent } from './Components/add-review/add-review.component';
-
->>>>>>> development
 import { TestPageComponent } from './test/test-page/test-page.component';
+import { AddReviewComponent } from './Components/add-review/add-review.component';
 
 
 

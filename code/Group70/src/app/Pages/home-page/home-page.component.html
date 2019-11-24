@@ -39,7 +39,7 @@
 </form>
 
 <form [formGroup]="exploreForm" (ngSubmit)="explore()" class="form"> 
-  <mat-form-field (click)="loadGenres()">
+  <mat-form-field>
     <mat-label>Genre</mat-label>
     <mat-select formControlName='genre'>
       <mat-option *ngFor="let genre of movieGenres" [value]="genre.id">
@@ -47,8 +47,16 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-label>Rating</mat-label>
+    <mat-select formControlName='rating'>
+      <mat-option *ngFor="let rating of certifications" [value]="rating.certification">
+        {{rating.certification}}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
   <input matInput class="search-options" placeholder="Explore by year..." formControlName="year">
-  <input matInput class="search-options" placeholder="Explore by rating..." formControlName="rating">
   <button class="search-button btn" type="submit" [disabled]="!searchForm.valid">Explore Films</button>
 </form>
 
@@ -57,12 +65,12 @@
 </div>
 
 <div class="movie-container">
-  <mat-card class="movie-card" *ngFor="let movie of searchResults">
+  <mat-card class="movie-card" *ngFor="let movie of searchResults" >
           <mat-card-header class="movie-title">
             <mat-card-title>{{movie.title}}</mat-card-title>
             <mat-card-subtitle>{{movie.release_date}}</mat-card-subtitle>
           </mat-card-header>
-          <img mat-card-image  class="poster" src="{{movie.poster}}" alt="batman">
+          <img mat-card-image  class="poster"  src="{{movie.poster}}" alt="movie poster">
           <mat-card-actions>
             <button mat-button (click)="openPreview(movie)">view more</button>
           </mat-card-actions>
