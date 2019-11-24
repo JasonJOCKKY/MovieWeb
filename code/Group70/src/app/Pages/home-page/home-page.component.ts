@@ -6,21 +6,7 @@ import {map, startWith} from 'rxjs/operators';
 import { PreviewComponent } from '../../Components/preview/preview.component';
 import { TmdbServiceService } from '../../Services/tmdb-service.service';
 import { CloseScrollStrategy } from '@angular/cdk/overlay';
-
-//will replace when all code merged
-export interface Movie {
-  id: number,
-  title: string,
-  genre_ids: number[],
-  poster: string,
-  description: string,
-  release_date: string
-}
-
-export interface Genre {
-  id: number,
-  name: string
-}
+import { Movie, Genre, Certification} from '../../../type'
 
 @Component({
   selector: 'app-home-page',
@@ -38,7 +24,7 @@ export class HomePageComponent{
   });
   searchResults: Movie[];
   movieGenres: Genre[];
-  certifications: any[];
+  certifications: Certification[];
 
   constructor(
     public dialog: MatDialog,
@@ -66,7 +52,7 @@ export class HomePageComponent{
     let res = new Subject();
     res = this.movieService.getAllCertifications()
     res.subscribe({
-      next: (c: any[]) => this.certifications = c
+      next: (c: Certification[]) => this.certifications = c
     });
   }
 
