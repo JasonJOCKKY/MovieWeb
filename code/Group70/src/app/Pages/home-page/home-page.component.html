@@ -1,78 +1,74 @@
-<form [formGroup]="searchForm" (ngSubmit)="searchTitle()" class="form">
+<mat-tab-group (selectedTabChange)="onTabChange($event)">
+    <mat-tab label="Search by Title">
+      <mat-card class="search-box">
+          <form [formGroup]="searchForm" (ngSubmit)="searchTitle()" class="form">
+              <input matInput class="search-options" placeholder="Search by title..." formControlName="title">
+              <button class="search-button btn" type="submit" [disabled]="!searchForm.valid">Search</button>
+          </form>
+      </mat-card>
+    </mat-tab>
 
-    <input matInput class="search-options" placeholder="Search by title..." formControlName="title">
-    <button class="search-button btn" type="submit" [disabled]="!searchForm.valid">Search Titles</button>
-    <!--
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let movie of filteredMovies | async" [value]="movie.title">
-        <!-<img class="example-option-img" aria-hidden [src]="state.flag" height="25">->
-        <span>{{movie.title}}</span> |
-        <!-<small>Director: {{movie.director}}</small>->
-      </mat-option>
-    </mat-autocomplete>
-    -->
-    <!--
-      <mat-expansion-panel class="search-options">
-            <mat-expansion-panel-header (click)="loadGenres()">
-              <mat-panel-title>
-                <mat-icon>filter_list</mat-icon>
-                &nbsp;
-                Or explore by year, genre, and rating
-            </mat-panel-title>
-            </mat-expansion-panel-header>
-        
-            <mat-form-field>
-              <input matInput placeholder="Year" formControlName="year">
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-              <mat-label>Genre</mat-label>
-              <mat-select>
-                  <mat-option *ngFor="let genre of movieGenres" [value]="genre.name">
-                    {{genre.name}}
-                  </mat-option>
-              </mat-select>
-          </mat-form-field>
-            <br>
-          </mat-expansion-panel>
-    -->
-</form>
+    <mat-tab label="Explore Films">
+      <div class="filter-wrapper">
+        <mat-card class="search-box">
+            <mat-card-header>
+                <mat-card-title>Explore by Genre, Rating, and Year</mat-card-title>
+            </mat-card-header>
+            <form [formGroup]="exploreForm" (ngSubmit)="explore()" class="form"> 
+                <mat-form-field>
+                  <mat-label>Genre</mat-label>
+                  <mat-select formControlName='genre'>
+                    <mat-option *ngFor="let genre of movieGenres" [value]="genre.id">
+                      {{genre.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                  <mat-label>Rating</mat-label>
+                  <mat-select formControlName='rating'>
+                    <mat-option *ngFor="let rating of certifications" [value]="rating.certification">
+                      {{rating.certification}}
+                    </mat-option>
+                  </mat-select>
+              </mat-form-field>
+                <input matInput class="search-options" placeholder="Year" formControlName="year">
+                <button class="search-button btn" type="submit" [disabled]="!exploreForm.valid">Explore Films</button>
+              </form>
+        </mat-card>
+      
+        <mat-card class="search-box">
+            <mat-card-header>
+                <mat-card-title>Find Popular Movies</mat-card-title>
+            </mat-card-header>
+            <button class="pop-button btn" (click)="searchPopular()">Find</button>
+        </mat-card>
+      
+      </div>
+    </mat-tab>
 
-<form [formGroup]="exploreForm" (ngSubmit)="explore()" class="form"> 
-  <mat-form-field>
-    <mat-label>Genre</mat-label>
-    <mat-select formControlName='genre'>
-      <mat-option *ngFor="let genre of movieGenres" [value]="genre.id">
-        {{genre.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-label>Rating</mat-label>
-    <mat-select formControlName='rating'>
-      <mat-option *ngFor="let rating of certifications" [value]="rating.certification">
-        {{rating.certification}}
-      </mat-option>
-    </mat-select>
-</mat-form-field>
-  <input matInput class="search-options" placeholder="Explore by year..." formControlName="year">
-  <button class="search-button btn" type="submit" [disabled]="!searchForm.valid">Explore Films</button>
-</form>
+    <mat-tab label="View Popular Movies" >
+      <div class="popular-movies">
+          <h1>Popular movies...</h1>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 
-<div class="pop-container">
-    <button class="pop-button btn" (click)="searchPopular()">Find Popular Movies</button>
-</div>
 
+
+
+<!-- Search Results -->
 <div class="movie-container">
   <mat-card class="movie-card" *ngFor="let movie of searchResults" >
-          <mat-card-header class="movie-title">
-            <mat-card-title>{{movie.title}}</mat-card-title>
-            <mat-card-subtitle>{{movie.release_date}}</mat-card-subtitle>
-          </mat-card-header>
-          <img mat-card-image  class="poster"  src="{{movie.poster}}" alt="movie poster">
-          <mat-card-actions>
-            <button mat-button (click)="openPreview(movie)">view more</button>
-          </mat-card-actions>
+    <mat-card-header class="movie-title">
+      <mat-card-title>{{movie.title}}</mat-card-title>
+      <mat-card-subtitle>{{movie.release_date}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image  class="poster"  src="{{movie.poster}}" alt="movie poster">
+    <mat-card-actions>
+      <button mat-button (click)="openPreview(movie)">view more</button>
+    </mat-card-actions>
   </mat-card>
 </div>
+
+

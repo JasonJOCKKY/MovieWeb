@@ -20,8 +20,8 @@ export class ReviewService {
     this.movieReviewCollection = this.afs.collection<Review>('Group70Movies');
   }
 
-  createMovieReview(data: Review, movieID: number){
-    this.movieReviewCollection.doc(movieID.toString()).set(data);
+  createMovieReview(data: Review, movieID: string){
+    this.movieReviewCollection.doc(movieID).set(data);
   }
 
   retrieveAllMovieReviews(): Observable<Review[]>{
@@ -35,8 +35,8 @@ export class ReviewService {
     return this.allMovieReviews;
   }
 
-  retrieveMovieReview(movieID: number): Observable<Review>{
-    this.movieReviewDocument = this.afs.doc<Review>(movieID.toString());
+  retrieveMovieReview(movieID: string): Observable<Review>{
+    this.movieReviewDocument = this.afs.doc<Review>(movieID);
     this.movieReview = this.movieReviewDocument.valueChanges();
     return this.movieReview;
   }

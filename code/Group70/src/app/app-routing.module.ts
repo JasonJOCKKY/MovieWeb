@@ -3,13 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './Pages/page-not-found/page-not-found.component';
 import { HomePageComponent } from './Pages/home-page/home-page.component';
 import { MovieDetailsPageComponent } from './Pages/movie-details-page/movie-details-page.component';
-import { TestPageComponent } from './test/test-page/test-page.component';
+import { LoginComponent } from './Components/login/login.component';
 
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'details/:movie_id', component: MovieDetailsPageComponent },
-  { path: 'test', component: TestPageComponent},
+  { path: 'login', component: LoginComponent},
   {
     path: '',
     redirectTo: 'home',

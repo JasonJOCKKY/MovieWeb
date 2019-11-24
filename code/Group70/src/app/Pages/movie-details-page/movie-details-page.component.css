@@ -1,8 +1,7 @@
 
- .wrapper{
+ .mainWrapper{
     width: 90%;
     height: 1700px;
-    /* background-color: whitesmoke; */
     margin: auto;
 }
 
@@ -10,23 +9,21 @@
     margin-top: 20px;
 }
 
-.poster img{
-    width: 130px;
-    height: 200px;
-    margin: 0 0 0 20px;
-}
-
 .actor{
+    width: 16%;
+    height: 100%;
     display: inline-block;
-    margin: 0 5px;
+    padding: 5px;
 }
 
 .actor img{
-    width: 50px;
-    height: 50px;
+    width: 100%;
+    height: 100%;
 }
 
 .actors{
+    width: 100%;
+    height: auto;
     margin: 0 auto;
     margin-top: 20px;
 }
@@ -40,40 +37,24 @@
     }
 
     .info{
-
+        padding: 0 20px 0 20px !important;
     }
 
-    .wrapper{
-        width: 1000px;
-        height: 1700px;
-        /* background-color: whitesmoke; */
-        margin: auto;
+    .card-img{
+        margin: 0 !important;
     }
 
-    .actor img{
-        width: 100px;
-        height: 100px;
-    }
-
-    .actor{
-        display: inline-block;
-        margin: 0 10px;
-    }
-
-    .actors{
-        width: 600px;
-        margin: 0 auto;
-        margin-top: 20px;
-    }
 
     .comments{
         font-size: medium;
     }
 
+    .poster{
+
+    }
     .poster img{
-        width: 220px;
-        height: 350px;
-        margin-top: 20px;
+        width: 100%;
+        height: auto;
     }
 
     .review{
@@ -81,115 +62,62 @@
     }
 
     .rating{
-        width: 200px;
+        width: 100%;
+        height: 100% !important;
     }
+
     .rating-card{
-        width: 200px;
-        height: 400px;
-        margin-left: 25px;
+        width: 90%;
+        height: 275px;
+        margin-left: 20px;
+        padding-top: 0 !important;
     }
 
     .rate{
         font-size: large;
-        margin-right: 10px;
+        margin: 10px 0 0 0;
+        padding-right: 5px;
+        display: inline-block;
     }
 
     .barChart{
         display: block;
-        max-width: 200px;
+        width: 70%;
+        height: 100px !important;
         margin-top: 10px;
         margin-bottom: 20px;
     }
 
     .addReview{
+        float: right;
         width: 150px;
-        margin-left: 10px;
+        margin: 5px 0 0 0;
     }
 
-    .modalCard{
-        height: 350px;
-        /* background-color: silver; */
-    }
-
-    .modalPoster{
-        /* background-color: gold; */
-    }
-
-    .modalForm{
-        /* background-color: mediumslateblue; */
-    }
-
-    .modalPoster img{
-        /* position: absolute;
-        top: 0; */
-        width: 100%;
-    }
-
-    .closeButton{
+    .backgroundWrapper{
         position: absolute;
-        top: 0;
-        right: 0;
+        width:100%;
+        height:400px;
+        background-color: #3f51b5;
+        z-index: -1;
     }
 
-    .formWrapper{
-        position: absolute;
-        top: 15px;
-        left: 30px;
-        width:90%;
+    .movieCard{
+        width:100%;
+        background-color: white;
     }
-
-    .title{
+    .mainWrapper{
         width: 100%;
+        padding: 0 200px;
     }
 
-    .comment{
-        width: 100%;
+    .ratingCardHeader{
+        padding: 0 0 10px 0;      
     }
 
-    textarea {
-        resize: none !important;
+    .firstPart{
+        padding-bottom: 20px;
     }
-
-    .reviewRating{
-        margin-bottom: 5px;
-        margin-left: 7px;
-    }
-
-    .submitButton{
-        margin-top: 7px;
-        margin-left: 5px;
-    }
-
-    .hidden{
-        display: none;
-    }
-
-    ::ng-deep .mat-form-field-wrapper{padding: 5px !important;}
-
-    ::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0px !important;}
-    ::ng-deep .mat-form-field-label-wrapper { top: -1.5em;}
-
-    ::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-        transform: translateY(-1.1em) scale(.75);
-        width: 133.33333%;
-    }
-
-
-    /* form rating */
-    .star {
-        font-size: 1.5rem;
-        color: #b0c4de;
-    }
-    .filled {
-        color: #1e90ff;
-    }
-    .bad {
-        color: #deb0b0;
-    }
-    .filled.bad {
-        color: #ff1e1e;
-    }
-
 
   }
 

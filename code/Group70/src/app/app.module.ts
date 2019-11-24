@@ -37,11 +37,14 @@ import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
-import {MatSelectModule} from '@angular/material/select';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatSelectModule} from '@angular/material/select'
 
-import { PreviewComponent } from './Components/preview/preview.component';
-import { TestPageComponent } from './test/test-page/test-page.component';
+
+
+import { PreviewComponent } from './Components/preview/preview.component'
 import { AddReviewComponent } from './Components/add-review/add-review.component';
+import { LoginComponent } from './Components/login/login.component';
 
 
 
@@ -54,11 +57,14 @@ import { AddReviewComponent } from './Components/add-review/add-review.component
     MovieDetailsPageComponent,
     PreviewComponent,
     AddReviewComponent,
-    TestPageComponent
+    LoginComponent
   ],
   entryComponents: [
-    PreviewComponent
+    PreviewComponent,
+    LoginComponent,
+    AddReviewComponent 
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -94,6 +100,7 @@ import { AddReviewComponent } from './Components/add-review/add-review.component
     ReactiveFormsModule,
     MatIconModule,
     HttpClientModule,
+    MatTabsModule,
     MatSelectModule
   ],
   providers: [],

@@ -1,21 +1,23 @@
-<mat-toolbar color="primary" role="heading">
-    <button mat-flat-button routerLink="/home">
-        <mat-icon >home</mat-icon>
+<mat-toolbar color="primary">
+  <span>
+    <button mat-icon-button [routerLink]="['/']">
+      <mat-icon>home</mat-icon>
     </button>
-    
-    <span class="title">Movie Review Application</span>
-    <span class="example-fill-remaining-space"></span>
-    <div class="fixRight">
-        <div *ngIf="authService.afAuth.authState | async as user; else showLogin">
-            <button mat-flat-button [matMenuTriggerFor]="account" class="user">{{ user.displayName }}</button>
-            <mat-menu #account="matMenu">
-                <button class="logoutButton" mat-button color="primary" (click)="logout()">Logout</button>
-            </mat-menu>
-        </div>
-        <div class="loginButton">
-            <ng-template #showLogin>
-                <button mat-flat-button (click)="login()">Login</button>
-            </ng-template>
-        </div>
-    </div>
+  </span>
+
+  <span class="m-auto">Movie Application</span>
+
+  <span *ngIf="!isSignedIn">
+    <button mat-raised-button (click)="login()">Login</button>
+  </span>
+
+  <span *ngIf="isSignedIn">
+    <button mat-button [matMenuTriggerFor]="userMenu" class="pl-2 pr-2">
+      <mat-icon>account_circle</mat-icon>
+      User Name
+    </button>
+    <mat-menu #userMenu="matMenu" xPosition="before">
+      <button mat-menu-item>Sign Out</button>
+    </mat-menu>
+  </span>
 </mat-toolbar>
