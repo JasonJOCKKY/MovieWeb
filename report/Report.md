@@ -34,15 +34,30 @@ Jingson implemented the services for the API calls, user authorization, and addi
 
 ### Grading Criteria
 **Consistent Design and User Experience** 
+The application has a consisten color scheme. Similar material components are used to build each front-end component. Everypage shares the header bar, which allows a user to login or redirect to the home page. 
+
 **Well-Structured**
+All interfaces are defined in one file, type.ts. The header bar, which is present on everypage, is its own component (/Components/header-bar). Back-end code is organized into three services for the three main functionalities (API calls, user authorization, and movie reviews). Front-end components are organized into two folders, Pages (home page, details page) and Components (headers and modals). 
+
 **Authentication**
+In order to leave a review, the user must be logged in.
+
 **Architecture**
+Our code is organized according to Model-View-Controller architecture. The M, model, is the API and our Firebase database. The View, our front-end components, are organized into pages and components. Main page components (home page, details page, and page-not-found page) are organized into the Pages directory. Components for modals and headers are organized into the Components directory. The Controllers are the services, which are organized into the Services directory. The three services are used to communicate the front-end view components to the model (API and Firebase) which never communicate directly. 
+
 **Persistent**
+Users can register and leave reviews on the site. Data for registered users and reviews are stored persistently using Firebase. 
+
 **Provide some Security**
+
 **Responsive**
+
 **Content**
+
 **Error Handling**
+
 **Publicly Viewable**
+
 **Overall Purpose**
 
 ## Knowledge Gained
