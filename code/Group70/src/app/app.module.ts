@@ -28,7 +28,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
-import {MatTabsModule} from '@angular/material/tabs';
 
 
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -41,6 +40,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 
 import { PreviewComponent } from './Pages/preview/preview.component';
@@ -62,8 +63,10 @@ import { LoginComponent } from './Components/login/login.component';
   ],
   entryComponents: [
     PreviewComponent,
-    LoginComponent
+    LoginComponent,
+    AddReviewComponent 
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -98,8 +101,8 @@ import { LoginComponent } from './Components/login/login.component';
     MatExpansionModule,
     ReactiveFormsModule,
     MatIconModule,
-    MatTabsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

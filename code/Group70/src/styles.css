@@ -2,15 +2,3 @@
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-
-/* modal */
-
-@media (min-width: 576px) {
-
-.backDrop{
-    background-color: black;
-    opacity: 0.8 !important;
-}
-
-}
