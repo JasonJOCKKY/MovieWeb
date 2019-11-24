@@ -12,6 +12,9 @@ import { ActivatedRoute } from '@angular/router';
 import { CdkRowDef } from '@angular/cdk/table';
 import { BreadcrumbModule } from 'angular-bootstrap-md';
 import { Movie } from '../preview/preview.component';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
+import { MatDialog } from '@angular/material';
+import { LoginComponent } from 'src/app/Components/login/login.component';
 
 
 @Component({
@@ -37,7 +40,9 @@ export class MovieDetailsPageComponent implements OnInit {
     private reviewService: ReviewService,
     private tmdbService: TmdbServiceService,
     private route: ActivatedRoute,
-    private modalConfig: NgbModalConfig
+    private modalConfig: NgbModalConfig,
+    private authService: AuthenticationService,
+    private dialog: MatDialog
     ) {
     this.modalConfig.backdrop = 'static';
     this.modalConfig.keyboard = false;
@@ -132,7 +137,15 @@ export class MovieDetailsPageComponent implements OnInit {
 
   // modal
   open() {
-    const modalRef = this.modalService.open(AddReviewComponent);
+    if(this.authService.authState){
+      const modalRef = this.modalService.open(AddReviewComponent);
+    }
+    else{
+      this.dialog.open(LoginComponent, {
+        width: '500px'
+      });
+    }
+    
   }
 
 
