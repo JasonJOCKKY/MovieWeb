@@ -4,7 +4,7 @@
         <mat-card> 
                 <mat-card-content>
                         <div>
-                                <img mat-card-image  class="poster" src="{{movie.poster}}" alt="poster">
+                                <img mat-card-image  class="poster" src="{{movie.poster}}" onError="this.src='../../../assets/images/placeholder.png'" alt="poster">
                                 <h3>Abstract</h3>
                                 <p>{{movie.description}}</p>
                         </div>
