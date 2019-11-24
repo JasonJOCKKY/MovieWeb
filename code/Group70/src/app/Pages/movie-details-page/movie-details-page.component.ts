@@ -10,6 +10,8 @@ import { TmdbServiceService } from 'src/app/Services/tmdb-service.service';
 
 import { ActivatedRoute } from '@angular/router';
 import { CdkRowDef } from '@angular/cdk/table';
+import { BreadcrumbModule } from 'angular-bootstrap-md';
+import { Movie } from '../preview/preview.component';
 
 
 @Component({
@@ -24,6 +26,8 @@ export class MovieDetailsPageComponent implements OnInit {
   reviews: Review[];
   crewFirstRow: Person[];
   castFirstRow: Person[];
+  crewRest: Person[];
+  castRest: Person[];
 
   
 
@@ -35,13 +39,12 @@ export class MovieDetailsPageComponent implements OnInit {
     private route: ActivatedRoute,
     private modalConfig: NgbModalConfig
     ) {
-      this.modalConfig.backdrop = 'static';
+    this.modalConfig.backdrop = 'static';
     this.modalConfig.keyboard = false;
     this.modalConfig.backdropClass = "backDrop";
     this.modalConfig.centered = true;
     this.modalConfig.size = "lg";
     this.modalConfig.scrollable = true;
-
   }
 
 
@@ -49,22 +52,82 @@ export class MovieDetailsPageComponent implements OnInit {
     const movie_id = this.route.snapshot.paramMap.get('movie_id');
     this.tmdbService.getMovieDetail(movie_id).subscribe((movie: Movie_Detail) => {
       this.movie = movie;
-      this.getFirstRow();
+      this.deleteDuplicate();
+      this.getPeople();
     });
   
 
     this.reviews = [];
   }
 
-  getFirstRow(){
+  deleteDuplicate(){
+    let newCrew: Person[] = [];
+    let newCast: Person[] = [];
+    let flag = false;
+    for(let i = 0; i < this.movie.casts.length; i++){
+      for(let j = i+1; j < this.movie.casts.length; j++){
+        if(this.movie.casts[i].name == this.movie.casts[j].name){
+          flag = true;
+          break;
+        }
+      }
+      if(!flag){
+        newCast.push(this.movie.casts[i]);
+      }
+      flag = false;
+    }
+
+    flag = false;
+
+    for(let i = 0; i < this.movie.crews.length; i++){
+      for(let j = i+1; j < this.movie.crews.length; j++){
+        if(this.movie.crews[i].name == this.movie.crews[j].name){
+          flag = true;
+          break;
+        }
+      }
+      if(!flag){
+        newCrew.push(this.movie.crews[i]);
+      }
+      flag = false;
+    }
+
+    this.movie.casts = newCast;
+    this.movie.crews = newCrew;
+  }
+
+
+  getPeople(){
     this.crewFirstRow = [];
     this.castFirstRow = [];
-    for(let i = 0; i < 6; i++){
-      this.crewFirstRow.push(this.movie.crews[i]);
-      this.castFirstRow.push(this.movie.casts[i]);
+    let crewCount = 0;
+    let castCount = 0;
+    this.crewRest = [];
+    this.castRest = [];
+
+    for(let i = 0; i < this.movie.crews.length; i++){
+      if(this.movie.crews[i].poster!=null){
+        if(crewCount < 6){
+          this.crewFirstRow.push(this.movie.crews[i]);
+          crewCount++;
+        }
+        else{
+          this.crewRest.push(this.movie.crews[i]);
+        } 
+      }
     }
-    console.log(this.crewFirstRow);
-    
+
+    for (let i = 0; i < this.movie.casts.length; i++) {
+      if (this.movie.casts[i].poster != null) {
+        if (castCount < 6) {
+          this.castFirstRow.push(this.movie.casts[i]);
+          castCount++;
+        }
+        else {
+          this.castRest.push(this.movie.casts[i]);
+        }
+      }
+    }
   }
 
   // modal
