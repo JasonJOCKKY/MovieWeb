@@ -1,59 +1,49 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 import { Person, Review, Reply, Movie_Detail } from 'src/type';
 import { ReviewService } from 'src/app/Services/review.service';
 
-import { DatePipe } from '@angular/common';
 import { AddReviewComponent } from 'src/app/Components/add-review/add-review.component';
 
 import { TmdbServiceService } from 'src/app/Services/tmdb-service.service';
 
 import { ActivatedRoute } from '@angular/router';
+import { CdkRowDef } from '@angular/cdk/table';
 
 
 @Component({
   selector: 'app-movie-details-page',
   templateUrl: './movie-details-page.component.html',
   styleUrls: ['./movie-details-page.component.css'],
-  // add NgbModalConfig and NgbModal to the component providers
-  providers: [NgbModalConfig, NgbModal, DatePipe]
+  providers: [NgbModalConfig, NgbModal]
 })
 export class MovieDetailsPageComponent implements OnInit {
 
 
-  reviewRate = 4;
-
-  movie: Movie_Detail;
-
-
-
-  reviewForm = new FormGroup({
-    title: new FormControl('',[Validators.required, Validators.pattern("[a-zA-Z\\s]+")]),
-    comment: new FormControl('',[Validators.required]),
-    user: new FormControl(''),
-    score: new FormControl(''),
-    date: new FormControl(''),
-    replies: new FormControl('')
-  });
-
+  
 
   movie: Movie_Detail;
   reviews: Review[];
+  crewFirstRow: Person[];
+  castFirstRow: Person[];
 
+  
+
+ 
   constructor(
-    private modalConfig: NgbModalConfig,
     private modalService: NgbModal,
     private reviewService: ReviewService,
     private tmdbService: TmdbServiceService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modalConfig: NgbModalConfig
     ) {
-     this.modalConfig.backdrop = 'static';
-     this.modalConfig.keyboard = false;
-     this.modalConfig.backdropClass = "backDrop";
-     this.modalConfig.centered = true;
-     this.modalConfig.size = "lg";
-     this.modalConfig.scrollable = true;
+      this.modalConfig.backdrop = 'static';
+    this.modalConfig.keyboard = false;
+    this.modalConfig.backdropClass = "backDrop";
+    this.modalConfig.centered = true;
+    this.modalConfig.size = "lg";
+    this.modalConfig.scrollable = true;
 
   }
 
@@ -62,26 +52,25 @@ export class MovieDetailsPageComponent implements OnInit {
     const movie_id = this.route.snapshot.paramMap.get('movie_id');
     this.tmdbService.getMovieDetail(movie_id).subscribe((movie: Movie_Detail) => {
       this.movie = movie;
+      this.getFirstRow();
     });
 
+    
 
     this.reviews = [];
   }
 
-  // retrieve data
-  retrieveData(){
-    this.reviewService.retrieveMovieReview(1);
+  getFirstRow(){
+    this.crewFirstRow = [];
+    this.castFirstRow = [];
+    for(let i = 0; i < 6; i++){
+      this.crewFirstRow.push(this.movie.crews[i]);
+      this.castFirstRow.push(this.movie.casts[i]);
+    }
+    console.log(this.crewFirstRow);
+    
   }
 
-  // form and data
-  onSubmit() {
-
-    let myDate = new Date().toString();
-    myDate = this.datePipe.transform(myDate, 'yyyy-MM-dd');
-    this.reviewForm.patchValue({user: "Weiyu", score: this.reviewRate, date: myDate, replies: []});
-    console.log(this.reviewForm.value);
-   //this.reviewService.createMovieReview(this.reviewForm.value, 1);
-  }
 
 
   // modal

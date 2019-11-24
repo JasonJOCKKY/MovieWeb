@@ -40,6 +40,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 
 import { PreviewComponent } from './Pages/preview/preview.component';
@@ -60,7 +62,7 @@ import { TestPageComponent } from './test/test-page/test-page.component';
     AddReviewComponent,
     TestPageComponent
   ],
-  entryComponents: [PreviewComponent],
+  entryComponents: [PreviewComponent, AddReviewComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -95,7 +97,8 @@ import { TestPageComponent } from './test/test-page/test-page.component';
     MatExpansionModule,
     ReactiveFormsModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
