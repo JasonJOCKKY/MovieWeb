@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class AddReviewComponent implements OnInit {
   });
 
 
-  constructor() {}
+  constructor( private dialogRef:MatDialogRef<AddReviewComponent>) {}
 
   ngOnInit() {
   }
@@ -33,11 +34,13 @@ export class AddReviewComponent implements OnInit {
     console.log(this.reviewForm.value);
     console.log(this.reviewForm.get('title').value);
 
+    //this.reviewService.createMovieReview(this.reviewForm.value, 1);
+    this.closeDialog();
 
-   //this.reviewService.createMovieReview(this.reviewForm.value, 1);
+   
   }
-  close(){
-    this.activeModal.dismiss('Cross click');
+  closeDialog(){
+    this.dialogRef.close();
   }
   
 }
