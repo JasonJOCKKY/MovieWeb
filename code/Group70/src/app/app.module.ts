@@ -28,6 +28,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -102,7 +103,8 @@ import { LoginComponent } from './Components/login/login.component';
     ReactiveFormsModule,
     MatIconModule,
     HttpClientModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
