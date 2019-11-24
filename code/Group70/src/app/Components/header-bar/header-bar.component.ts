@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
+import { MatDialog } from '@angular/material';
+import { LoginComponent } from '../../Components/login/login.component'
 
 
 @Component({
@@ -8,19 +10,19 @@ import { AuthenticationService } from 'src/app/Services/authentication.service';
   styleUrls: ['./header-bar.component.css']
 })
 export class HeaderBarComponent implements OnInit {
-  isSignedIn: Boolean = false;
+  isSignedIn: Boolean = true;
 
-  constructor( private authService : AuthenticationService) { }
+  constructor(
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit() {
   }
 
   login() {
-    this.authService.login();
-  }
-
-  logout() {
-    this.authService.logout();
+    this.dialog.open(LoginComponent, {
+      width: '500px'
+    });
   }
 
 }
