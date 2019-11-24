@@ -1,10 +1,50 @@
+/* mat-grid-tile {
+  background-color: antiquewhite;
+} */
 
- .mainWrapper{
-    width: 90%;
-    height: 1700px;
-    margin: auto;
+/* .textFont {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+} */
+
+h1 {
+  font-weight: bold;
 }
 
+.mainWrapper {
+  width: 90%;
+  max-width: 70em;
+  margin: auto;
+  padding-bottom: 5em;
+}
+
+.backgroundWrapper{
+  position: absolute;
+  /* width: 100%;
+  height: 400px; */
+  background-color: #3f51b5;
+  z-index: -1;
+}
+
+.barChart {
+  height: auto;
+}
+
+.profile {
+  width: 100%;
+  height: 100%;
+}
+
+.profile > img {
+  width: 100%;
+  height: 85%;
+  padding-bottom: 0.5em;
+}
+
+.profile > h5 {
+  margin-bottom: 0;
+}
+
+/*
 .card{
     margin-top: 20px;
 }
@@ -28,6 +68,13 @@
     margin-top: 20px;
 }
 
+.backgroundWrapper{
+  position: absolute;
+  width:100%;
+  height:400px;
+  background-color: #3f51b5;
+  z-index: -1;
+}
 
 @media (min-width: 576px) {
     .card{
@@ -94,14 +141,6 @@
         margin: 5px 0 0 0;
     }
 
-    .backgroundWrapper{
-        position: absolute;
-        width:100%;
-        height:400px;
-        background-color: #3f51b5;
-        z-index: -1;
-    }
-
     .movieCard{
         width:100%;
         background-color: white;
@@ -112,7 +151,7 @@
     }
 
     .ratingCardHeader{
-        padding: 0 0 10px 0;      
+        padding: 0 0 10px 0;
     }
 
     .firstPart{
@@ -130,5 +169,5 @@
 
 @media (min-width: 1200px) {  }
 
-
+*/
 

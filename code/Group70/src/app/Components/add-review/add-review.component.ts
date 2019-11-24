@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialogRef } from '@angular/material';
 
 
 @Component({
   selector: 'app-add-review',
   templateUrl: './add-review.component.html',
-  styleUrls: ['./add-review.component.css'],
-  providers: [NgbModalConfig, NgbModal]
+  styleUrls: ['./add-review.component.css']
 })
 export class AddReviewComponent implements OnInit {
 
@@ -24,7 +22,7 @@ export class AddReviewComponent implements OnInit {
   });
 
 
-  constructor(private activeModal: NgbActiveModal) {}
+  constructor( private dialogRef:MatDialogRef<AddReviewComponent>) {}
 
   ngOnInit() {
   }
@@ -34,7 +32,15 @@ export class AddReviewComponent implements OnInit {
     let myDate = new Date().toString();
     this.reviewForm.patchValue({user: "Weiyu", score: this.reviewRate, date: myDate, replies: []});
     console.log(this.reviewForm.value);
-   //this.reviewService.createMovieReview(this.reviewForm.value, 1);
-  }
+    console.log(this.reviewForm.get('title').value);
 
+    //this.reviewService.createMovieReview(this.reviewForm.value, 1);
+    this.closeDialog();
+
+   
+  }
+  closeDialog(){
+    this.dialogRef.close();
+  }
+  
 }

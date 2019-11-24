@@ -18,6 +18,10 @@ export interface Person {
   role: string
 }
 
+export interface Reviews{
+  reviews: Review[];
+}
+
 export interface Review {
   user: string,
   score: number,

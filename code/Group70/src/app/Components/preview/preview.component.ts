@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {ReviewService} from "../../Services/review.service"
-import { Movie, Review } from 'src/type';
+import { Movie, Review, Reviews } from 'src/type';
 import { Observable, Subject } from 'rxjs';
 import { _MatTabBodyBase } from '@angular/material';
 
@@ -20,21 +20,22 @@ export class PreviewComponent implements OnInit {
       
   }
 
-  reviews: Review[] = [{user: "bob", score: 5, date: "2019-11-24", title: "good film!", comment: "I liked this film", replies: [] },
+  reviews: Reviews;
+  /*[{user: "bob", score: 5, date: "2019-11-24", title: "good film!", comment: "I liked this film", replies: [] },
     {user: "bob2", score: 5, date: "2019-11-24", title: "good film!", comment: "I liked this film", replies: [] },
     {user: "bob3", score: 5, date: "2019-11-24", title: "good film!", comment: "I liked this film", replies: [] },
     {user: "bob4", score: 5, date: "2019-11-24", title: "good film!", comment: "I liked this film", replies: [] },
     {user: "bob5", score: 5, date: "2019-11-24", title: "good film!", comment: "I liked this film", replies: [] }
-  ];
+  ];*/
   review: Review;
 
   ngOnInit() {
-/*
-    this.reviewService.retrieveMovieReview(this.movie.id.toString())
-    .subscribe(review =>{
-      this.review = review as Review
+    this.reviews = {reviews: []};
+    this.reviewService.retrieveMovieReviews(this.movie.id.toString())
+    .subscribe(reviews =>{
+      this.reviews = reviews as Reviews;
+      console.log(this.reviews);
     })
-    */
   }
 
   onCloseClick(){
