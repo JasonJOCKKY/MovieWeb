@@ -11,6 +11,9 @@ export const environment = {
     measurementId: "G-ET18K52JH0"
   },
   tmdb: {
-    apiKey: "59a4d94af159f2d5a71a45127ee989e1"
+    apiKey: "59a4d94af159f2d5a71a45127ee989e1",
+    url: "https://api.themoviedb.org/3",
+    img_baseurl: "https://image.tmdb.org/t/p",
+    country: 'US'
   }
 };

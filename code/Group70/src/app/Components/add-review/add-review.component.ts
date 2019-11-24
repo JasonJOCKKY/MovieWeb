@@ -36,5 +36,8 @@ export class AddReviewComponent implements OnInit {
     console.log(this.reviewForm.value);
    //this.reviewService.createMovieReview(this.reviewForm.value, 1);
   }
-
+  close(){
+    this.activeModal.dismiss('Cross click');
+  }
+  
 }

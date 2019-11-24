@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   loginFormGroup: FormGroup;
   registerFormGroup: FormGroup;
 
-  constructor(private authService: AuthenticationService, private snackBar: MatSnackBar, private router: Router, private formBuilder: FormBuilder) {
+  constructor(private authService: AuthenticationService, private snackBar: MatSnackBar, private router: Router, private formBuilder: FormBuilder, private dialogRef:MatDialogRef<LoginComponent>) {
     this.loginFormGroup = new FormGroup(
       {
         email: new FormControl(''),
@@ -33,12 +33,6 @@ export class LoginComponent implements OnInit {
     });
   }
   
-//   function ageRangeValidator(control: AbstractControl): { [key: string]: boolean } | null {
-//     if (control.value !== undefined && (isNaN(control.value) || control.value < 18 || control.value > 45)) {
-//         return { 'ageRange': true };
-//     }
-//     return null;
-// }
 
   MustMatch(controlName: string, matchingControlName: string) {
 
@@ -55,23 +49,13 @@ export class LoginComponent implements OnInit {
     }
 }
 
-  // MustMatch(controlName: string):ValidatorFn{
-  //   return (control: AbstractControl): { [key: string]: boolean } | null => {
-      
-  //     if(control.value != controlName){
-  //       return {mustMatch: true};
-  //     }
-  //     return null;
-  //   };
-  // }
-
 
 
   async login() {
     if (this.loginFormGroup.valid) {
       try {
         await this.authService.login(this.loginFormGroup.get('email').value, this.loginFormGroup.get('password').value);
-        this.router.navigate(['']);
+        this.closeDialog();
       } catch (e) {
         this.snackBar.open('Unable to log in', null, {
           duration: 4000
@@ -83,20 +67,26 @@ export class LoginComponent implements OnInit {
   async register() {
     if (this.registerFormGroup.valid) {
       try {
-        console.log(this.registerFormGroup.get('email').value);
-        console.log(this.registerFormGroup.get('password').value);
         await this.authService.signUp(
           this.registerFormGroup.get('email').value,
           this.registerFormGroup.get('password').value,
           this.registerFormGroup.get('name').value
         );
-        this.router.navigate(['']);
+        this.closeDialog();
       } catch (e) {
         this.snackBar.open('Unable to register', null, {
           duration: 4000
         });
       }
     }
+  }
+
+  loginWithGoogle(){
+    this.authService.loginWithGoogle();
+  }
+
+  closeDialog(){
+    this.dialogRef.close();
   }
   
 

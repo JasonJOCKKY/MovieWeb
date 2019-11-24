@@ -35,6 +35,7 @@ export class AuthenticationService {
 
   logout() {
     this.afAuth.auth.signOut();
+    console.log(this.afAuth.auth.currentUser);
   }
 
   async signUp(email: string, password: string, first: string) {

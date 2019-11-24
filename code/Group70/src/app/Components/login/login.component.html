@@ -22,7 +22,7 @@
         <button mat-flat-button color="primary" class="mt-3" [disabled]="loginFormGroup.invalid" type="submit">Login</button>
 
         <!-- Alternative Login Methods -->
-        <button mat-stroked-button>
+        <button mat-stroked-button (click)="loginWithGoogle()">
           <img class="icon mr-2" src="../../../assets/google_icon.svg">
           Login With Google
         </button>
