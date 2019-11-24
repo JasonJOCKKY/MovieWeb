@@ -1,14 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {ReviewService} from "../../Services/review.service"
 
-export interface Movie {
-  id: number,
-  title: string,
-  genre_ids: number[],
-  poster: string,
-  description: string,
-  release_date: string
-}
+import { Movie, Review } from 'src/type';
 
 @Component({
   selector: 'app-preview',
@@ -18,10 +12,13 @@ export interface Movie {
 export class PreviewComponent implements OnInit {
 
   constructor(
+    public reviewService: ReviewService,
     public dialogRef: MatDialogRef<PreviewComponent>,
     @Inject(MAT_DIALOG_DATA) public movie: Movie
     ) {
-    }
+  }
+
+  reviews: Review[];
 
   ngOnInit() {
   }
@@ -29,5 +26,6 @@ export class PreviewComponent implements OnInit {
   onCloseClick(){
     this.dialogRef.close();
   }
+
 
 }

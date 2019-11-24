@@ -103,7 +103,6 @@ export class HomePageComponent{
     //console.log("popular movies: ",this.movieService.getPopular());
     let res = new Subject();
     res = this.movieService.getPopular();
-    console.log("res: ",res);
     res.subscribe({
       next: (v : Movie[]) => this.searchResults = v
     });
