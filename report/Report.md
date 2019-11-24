@@ -33,18 +33,7 @@ An AWS EC2 instance was used to serve the running code.
 Jingson implemented the services for the API calls, user authorization, and adding/retrieving reviews. He also implemented the login page. Weiyu implemented the movie-details page and the add-review component. Joseph implemented the search page and the preview component. 
 
 ### Grading Criteria
-
-
-## Knowledge Gained
-Pointers, knowledge, tricks to inform the rest of the class
-
-## Future Work
-What needs to be finished before the due date
-
-## References
-
-## Grading Criteria
-### Consistent Design and User Experience  
+**Consistent Design and User Experience**
 ### Well-Structured 
 ### Authentication 
 ### Architecture
@@ -55,3 +44,11 @@ What needs to be finished before the due date
 ### Error Handling
 ### Publicly Viewable 
 ### Overall Purpose
+
+## Knowledge Gained
+Pointers, knowledge, tricks to inform the rest of the class
+
+## Future Work
+What needs to be finished before the due date
+
+## References
