@@ -83,6 +83,9 @@ export class TmdbServiceService {
   }
 
   getPosterUrl(width: number, filePath: string): string {
+    if (!filePath) {
+      return null;
+    }
     return this.img_baseurl + '/w' + width + filePath;
   }
 

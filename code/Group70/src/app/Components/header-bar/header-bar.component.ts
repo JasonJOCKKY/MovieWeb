@@ -8,6 +8,7 @@ import { AuthenticationService } from 'src/app/Services/authentication.service';
   styleUrls: ['./header-bar.component.css']
 })
 export class HeaderBarComponent implements OnInit {
+  isSignedIn: Boolean = false;
 
   constructor( private authService : AuthenticationService) { }
 
