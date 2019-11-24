@@ -1,5 +1,5 @@
 <div class="position-relative">
-  <button mat-icon-button mat-dialog-close class="closeButton">
+  <button mat-icon-button mat-dialog-close class="closeButton" tabindex="-1">
     <mat-icon>close</mat-icon>
   </button>
   <mat-tab-group mat-align-tabs="center">
@@ -60,7 +60,7 @@
           <!-- Alternative Login Methods -->
           <button mat-stroked-button type="button" (click)="loginWithGoogle()">
             <img class="icon mr-2" src="../../../assets/google_icon.svg">
-            Sign Up With Google
+            Login With Google
           </button>
         </form>
     </mat-tab>

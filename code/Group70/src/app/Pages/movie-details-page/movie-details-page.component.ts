@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Person, Reply, Movie_Detail, Reviews } from 'src/type';
+import { Person, Reply, Movie_Detail, Reviews, Review } from 'src/type';
 import { ReviewService } from 'src/app/Services/review.service';
 
 import { AddReviewComponent } from 'src/app/Components/add-review/add-review.component';
@@ -9,7 +9,6 @@ import { ActivatedRoute } from '@angular/router';
 
 import { CdkRowDef } from '@angular/cdk/table';
 import { BreadcrumbModule } from 'angular-bootstrap-md';
-import { Movie } from '../preview/preview.component';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { MatDialog } from '@angular/material';
 import { LoginComponent } from 'src/app/Components/login/login.component';
@@ -30,9 +29,9 @@ export class MovieDetailsPageComponent implements OnInit {
   castFirstRow: Person[];
   crewRest: Person[];
   castRest: Person[];
-  
+
   movie_id: string;
-  
+
   peopleCol = 5;
 
 
@@ -135,17 +134,23 @@ export class MovieDetailsPageComponent implements OnInit {
 
   // Add Review
   onAddReview() {
-  if(this.authService.authState){
-    this.dialog.open(AddReviewComponent, {
-      width: '900px'
-    });
-  }
-   else{
+    if(this.authService.authState){
+      const addReviewDialog = this.dialog.open(AddReviewComponent, {
+        width: '900px',
+        data: {
+          movie: this.movie,
+        }
+      });
+      addReviewDialog.afterClosed().subscribe((review: Review) => {
+        if (review) {
+          console.log(review);
+        }
+      });
+    } else {
       this.dialog.open(LoginComponent, {
         width: '500px'
       });
     }
-
   }
 
 
