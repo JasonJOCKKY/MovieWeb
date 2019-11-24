@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Person, Reply, Movie_Detail, Reviews } from 'src/type';
 import { ReviewService } from 'src/app/Services/review.service';
 
 import { AddReviewComponent } from 'src/app/Components/add-review/add-review.component';
-
 import { TmdbServiceService } from 'src/app/Services/tmdb-service.service';
-
 import { ActivatedRoute } from '@angular/router';
+
 import { CdkRowDef } from '@angular/cdk/table';
 import { BreadcrumbModule } from 'angular-bootstrap-md';
 import { Movie } from '../preview/preview.component';
@@ -17,12 +15,13 @@ import { MatDialog } from '@angular/material';
 import { LoginComponent } from 'src/app/Components/login/login.component';
 
 
+
 @Component({
   selector: 'app-movie-details-page',
   templateUrl: './movie-details-page.component.html',
-  styleUrls: ['./movie-details-page.component.css'],
-  providers: [NgbModalConfig, NgbModal]
+  styleUrls: ['./movie-details-page.component.css']
 })
+
 export class MovieDetailsPageComponent implements OnInit {
 
   movie: Movie_Detail;
@@ -33,26 +32,18 @@ export class MovieDetailsPageComponent implements OnInit {
   castRest: Person[];
   
   movie_id: string;
-
   
+  peopleCol = 5;
 
- 
+
   constructor(
-    private modalService: NgbModal,
     private reviewService: ReviewService,
     private tmdbService: TmdbServiceService,
     private route: ActivatedRoute,
-    private modalConfig: NgbModalConfig,
     private authService: AuthenticationService,
     private dialog: MatDialog
-    ) {
-    this.modalConfig.backdrop = 'static';
-    this.modalConfig.keyboard = false;
-    this.modalConfig.backdropClass = "backDrop";
-    this.modalConfig.centered = true;
-    this.modalConfig.size = "lg";
-    this.modalConfig.scrollable = true;
-  }
+    ) {}
+
 
 
   ngOnInit() {
@@ -63,7 +54,7 @@ export class MovieDetailsPageComponent implements OnInit {
       this.getPeople();
       this.retrieveReviews();
     });
-  
+
 
     this.reviews = null;
   }
@@ -121,41 +112,40 @@ export class MovieDetailsPageComponent implements OnInit {
     this.castRest = [];
 
     for(let i = 0; i < this.movie.crews.length; i++){
-      if(this.movie.crews[i].poster!=null){
-        if(crewCount < 6){
-          this.crewFirstRow.push(this.movie.crews[i]);
-          crewCount++;
-        }
-        else{
-          this.crewRest.push(this.movie.crews[i]);
-        } 
+      if(crewCount < this.peopleCol){
+        this.crewFirstRow.push(this.movie.crews[i]);
+        crewCount++;
+      }
+      else{
+        this.crewRest.push(this.movie.crews[i]);
       }
     }
 
     for (let i = 0; i < this.movie.casts.length; i++) {
-      if (this.movie.casts[i].poster != null) {
-        if (castCount < 6) {
-          this.castFirstRow.push(this.movie.casts[i]);
-          castCount++;
-        }
-        else {
-          this.castRest.push(this.movie.casts[i]);
-        }
+      if (castCount < this.peopleCol) {
+        this.castFirstRow.push(this.movie.casts[i]);
+        castCount++;
+      }
+      else {
+        this.castRest.push(this.movie.casts[i]);
       }
     }
   }
 
-  // modal
-  open() {
-    if(this.authService.authState){
-      const modalRef = this.modalService.open(AddReviewComponent);
-    }
-    else{
+
+  // Add Review
+  onAddReview() {
+  if(this.authService.authState){
+    this.dialog.open(AddReviewComponent, {
+      width: '900px'
+    });
+  }
+   else{
       this.dialog.open(LoginComponent, {
         width: '500px'
       });
     }
-    
+
   }
 
 

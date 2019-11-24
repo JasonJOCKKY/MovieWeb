@@ -36,7 +36,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material';
+import {MatInputModule, MatProgressBarModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -65,7 +65,7 @@ import { LoginComponent } from './Components/login/login.component';
   entryComponents: [
     PreviewComponent,
     LoginComponent,
-    AddReviewComponent 
+    AddReviewComponent
   ],
 
   imports: [
@@ -104,7 +104,8 @@ import { LoginComponent } from './Components/login/login.component';
     MatIconModule,
     HttpClientModule,
     MatTabsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
