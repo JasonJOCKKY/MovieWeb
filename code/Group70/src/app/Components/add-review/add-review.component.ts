@@ -34,6 +34,9 @@ export class AddReviewComponent implements OnInit {
     let myDate = new Date().toString();
     this.reviewForm.patchValue({user: "Weiyu", score: this.reviewRate, date: myDate, replies: []});
     console.log(this.reviewForm.value);
+    console.log(this.reviewForm.get('title').value);
+
+
    //this.reviewService.createMovieReview(this.reviewForm.value, 1);
   }
   close(){
