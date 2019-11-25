@@ -50,10 +50,19 @@
 </div>
 
 <!-- Movies -->
-<!-- <div class="movie-container">
+<div class="movie-container">
   <div class="card" *ngFor="let movie of searchResults">
+    <!-- Poster -->
+    <div class="view overlay">
+      <img class="card-image-top" src="{{ movie.poster }}" onError="this.src='../../../assets/images/placeholder.png'" alt="...">
+    </div>
 
-  </div> -->
+    <!-- Content -->
+    <div class="card-body">
+      <h4 class="card-title">{{ movie.title }}</h4>
+    </div>
+
+  </div>
   <!-- <div class="w-100 float-left p-2" *ngFor="let movie of searchResults">
     <mat-card>
       <mat-card-header>
@@ -63,9 +72,9 @@
       <img mat-card-image src="{{movie.poster}}" onError="this.src='../../../assets/images/placeholder.png'" alt="...">
     </mat-card>
   </div> -->
-<!-- </div> -->
+</div>
 
-<div class="movie-container">
+<!-- <div class="movie-container">
   <mat-card class="movie-card" *ngFor="let movie of searchResults" >
     <mat-card-header>
       <mat-card-title>{{movie.title}}</mat-card-title>
@@ -76,4 +85,4 @@
       <button mat-raised-button (click)="openPreview(movie)">view more</button>
     </mat-card-actions>
   </mat-card>
-</div>
+</div> -->
