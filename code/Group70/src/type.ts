@@ -55,6 +55,6 @@ export interface User{
 }
 
 export interface UserReview{
-  movieID: number;
-  reviewID: number;
+  movieID: string;
+  reviewID: string;
 }

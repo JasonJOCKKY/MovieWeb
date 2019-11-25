@@ -14,8 +14,11 @@ export class UserService {
   private allUsers: Observable<User[]>;
   private user: Observable<User>;
 
-  constructor(private afs: AngularFirestore) {
+  constructor(
+    private afs: AngularFirestore,
+    ) {
     this.userCollection = this.afs.collection<User>('Group70Users');
+
    }
 
 
@@ -24,7 +27,7 @@ export class UserService {
     let flag=false;
     //check if user already exists
     this.retrieveUser(newUserID).subscribe(user => {
-      if (flag || user.userID == newUserID) {
+      if (flag || user) {
         console.log("User already exists!");
       }
       else{
@@ -41,4 +44,16 @@ export class UserService {
     return this.user;
   }
 
+  addUserReview(userID: string, newMovieID: string, newReviewID: string){
+    let newUserReview: UserReview = {movieID: newMovieID, reviewID: newReviewID};
+    let flag = false;
+    this.retrieveUser(userID).subscribe(user => {
+      if(user){
+        user.userReviews.push(newUserReview);
+      }
+      else{
+        console.log("invalid user id");
+      }
+    });
+  }
 }

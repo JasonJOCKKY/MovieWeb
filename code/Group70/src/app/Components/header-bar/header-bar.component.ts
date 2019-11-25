@@ -13,12 +13,14 @@ import { User, UserReview } from 'src/type';
 export class HeaderBarComponent implements OnInit {
   user: User;
   userName: string = null;
-  userID = 0;
+  userID:string = null;
 
   constructor(
     private dialog: MatDialog,
     private authService: AuthenticationService
-  ) { }
+  ) { 
+    //this.userID = this.authService.currentUserId;
+  }
 
   ngOnInit() {
   }
@@ -30,8 +32,10 @@ export class HeaderBarComponent implements OnInit {
   }
 
   getCurrentUser(){
-    if(this.authService.authState)
+    if(this.authService.authState){
       this.userName = this.authService.authState.displayName;
+      this.userID = this.authService.authState.uid;
+    }
     return this.authService.authState;
   }
 
