@@ -10,7 +10,6 @@
 <div *ngIf="movie" class="textFont">
   <div class="mainWrapper">
 
-
     <!-- Movie -->
     <mat-card class="w-100 shadow p-4">
 
@@ -126,76 +125,63 @@
 
     <!-- Reviews -->
     <h3 class="mt-5">Reiviews</h3>
-    <div class="w-100" *ngIf="reviews && reviews.length > 0">
-      <div class="border-top border-bottom" *ngFor="let review of reviews">
-          <h6><strong>User1</strong> Posted: 2019-11-23</h6>
-          <h5><strong>{{review.title}}</strong></h5>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic dolor debitis libero fugit aperiam itaque accusantium rem quis, explicabo eius doloremque assumenda dolore omnis cum, laboriosam adipisci! Tempora, ab vitae!</p>
+    <div class="w-100">
+      <div *ngFor="let review of testReviews; index as k" class="border-top border-bottom pt-3 pb-3">
+          <h6><strong>{{ review.user }}</strong> <a class="text-muted float-right">Posted: {{ review.date }}</a></h6>
+          <!-- Stars -->
+          <div>
+            <mat-icon *ngFor="let i of [1, 2, 3, 4, 5]">
+              {{ i <= review.score ? 'star' : 'star_outline' }}
+            </mat-icon>
+          </div>
+          <h5><strong>{{ review.title }}</strong></h5>
+          <p class="mb-0">{{ review.comment }}</p>
+
+          <!-- Reply Section -->
+          <div *ngIf="review.replies.length > 0">
+            <button mat-button (click)="reviewsExpandControl[k] = !reviewsExpandControl[k]">
+              <mat-icon>{{ reviewsExpandControl[k] ? 'expand_more' : 'chevron_right' }}</mat-icon>
+              View Reply
+            </button>
+
+            <ul [class.d-none]="!reviewsExpandControl[k]">
+              <li>
+                <mat-tree [dataSource]="getReplyDataSource(review.replies)" [treeControl]="replyTreeControls[k]">
+                    <!-- Leaf Node -->
+                    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+                      <li>
+                        <p class="mb-0"><strong>{{ node.user }}</strong></p>
+                        <p>{{ node.body }}</p>
+                      </li>
+                    </mat-tree-node>
+                    <!-- Nested Node -->
+                    <mat-nested-tree-node *matTreeNodeDef="let node; when: whenNested">
+                      <li>
+                        <!-- Node Content -->
+                        <div>
+                          <p class="mb-0"><strong>{{ node.user }}</strong></p>
+                          <p>{{ node.body }}</p>
+                        </div>
+                        <!-- Expansion Button -->
+                        <button mat-button matTreeNodeToggle>
+                          <mat-icon class="mat-icon-rtl-mirror">
+                              {{ replyTreeControls[k].isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+                          </mat-icon>
+                          View Reply
+                        </button>
+                        <!-- Expanded Children -->
+                        <ul [class.d-none]="!replyTreeControls[k].isExpanded(node)">
+                          <ng-container matTreeNodeOutlet></ng-container>
+                        </ul>
+                      </li>
+                    </mat-nested-tree-node>
+                  </mat-tree>
+              </li>
+            </ul>
+          </div>
+ 
       </div>
     </div>
 
-    <!-- <div class="no-gutters">
-        <div class="my-3 bg-white rounded box-shadow review">
-            <h2 class="border-bottom border-gray pb-2 mb-0">Review</h2>
-            <div class="media text-muted pt-3">
-                <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32"
-                    class="mr-2 rounded"
-                    src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
-                    data-holder-rendered="true" style="width: 32px; height: 32px;">
-                <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                    <div class="d-flex justify-content-between align-items-center w-100">
-                        <strong class="text-gray-dark">Full Name</strong>
-                    </div>
-
-                    <div class="d-block comments">Lorem ipsum dolor sit amet, error mediocrem mei an, ut pri
-                        exerci
-                        adipisci.
-                        Soleat iisque sit no. Et cum discere debitis argumentum, eu elitr libris molestiae sed.
-                        Ne diam
-                        platonem disputando per, no dicta dicit est, modus partem vivendum in mel.
-
-                        Nec an nisl adversarium. Nulla utroque eu sed, te dicant praesent vituperata vix, nam eu
-                        brute
-                        delicatissimi. Vix congue nostrum ne, ei duo malorum appetere reformidans, nam tale
-                        exerci
-                        fuisset id. Has cu mundi aliquid offendit, ut libris possim vis, augue error omnium te
-                        sed. Ut
-                        ferri utroque cum.
-                        <a href="">Show more</a>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="media text-muted pt-3">
-                <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32"
-                    class="mr-2 rounded"
-                    src="https://m.media-amazon.com/images/M/MV5BMTg2NDA4OTU3OV5BMl5BanBnXkFtZTgwNTQ5NzgxOTE@._V1_UX214_CR0,0,214,317_AL_.jpg"
-                    data-holder-rendered="true" style="width: 32px; height: 32px;">
-                <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                    <div class="d-flex justify-content-between align-items-center w-100">
-                        <strong class="text-gray-dark">Full Name</strong>
-                    </div>
-                    <div class="d-block comments">Lorem ipsum dolor sit amet, error mediocrem mei an, ut pri
-                        exerci
-                        adipisci.
-                        Soleat iisque sit no. Et cum discere debitis argumentum, eu elitr libris molestiae sed.
-                        Ne diam
-                        platonem disputando per, no dicta dicit est, modus partem vivendum in mel.
-
-                        Nec an nisl adversarium. Nulla utroque eu sed, te dicant praesent vituperata vix, nam eu
-                        brute
-                        delicatissimi. Vix congue nostrum ne, ei duo malorum appetere reformidans, nam tale
-                        exerci
-                        fuisset id. Has cu mundi aliquid offendit, ut libris possim vis, augue error omnium te
-                        sed. Ut
-                        ferri utroque cum.
-                        <a href="">Show more</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div> -->
   </div>
 </div>

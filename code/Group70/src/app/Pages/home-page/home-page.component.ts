@@ -1,12 +1,10 @@
 import { Component} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Observable, Subject} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 import { PreviewComponent } from '../../Components/preview/preview.component';
 import { TmdbServiceService } from '../../Services/tmdb-service.service';
-import { CloseScrollStrategy } from '@angular/cdk/overlay';
-import { Movie, Genre, Certification} from '../../../type'
+import { Movie, Genre, Certification} from '../../../type';
 
 @Component({
   selector: 'app-home-page',
@@ -29,13 +27,8 @@ export class HomePageComponent{
   constructor(
     public dialog: MatDialog,
     public movieService: TmdbServiceService,
-    ) { 
+    ) {
     this.searchResults = [];
-    /*
-    this.movieService.getAllGenres().subscribe(g =>{
-      console.log(g[0]);
-    });
-    */
     this.loadGenres();
     this.loadCertifications();
   }
@@ -63,14 +56,11 @@ export class HomePageComponent{
       res.subscribe({
         next: (v : Movie[]) => this.searchResults = v
       });
-      res.subscribe({
-        next: (v: Movie[]) => console.log(v)
-      });
     }
     else{
       window.alert("Please enter a title!");
     }
-    
+
   }
 
   searchPopular(){
@@ -123,5 +113,5 @@ export class HomePageComponent{
   fixPoster(url){
     console.log(url);
   }
- 
+
 }

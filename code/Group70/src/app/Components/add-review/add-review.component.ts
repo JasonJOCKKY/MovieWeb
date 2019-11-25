@@ -41,8 +41,6 @@ export class AddReviewComponent implements OnInit {
     console.log('submit called');
     let myDate = new Date().toString();
 
-
-
     // Return the new review when closing the dialog
     const newReview: Reviews = {
       reviews: [{

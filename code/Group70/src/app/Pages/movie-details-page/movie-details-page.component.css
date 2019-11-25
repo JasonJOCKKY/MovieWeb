@@ -1,11 +1,3 @@
-/* mat-grid-tile {
-  background-color: antiquewhite;
-} */
-
-/* .textFont {
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-} */
-
 h1 {
   font-weight: bold;
 }
@@ -44,130 +36,16 @@ h1 {
   margin-bottom: 0;
 }
 
-/*
-.card{
-    margin-top: 20px;
+ul, li {
+  list-style: none;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
-.actor{
-    width: 16%;
-    height: 100%;
-    display: inline-block;
-    padding: 5px;
+li {
+  margin-top: 10px;
 }
 
-.actor img{
-    width: 100%;
-    height: 100%;
+mat-tree p {
+  margin-bottom: 0;
 }
-
-.actors{
-    width: 100%;
-    height: auto;
-    margin: 0 auto;
-    margin-top: 20px;
-}
-
-.backgroundWrapper{
-  position: absolute;
-  width:100%;
-  height:400px;
-  background-color: #3f51b5;
-  z-index: -1;
-}
-
-@media (min-width: 576px) {
-    .card{
-        border: none;
-        max-width: 1200px;
-        margin-top: 50px;
-    }
-
-    .info{
-        padding: 0 20px 0 20px !important;
-    }
-
-    .card-img{
-        margin: 0 !important;
-    }
-
-
-    .comments{
-        font-size: medium;
-    }
-
-    .poster{
-
-    }
-    .poster img{
-        width: 100%;
-        height: auto;
-    }
-
-    .review{
-        padding: 15px;
-    }
-
-    .rating{
-        width: 100%;
-        height: 100% !important;
-    }
-
-    .rating-card{
-        width: 90%;
-        height: 275px;
-        margin-left: 20px;
-        padding-top: 0 !important;
-    }
-
-    .rate{
-        font-size: large;
-        margin: 10px 0 0 0;
-        padding-right: 5px;
-        display: inline-block;
-    }
-
-    .barChart{
-        display: block;
-        width: 70%;
-        height: 100px !important;
-        margin-top: 10px;
-        margin-bottom: 20px;
-    }
-
-    .addReview{
-        float: right;
-        width: 150px;
-        margin: 5px 0 0 0;
-    }
-
-    .movieCard{
-        width:100%;
-        background-color: white;
-    }
-    .mainWrapper{
-        width: 100%;
-        padding: 0 200px;
-    }
-
-    .ratingCardHeader{
-        padding: 0 0 10px 0;
-    }
-
-    .firstPart{
-        padding-bottom: 20px;
-    }
-
-  }
-
-
-@media (min-width: 768px) {  }
-
-
-@media (min-width: 992px) {  }
-
-
-@media (min-width: 1200px) {  }
-
-*/
-
