@@ -7,10 +7,10 @@
 
   <span class="m-auto">Movie Application</span>
 
-  <span *ngIf="getCurrentUser() != null; else showLogin">
+  <span *ngIf="getCurrentUser() != null && user != null; else showLogin">
       <button mat-button [matMenuTriggerFor]="userMenu" class="pl-2 pr-2">
         <mat-icon>account_circle</mat-icon>
-        {{userName}}
+        {{user.username}}
       </button>
       <mat-menu #userMenu="matMenu" xPosition="before">
         <button mat-menu-item [routerLink]="['/profile', userID]">View Profile</button>

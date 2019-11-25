@@ -3,6 +3,7 @@ import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { MatDialog } from '@angular/material';
 import { LoginComponent } from '../../Components/login/login.component'
 import { User, UserReview } from 'src/type';
+import { UserService } from '../../Services/user.service'
 
 
 @Component({
@@ -11,13 +12,13 @@ import { User, UserReview } from 'src/type';
   styleUrls: ['./header-bar.component.css']
 })
 export class HeaderBarComponent implements OnInit {
-  user: User;
-  userName: string = null;
+  user: User = null;
   userID:string = null;
 
   constructor(
     private dialog: MatDialog,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private userService: UserService,
   ) { 
     //this.userID = this.authService.currentUserId;
   }
@@ -33,8 +34,16 @@ export class HeaderBarComponent implements OnInit {
 
   getCurrentUser(){
     if(this.authService.authState){
-      this.userName = this.authService.authState.displayName;
       this.userID = this.authService.authState.uid;
+      this.userService.retrieveUser(this.userID).subscribe(user=>{
+        if(user){
+          this.user = user;
+        }
+        else{
+          console.log("no user");
+          return null;
+        }
+      });
     }
     return this.authService.authState;
   }
