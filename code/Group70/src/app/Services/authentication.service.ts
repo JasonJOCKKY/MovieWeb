@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
-
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,10 @@ import { auth } from 'firebase/app';
 export class AuthenticationService {
 
   authState: any = null;
-  constructor(private afAuth: AngularFireAuth) {
+  constructor(
+    private afAuth: AngularFireAuth,
+    public userService: UserService
+    ) {
     this.afAuth.authState.subscribe(data => this.authState = data);
   }
 
@@ -22,7 +25,10 @@ export class AuthenticationService {
   }
 
   loginWithGoogle() {
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
+      cred => this.userService.addUser(cred.user.uid, cred.user.displayName)
+    );
+    
   }
 
   async login(email: string, password: string) {
@@ -41,6 +47,7 @@ export class AuthenticationService {
   async signUp(email: string, password: string, first: string) {
     try {
       const cred = await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+      this.userService.addUser(cred.user.uid, first);
       // const newUser: User = {
       //   first,
       //   email,

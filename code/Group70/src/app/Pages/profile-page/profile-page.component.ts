@@ -16,15 +16,7 @@ export class ProfilePageComponent implements OnInit {
     public authService: AuthenticationService,
   ) { 
     this.reviews = [];
-    this.getCurrentUser();
-  }
-
-  getCurrentUser(){
-    if(this.authService.authState){
-      console.log("auth");
-      this.username = this.authService.authState.displayName;
-    }
-    return this.authService.authState;
+    this.username = "Test Name";
   }
 
   ngOnInit() {

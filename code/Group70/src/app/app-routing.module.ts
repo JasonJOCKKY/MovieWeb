@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'details/:movie_id', component: MovieDetailsPageComponent },
   { path: 'login', component: LoginComponent},
-  { path: 'profile', component: ProfilePageComponent},
+  { path: 'profile/:user_id', component: ProfilePageComponent},
   {
     path: '',
     redirectTo: 'home',

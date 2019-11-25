@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Reviews, Review } from 'src/type';
+import { Reviews, Review, User } from 'src/type';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -60,5 +60,4 @@ export class ReviewService {
 
     return this.movieReviews;
   }
-
 }
