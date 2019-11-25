@@ -4,7 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ReviewService } from 'src/app/Services/review.service';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Movie_Detail, Review } from 'src/type';
+import { Movie_Detail, Review, Reviews } from 'src/type';
 
 
 
@@ -21,10 +21,7 @@ export class AddReviewComponent implements OnInit {
   reviewForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z\\s]+")]),
     comment: new FormControl('', [Validators.required]),
-    user: new FormControl(''),
-    score: new FormControl(5),
-    date: new FormControl(''),
-    replies: new FormControl('')
+    score: new FormControl(5)
   });
 
 
@@ -43,24 +40,22 @@ export class AddReviewComponent implements OnInit {
   onSubmit() {
     console.log('submit called');
     let myDate = new Date().toString();
-    // this.reviewForm.patchValue({user: "Weiyu", score: this.reviewForm.get['score'].value, date: myDate, replies: []});
-    // console.log(this.reviewForm.value);
-    // console.log(this.reviewForm.get('title').value);
 
-    this.reviewService.createMovieReview(this.reviewForm.value, "1");
-    //this.closeDialog();
 
     // Return the new review when closing the dialog
-    const newReview: Review = {
-      user: 'random user',
-      // score: this.reviewForm.get['score'].value,
-      score: this.reviewForm.get('score').value,
-      date: myDate,
-      title: this.reviewForm.get('title').value,
-      comment: this.reviewForm.get('comment').value,
-      replies: []
+    const newReview: Reviews = {
+      reviews: [{
+        user: 'random user',
+        score: this.reviewForm.get('score').value,
+        date: myDate,
+        title: this.reviewForm.get('title').value,
+        comment: this.reviewForm.get('comment').value,
+        replies: []
+      }]
     }
+    this.reviewService.addMovieReview(newReview, this.movie.id.toString());
     this.dialogRef.close(newReview);
+    
   }
 
   // Score functions

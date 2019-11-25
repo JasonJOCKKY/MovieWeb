@@ -24,7 +24,7 @@ import { LoginComponent } from 'src/app/Components/login/login.component';
 export class MovieDetailsPageComponent implements OnInit {
 
   movie: Movie_Detail;
-  reviews: Reviews;
+  reviews: Review[];
   crewFirstRow: Person[];
   castFirstRow: Person[];
   crewRest: Person[];
@@ -59,8 +59,9 @@ export class MovieDetailsPageComponent implements OnInit {
   }
 
   retrieveReviews(){
-    this.reviewService.retrieveMovieReviews(this.movie_id).subscribe(reviews => {this.reviews = reviews;});
-    console.log(this.reviews);
+    this.reviewService.retrieveMovieReviews(this.movie_id).subscribe(reviews => {
+      if(reviews) this.reviews = reviews.reviews;
+    });
   }
 
 
@@ -143,7 +144,7 @@ export class MovieDetailsPageComponent implements OnInit {
       });
       addReviewDialog.afterClosed().subscribe((review: Review) => {
         if (review) {
-          console.log(review);
+          // console.log(review);
         }
       });
     } else {
