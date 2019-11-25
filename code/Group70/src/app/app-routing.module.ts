@@ -4,12 +4,14 @@ import { PageNotFoundComponent } from './Pages/page-not-found/page-not-found.com
 import { HomePageComponent } from './Pages/home-page/home-page.component';
 import { MovieDetailsPageComponent } from './Pages/movie-details-page/movie-details-page.component';
 import { LoginComponent } from './Components/login/login.component';
+import { ProfilePageComponent } from './Pages/profile-page/profile-page.component'
 
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'details/:movie_id', component: MovieDetailsPageComponent },
   { path: 'login', component: LoginComponent},
+  { path: 'profile', component: ProfilePageComponent},
   {
     path: '',
     redirectTo: 'home',

@@ -46,6 +46,7 @@ import {MatSelectModule} from '@angular/material/select'
 import { PreviewComponent } from './Components/preview/preview.component'
 import { AddReviewComponent } from './Components/add-review/add-review.component';
 import { LoginComponent } from './Components/login/login.component';
+import { ProfilePageComponent } from './Pages/profile-page/profile-page.component';
 
 
 
@@ -58,7 +59,8 @@ import { LoginComponent } from './Components/login/login.component';
     MovieDetailsPageComponent,
     PreviewComponent,
     AddReviewComponent,
-    LoginComponent
+    LoginComponent,
+    ProfilePageComponent
   ],
   entryComponents: [
     PreviewComponent,
