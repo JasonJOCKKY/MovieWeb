@@ -48,7 +48,6 @@ export class AddReviewComponent implements OnInit {
     // console.log(this.reviewForm.get('title').value);
 
     this.reviewService.createMovieReview(this.reviewForm.value, "1");
-    this.closeDialog();
 
     // Return the new review when closing the dialog
     const newReview: Review = {
