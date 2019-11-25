@@ -24,19 +24,25 @@ export class ReviewService {
     let newReview: Review;
     let movieReviews : Reviews = {reviews: []};
     newReview = data.reviews[0];    
+    let flag = true;
 
+    console.log("call");
     this.retrieveMovieReviews(movieID).subscribe(reviews => {
-      if (reviews) {
+      if (reviews && flag) {
+        flag = false;
+        console.log(reviews);
         movieReviews = reviews;
         movieReviews.reviews.push(newReview);
+        this.movieReviewCollection.doc(movieID).set(movieReviews);
       }
-      else {
+      else if(flag) {
+        flag = false;
         movieReviews = data;
-      }
-      // this.movieReviewCollection.doc(movieID).set(movieReviews);
+        this.movieReviewCollection.doc(movieID).set(movieReviews);
+      }      
+      
       console.log(movieReviews);
     });
-    
   }
 
   retrieveAllMovieReviews(): Observable<Reviews[]>{
