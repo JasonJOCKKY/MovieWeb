@@ -90,19 +90,19 @@ export class MovieDetailsPageComponent implements OnInit {
       this.getPeople();
       this.retrieveReviews();
     });
-
-    this.reviews = {
-      reviews: this.testReviews
-    };
-    this.reviews.reviews.forEach(testReview => {
-      this.replyTreeControls.push(this.getReplyTreeControl());
-      this.reviewsExpandControl.push(false);
-    });
   }
 
   retrieveReviews(){
     this.reviewService.retrieveMovieReviews(this.movie_id).subscribe(reviews => {
-      if(reviews) this.reviews = reviews.reviews;
+      if(reviews) {
+        this.reviews = reviews.reviews;
+        this.replyTreeControls = [];
+        this.reviewsExpandControl = [];
+        this.reviews.forEach(testReview => {
+          this.replyTreeControls.push(this.getReplyTreeControl());
+          this.reviewsExpandControl.push(false);
+        });
+      }
     });
   }
 
