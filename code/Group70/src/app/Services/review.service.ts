@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { Reviews, Review } from 'src/type';
+import { Observable, ReplaySubject } from 'rxjs';
+import { Reviews, Review, Reply } from 'src/type';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -18,6 +18,54 @@ export class ReviewService {
 
   constructor(private afs: AngularFirestore) {
     this.movieReviewCollection = this.afs.collection<Reviews>('Group70Movies');
+  }
+
+  addReply(data: Reply, movieID: string, reviewID: string, replyID: string) {
+    let movieReviews: Reviews;
+
+    this.retrieveMovieReviews(movieID).subscribe(reviews => {
+
+      if (reviews && reviews.reviews) {
+        for (let i = 0; i < reviews.reviews.length; i++) {
+          if (reviewID == reviews.reviews[i].id) {
+            movieReviews = reviews;
+
+            if (replyID == null) {
+              // add reply to review
+              movieReviews.reviews[i].replies.push(data);
+              break;
+            }
+            else {
+              // add reply to reply
+              movieReviews.reviews[i].replies = this.addReplyToReply(reviews.reviews[i].replies, data, replyID);
+              break;
+            }
+            
+          }
+        }
+        this.movieReviewCollection.doc(movieID).update(movieReviews);
+      }
+    });
+  }
+
+  addReplyToReply(replies: Reply[], data: Reply, replyID: string) {
+  
+    // if replies exits
+    if (replies) {
+      for (let j = 0; j < replies.length; j++) {
+        if (replyID == replies[j].id) {
+          replies[j].replies.push(data);
+          return replies;
+        }
+        else {
+          return this.addReplyToReply(replies[j].replies, data, replyID);
+        }
+      }  
+    }
+    else{
+      return null;
+    }
+    
   }
 
   addMovieReview(data: Reviews, movieID: string){

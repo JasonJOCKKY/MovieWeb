@@ -33,6 +33,7 @@ export interface Review {
 }
 
 export interface Reply {
+  id: string,
   user: string,
   body: string,
   replies: Reply[]
