@@ -23,6 +23,7 @@ export interface Reviews{
 }
 
 export interface Review {
+  id: string,
   user: string,
   score: number,
   date: string,

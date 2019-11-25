@@ -11,7 +11,6 @@ import { LoginComponent } from '../../Components/login/login.component'
 })
 export class HeaderBarComponent implements OnInit {
 
-  userName: string = null;
 
   constructor(
     private dialog: MatDialog,
@@ -27,10 +26,12 @@ export class HeaderBarComponent implements OnInit {
     });
   }
 
-  getCurrentUser(){
-    if(this.authService.authState)
-      this.userName = this.authService.authState.displayName;
-    return this.authService.authState;
+  getCurrentUserName(){
+    return this.authService.currentUserName();
+  }
+
+  isAuthenticated(){
+    return this.authService.authenticated();
   }
 
 

@@ -54,7 +54,6 @@ export class MovieDetailsPageComponent implements OnInit {
       this.retrieveReviews();
     });
 
-
     this.reviews = null;
   }
 

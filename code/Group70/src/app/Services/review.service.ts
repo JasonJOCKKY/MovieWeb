@@ -67,4 +67,8 @@ export class ReviewService {
     return this.movieReviews;
   }
 
+  createId(): string{
+    return this.afs.createId();
+  }
+
 }
