@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Reviews } from 'src/type';
+import { Reviews, Review } from 'src/type';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -20,11 +20,27 @@ export class ReviewService {
     this.movieReviewCollection = this.afs.collection<Reviews>('Group70Movies');
   }
 
-  createMovieReview(data: Reviews, movieID: string){
-    this.movieReviewCollection.doc(movieID).set(data);
+  addMovieReview(data: Reviews, movieID: string){
+    let newReview: Review;
+    let movieReviews : Reviews = {reviews: []};
+    newReview = data.reviews[0];    
+
+    this.retrieveMovieReviews(movieID).subscribe(reviews => {
+      if (reviews) {
+        movieReviews = reviews;
+        movieReviews.reviews.push(newReview);
+      }
+      else {
+        movieReviews = data;
+      }
+      // this.movieReviewCollection.doc(movieID).set(movieReviews);
+      console.log(movieReviews);
+    });
+    
   }
 
   retrieveAllMovieReviews(): Observable<Reviews[]>{
+
     this.allMovieReviews = this.movieReviewCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Reviews;
@@ -32,12 +48,16 @@ export class ReviewService {
         return { id, ...data };
       }))
     );
+
     return this.allMovieReviews;
   }
 
   retrieveMovieReviews(movieID: string): Observable<Reviews>{
-    this.movieReviewDocument = this.afs.doc<Reviews>(movieID);
+
+    this.movieReviewDocument = this.movieReviewCollection.doc<Reviews>(movieID);
+    
     this.movieReviews = this.movieReviewDocument.valueChanges();
+
     return this.movieReviews;
   }
 
