@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyD4DmwBjHAIWXVu7lz8jDIPuwEpz3OpNXQ",
-    authDomain: "group70-50ea3.firebaseapp.com",
-    databaseURL: "https://group70-50ea3.firebaseio.com",
-    projectId: "group70-50ea3",
-    storageBucket: "group70-50ea3.appspot.com",
-    messagingSenderId: "360596105603",
-    appId: "1:360596105603:web:54e8110b6af20698856eb6",
-    measurementId: "G-ET18K52JH0"
+    apiKey: "AIzaSyD0_tmaK1AcGZHZisTl7u4Ml1Q2Q5_Y_hw",
+    authDomain: "hackweekgroup70.firebaseapp.com",
+    databaseURL: "https://hackweekgroup70.firebaseio.com",
+    projectId: "hackweekgroup70",
+    storageBucket: "hackweekgroup70.appspot.com",
+    messagingSenderId: "893024218519",
+    appId: "1:893024218519:web:4726107e23d616b735a8d2",
+    measurementId: "G-5JW3EZQYV6"
   },
   tmdb: {
     apiKey: "59a4d94af159f2d5a71a45127ee989e1",
