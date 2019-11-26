@@ -27,7 +27,9 @@ export class AuthenticationService {
   }
 
   currentUserName() : string {
-    return this.authenticated() ? this.authState.displayName : null;
+    let userName : string;
+    this.userService.retrieveUser(this.currentUserId()).subscribe(user => userName = user.username);
+    return this.authenticated() ? userName : null;
   }
 
 

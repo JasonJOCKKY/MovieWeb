@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Reply } from 'src/type';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { ReviewService } from 'src/app/Services/review.service';
+import { UserService } from 'src/app/Services/user.service';
 
 @Component({
   selector: 'app-add-reply',
@@ -19,6 +20,7 @@ export class AddReplyComponent implements OnInit {
 
   constructor(
     private authService: AuthenticationService,
+    private userService: UserService,
     private reviewService: ReviewService,
   ) { }
 
@@ -49,7 +51,7 @@ export class AddReplyComponent implements OnInit {
     return this.reviewService.createId();
   }
   getCurrentUserName(): string {
-    return this.authService.currentUserName();
+    return "guest"
   }
 
   showAddReply(){

@@ -50,3 +50,14 @@ export interface Certification {
   meaning : string,
   order: string
 }
+
+export interface User{
+  userID;
+  username: string;
+  userReviews: UserReview[];
+}
+
+export interface UserReview{
+  movieID: string;
+  reviewID: string;
+}
