@@ -3,9 +3,13 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Group70": {
+    "hackWeek": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -13,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Group70",
+            "outputPath": "dist/hackWeek",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -24,12 +28,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.scss"
             ],
-            "scripts": [
-              "node_modules/chart.js/dist/Chart.js",
-              "node_modules/hammerjs/hammer.min.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -66,18 +68,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Group70:build"
+            "browserTarget": "hackWeek:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Group70:build:production"
+              "browserTarget": "hackWeek:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Group70:build"
+            "browserTarget": "hackWeek:build"
           }
         },
         "test": {
@@ -93,7 +95,7 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
@@ -115,20 +117,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Group70:serve"
+            "devServerTarget": "hackWeek:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Group70:serve:production"
+              "devServerTarget": "hackWeek:serve:production"
             }
           }
-        },
-        "deploy": {
-          "builder": "@angular/fire:deploy",
-          "options": {}
         }
       }
     }
   },
-  "defaultProject": "Group70"
+  "defaultProject": "hackWeek"
 }
