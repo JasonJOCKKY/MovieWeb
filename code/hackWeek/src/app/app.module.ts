@@ -44,6 +44,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
+import { ProfilePageComponent } from './Pages/profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { MatSelectModule } from '@angular/material/select';
     PreviewComponent,
     AddReviewComponent,
     LoginComponent,
-    AddReplyComponent
+    AddReplyComponent,
+    ProfilePageComponent
   ],
   entryComponents: [
     PreviewComponent,
