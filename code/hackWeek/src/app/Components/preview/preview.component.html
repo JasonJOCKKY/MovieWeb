@@ -1,32 +1,40 @@
-<h1 mat-dialog-title>{{movie.title}}</h1>
-<p>{{ movie.release_date }}</p>
-<div mat-dialog-content>
-  <mat-card>
-    <mat-card-content>
-      <div>
-        <img mat-card-image  class="poster" src="{{movie.poster}}" onError="this.src='../../../assets/images/placeholder.png'" alt="poster">
-        <h3>Abstract</h3>
-        <p>{{movie.description}}</p>
-      </div>
-      <br>
-      <div>
-        <h3>Recent Reviews:</h3>
-        <!-- <div *ngIf="reviews.reviews.length>0 else none">
-                <div *ngFor="let review of reviews.reviews | slice:0:3">
-                        <h4>{{review.title}}</h4>
-                        <p>{{review.comment}} - {{review.user}} on {{review.date}}</p>
-                </div>
-        </div> -->
-        <ng-template #none>
-                <p>No recent reviews.</p>
-        </ng-template>
-      </div>
-
-    </mat-card-content>
-  </mat-card>
+<div mat-dialog-title class="position-relative">
+  <h2>{{ movie.title }}</h2>
+  <h6 class="text-muted">{{ movie.release_date }}</h6>
+  <button mat-icon-button mat-dialog-close [tabIndex]="-1" class="closeButton">
+    <mat-icon>close</mat-icon>
+  </button>
 </div>
 
-<div mat-dialog-actions align="center">
-  <button mat-raised-button mat-dialog-close>Close</button>
-  <button mat-raised-button mat-dialog-close [routerLink]="['/details', movie.id]">View More</button>
+<div mat-dialog-content class="m-0 p-0">
+  <div class="row">
+    <!-- Poster -->
+    <div class="col-md-5 col-10 p-0 m-auto">
+      <img class="w-100" src="{{ movie.poster ? movie.poster : '../../../assets/images/placeholder.png' }}" alt="Poster of {{ movie.title }}">
+    </div>
+
+    <div class="col-12 d-block d-md-none mt-3"></div>
+
+    <!-- Movie Info -->
+    <div class="col-md-7 col-10 ml-auto mr-auto">
+      <h5>Overview</h5>
+      <p class="description">{{ movie.description }}</p>
+      <!-- Goto detail -->
+      <div mat-dialog-actions class="border-top d-md-block d-none">
+        <button mat-button mat-dialog-close [tabIndex]="-1" [routerLink]="['/details', movie.id]">
+          Detail
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Goto detail -->
+<div mat-dialog-actions class="border-top d-md-none">
+  <button mat-button mat-dialog-close [tabIndex]="-1" [routerLink]="['/details', movie.id]">
+    Detail
+    <mat-icon>arrow_forward</mat-icon>
+  </button>
 </div>

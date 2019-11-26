@@ -125,8 +125,8 @@ export class HomePageComponent{
   }
 
   openPreview(movie:Movie): void {
-    this.dialog.open(PreviewComponent, {
-      width: '500px',
+    const dialog = this.dialog.open(PreviewComponent, {
+      width: '700px',
       data: {
         movie: movie
       }
