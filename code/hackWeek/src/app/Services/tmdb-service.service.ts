@@ -37,9 +37,6 @@ export class TmdbService {
     this.http.get(url).subscribe((result) => {
       let movieList: Movie[] = [];
 
-      while (!this.img_baseurl) {
-
-      }
       result['results'].forEach((element) => {
         let movie: Movie = {
           id: element['id'],
@@ -114,8 +111,8 @@ export class TmdbService {
     return this.getMovieList(url);
   }
 
-  // Explore movies given filters and sort by release date
-  exploreMovies_ReleaseDate(year: number, genres: number[], certification: string) {
+  // Explore movies given filters and sort by popularity
+  exploreMovies(year: number, genres: number[], certification: string) {
     let genreString = '';
 
     if (genres) {
@@ -125,7 +122,7 @@ export class TmdbService {
     }
 
     let url = this.constructUrl('/discover/movie',
-    'sort_by=release_date.desc' +
+    'sort_by=popularity.desc' +
     '&certification_country=' + this.country +
     '&certification=' + (certification ? certification : '') +
     '&year=' + (year ? year : '') +
