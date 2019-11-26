@@ -1,5 +1,13 @@
-.poster{
-    float:left;
-    width: 125px;
-    margin: 5px;
+.mat-dialog-actions {
+  justify-content: flex-end;
+}
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.description {
+  overflow: scroll;
 }
