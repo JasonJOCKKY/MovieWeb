@@ -1,0 +1,12 @@
+
+<button mat-button color="primary" (click)="showAddReply()">Reply</button>
+<form [formGroup]="replyForm" (ngSubmit)="onSubmit()" class="w-100" [hidden]="this.hidden">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Reply</mat-label>
+      <textarea matInput rows="3" formControlName="reply" style="resize: none;"></textarea>
+    </mat-form-field>
+    <div class="clearfix">
+        <button type="submit" [disabled]="replyForm.invalid" mat-flat-button color="primary" class="d-block ml-2 float-right">Submit</button>
+        <button type="button" mat-button class="d-block m-auto float-right" (click)="close()">Cancel</button>
+    </div>
+</form>

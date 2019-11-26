@@ -5,6 +5,7 @@ import { ReviewService } from 'src/app/Services/review.service';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Movie_Detail, Review, Reviews } from 'src/type';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
 
 
 
@@ -26,6 +27,7 @@ export class AddReviewComponent implements OnInit {
 
 
   constructor(
+    private authService: AuthenticationService,
     private reviewService: ReviewService,
     private dialogRef:MatDialogRef<AddReviewComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any
@@ -41,11 +43,11 @@ export class AddReviewComponent implements OnInit {
     console.log('submit called');
     let myDate = new Date().toString();
 
-
     // Return the new review when closing the dialog
     const newReview: Reviews = {
       reviews: [{
-        user: 'random user',
+        id: this.createId(),
+        user: this.getCurrentUserName(),
         score: this.reviewForm.get('score').value,
         date: myDate,
         title: this.reviewForm.get('title').value,
@@ -70,4 +72,13 @@ export class AddReviewComponent implements OnInit {
   setScore(score: number) {
     this.reviewForm.get('score').setValue(score);
   }
+
+  createId(): string{
+    return this.reviewService.createId();
+  }
+
+  getCurrentUserName(): string{
+    return this.authService.currentUserName();
+  }
+
 }

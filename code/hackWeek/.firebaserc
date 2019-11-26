@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "hackweekgroup70": {
+      "hosting": {
+        "hackWeek": [
+          "hackweekgroup70"
+        ]
+      }
+    }
+  }
+}

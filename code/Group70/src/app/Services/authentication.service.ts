@@ -16,13 +16,20 @@ export class AuthenticationService {
     this.afAuth.authState.subscribe(data => this.authState = data);
   }
 
-  get authenticated() : boolean {
+
+
+  authenticated() : boolean {
     return this.authState !== null;
   }
 
-  get currentUserId() : string {
-    return this.authenticated ? this.authState.uid : null;
+  currentUserId() : string {
+    return this.authenticated() ? this.authState.uid : null;
   }
+
+  currentUserName() : string {
+    return this.authenticated() ? this.authState.displayName : null;
+  }
+
 
   loginWithGoogle() {
     this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(

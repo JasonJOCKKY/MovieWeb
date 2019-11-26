@@ -13,7 +13,7 @@
 
     <mat-tab label="Explore Films">
       <mat-card>
-          <form [formGroup]="exploreForm" (ngSubmit)="explore()"> 
+          <form [formGroup]="exploreForm" (ngSubmit)="explore()">
             <mat-form-field>
               <mat-label>Genre</mat-label>
               <mat-select formControlName='genre'>
@@ -42,14 +42,34 @@
     </mat-tab>
 
     <mat-tab label="View Popular Movies" >
-      <div class="popular-movies">
+      <!-- <div class="popular-movies">
           <h1>Popular movies...</h1>
-      </div>
+      </div> -->
     </mat-tab>
   </mat-tab-group>
 </div>
 
+<!-- Movies -->
 <div class="movie-container">
+  <!-- Card Container -->
+  <div class="w-20 p-3" *ngFor="let movie of searchResults">
+    <!-- Card -->
+    <mat-card class="w-100 shadow">
+      <!-- Movie Info -->
+      <mat-card-header>
+        <mat-card-title>{{movie.title}}</mat-card-title>
+        <mat-card-subtitle>{{movie.release_date}}</mat-card-subtitle>
+      </mat-card-header>
+      <!-- Poster -->
+      <div>
+        <img class="w-100" src="{{ movie.poster }}" onError="this.src='../../../assets/images/placeholder.png'" alt="...">
+      </div>
+    </mat-card>
+
+  </div>
+</div>
+
+<!-- <div class="movie-container">
   <mat-card class="movie-card" *ngFor="let movie of searchResults" >
     <mat-card-header>
       <mat-card-title>{{movie.title}}</mat-card-title>
@@ -60,4 +80,4 @@
       <button mat-raised-button (click)="openPreview(movie)">view more</button>
     </mat-card-actions>
   </mat-card>
-</div>
+</div> -->

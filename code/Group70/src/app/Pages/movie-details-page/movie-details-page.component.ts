@@ -7,11 +7,10 @@ import { AddReviewComponent } from 'src/app/Components/add-review/add-review.com
 import { TmdbServiceService } from 'src/app/Services/tmdb-service.service';
 import { ActivatedRoute } from '@angular/router';
 
-import { CdkRowDef } from '@angular/cdk/table';
-import { BreadcrumbModule } from 'angular-bootstrap-md';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatTreeNestedDataSource } from '@angular/material';
 import { LoginComponent } from 'src/app/Components/login/login.component';
+import { NestedTreeControl } from '@angular/cdk/tree';
 
 
 
@@ -24,14 +23,15 @@ import { LoginComponent } from 'src/app/Components/login/login.component';
 export class MovieDetailsPageComponent implements OnInit {
 
   movie: Movie_Detail;
+
+  reviewsExpandControl: Boolean[] = [];
+  replyTreeControls: NestedTreeControl<Reply>[] = [];
   reviews: Review[];
+
   crewFirstRow: Person[];
   castFirstRow: Person[];
   crewRest: Person[];
   castRest: Person[];
-
-  movie_id: string;
-
   peopleCol = 5;
 
 
@@ -46,21 +46,26 @@ export class MovieDetailsPageComponent implements OnInit {
 
 
   ngOnInit() {
-    this.movie_id = this.route.snapshot.paramMap.get('movie_id');
-    this.tmdbService.getMovieDetail(this.movie_id).subscribe((movie: Movie_Detail) => {
+    let movie_id = this.route.snapshot.paramMap.get('movie_id');
+    this.tmdbService.getMovieDetail(movie_id).subscribe((movie: Movie_Detail) => {
       this.movie = movie;
       this.deleteDuplicate();
       this.getPeople();
       this.retrieveReviews();
     });
-
-
-    this.reviews = null;
   }
 
   retrieveReviews(){
-    this.reviewService.retrieveMovieReviews(this.movie_id).subscribe(reviews => {
-      if(reviews) this.reviews = reviews.reviews;
+    this.reviewService.retrieveMovieReviews(this.movie.id.toString()).subscribe(reviews => {
+      if(reviews) {
+        this.reviews = reviews.reviews;
+        this.replyTreeControls = [];
+        this.reviewsExpandControl = [];
+        this.reviews.forEach(testReview => {
+          this.replyTreeControls.push(this.getReplyTreeControl());
+          this.reviewsExpandControl.push(false);
+        });
+      }
     });
   }
 
@@ -154,41 +159,74 @@ export class MovieDetailsPageComponent implements OnInit {
     }
   }
 
+  onAddReply(reviewId: string, replyId: string) {
+    if(this.authService.authState){
+
+    } else {
+      this.dialog.open(LoginComponent, {
+        width: '500px'
+      });
+    }
+  }
+
+  testReply() {
+
+  }
+
+  // Nested tree functions
+  getReplyTreeControl() {
+    return new NestedTreeControl<Reply>(node => node.replies);
+  }
+
+  getReplyDataSource(replies: Reply[]) {
+    let dataSource = new MatTreeNestedDataSource<Reply> ();
+    dataSource.data = replies;
+    return dataSource;
+  }
+
+  whenNested(index: number, data: Reply) {
+    return data.replies && data.replies.length > 0;
+  }
+
+  // Helper functions
+  formateDate(date: string) {
+    return new Date(date).toLocaleDateString();
+  }
 
   // rating chart
-  public chartType: string = 'bar';
+  // public chartType: string = 'bar';
 
-  public chartDatasets: Array<any> = [
-    { data: [65, 59, 80, 81, 56, 55]}
-  ];
+  // public chartDatasets: Array<any> = [
+  //   { data: [65, 59, 80, 81, 56, 55]}
+  // ];
 
-  public chartLabels: Array<any> = ['1', '2', '3', '4', '5'];
+  // public chartLabels: Array<any> = ['1', '2', '3', '4', '5'];
 
-  public chartColors: Array<any> = [
-    {
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)'
-      ],
-      borderColor: [
-        'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)'
-      ],
-      borderWidth: 1,
-    }
-  ];
+  // public chartColors: Array<any> = [
+  //   {
+  //     backgroundColor: [
+  //       'rgba(255, 99, 132, 0.2)',
+  //       'rgba(54, 162, 235, 0.2)',
+  //       'rgba(255, 206, 86, 0.2)',
+  //       'rgba(75, 192, 192, 0.2)',
+  //       'rgba(153, 102, 255, 0.2)'
+  //     ],
+  //     borderColor: [
+  //       'rgba(255,99,132,1)',
+  //       'rgba(54, 162, 235, 1)',
+  //       'rgba(255, 206, 86, 1)',
+  //       'rgba(75, 192, 192, 1)',
+  //       'rgba(153, 102, 255, 1)'
+  //     ],
+  //     borderWidth: 1,
+  //   }
+  // ];
 
-  public chartOptions: any = {
-    responsive: true
-  };
+  // public chartOptions: any = {
+  //   responsive: true
+  // };
 
-  public chartClicked(e: any): void { }
-  public chartHovered(e: any): void { }
+  // public chartClicked(e: any): void { }
+  // public chartHovered(e: any): void { }
 
 }

@@ -19,10 +19,6 @@ import { MovieDetailsPageComponent } from './Pages/movie-details-page/movie-deta
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-// For MDB Angular Free
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { ChartsModule, WavesModule } from 'angular-bootstrap-md'
 import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
@@ -33,7 +29,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule, MatProgressBarModule, MatTooltipModule} from '@angular/material';
+import {MatInputModule, MatProgressBarModule, MatTooltipModule, MatTreeModule, MatButtonToggleModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -47,6 +43,7 @@ import { PreviewComponent } from './Components/preview/preview.component'
 import { AddReviewComponent } from './Components/add-review/add-review.component';
 import { LoginComponent } from './Components/login/login.component';
 import { ProfilePageComponent } from './Pages/profile-page/profile-page.component';
+import { AddReplyComponent } from './Components/add-reply/add-reply.component';
 
 
 
@@ -60,7 +57,8 @@ import { ProfilePageComponent } from './Pages/profile-page/profile-page.componen
     PreviewComponent,
     AddReviewComponent,
     LoginComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    AddReplyComponent
   ],
   entryComponents: [
     PreviewComponent,
@@ -76,10 +74,7 @@ import { ProfilePageComponent } from './Pages/profile-page/profile-page.componen
     AngularFireAuthModule,
     AngularFireStorageModule,
     BrowserAnimationsModule,
-    NgbModule,
-    MDBBootstrapModule.forRoot(),
-    ChartsModule,
-    WavesModule,
+    // NgbModule,
     MatToolbarModule,
     MatGridListModule,
     MatButtonModule,
@@ -107,7 +102,9 @@ import { ProfilePageComponent } from './Pages/profile-page/profile-page.componen
     MatSelectModule,
     MatSnackBarModule,
     MatProgressBarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatTreeModule,
+    MatButtonToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

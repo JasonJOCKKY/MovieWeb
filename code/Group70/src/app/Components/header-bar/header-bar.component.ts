@@ -13,14 +13,13 @@ import { UserService } from '../../Services/user.service'
 })
 export class HeaderBarComponent implements OnInit {
   user: User = null;
-  userID:string = null;
+  userID: string = null;
 
   constructor(
     private dialog: MatDialog,
     private authService: AuthenticationService,
     private userService: UserService,
   ) { 
-    //this.userID = this.authService.currentUserId;
   }
 
   ngOnInit() {
@@ -33,19 +32,31 @@ export class HeaderBarComponent implements OnInit {
   }
 
   getCurrentUser(){
-    if(this.authService.authState){
-      this.userID = this.authService.authState.uid;
+    console.log("run1");
+    if(this.authService.authenticated){
+      this.userID = this.authService.currentUserId();
+      console.log("run2", this.userID);
       this.userService.retrieveUser(this.userID).subscribe(user=>{
         if(user){
           this.user = user;
         }
         else{
           console.log("no user");
-          return null;
         }
       });
     }
-    return this.authService.authState;
+  }
+
+  getCurrentUserName(){
+    return this.authService.currentUserName();
+  }
+
+  getCurrentUserID(){
+    return this.authService.currentUserId();
+  }
+
+  isAuthenticated(){
+    return this.authService.authenticated();
   }
 
 
