@@ -4,7 +4,7 @@ import { Person, Reply, Movie_Detail, Reviews, Review } from 'src/type';
 import { ReviewService } from 'src/app/Services/review.service';
 
 import { AddReviewComponent } from 'src/app/Components/add-review/add-review.component';
-import { TmdbServiceService } from 'src/app/Services/tmdb-service.service';
+import { TmdbService } from 'src/app/Services/tmdb-service.service';
 import { ActivatedRoute } from '@angular/router';
 
 import { AuthenticationService } from 'src/app/Services/authentication.service';
@@ -17,7 +17,7 @@ import { NestedTreeControl } from '@angular/cdk/tree';
 @Component({
   selector: 'app-movie-details-page',
   templateUrl: './movie-details-page.component.html',
-  styleUrls: ['./movie-details-page.component.css']
+  styleUrls: ['./movie-details-page.component.scss']
 })
 
 export class MovieDetailsPageComponent implements OnInit {
@@ -74,7 +74,7 @@ export class MovieDetailsPageComponent implements OnInit {
 
   constructor(
     private reviewService: ReviewService,
-    private tmdbService: TmdbServiceService,
+    private tmdbService: TmdbService,
     private route: ActivatedRoute,
     private authService: AuthenticationService,
     private dialog: MatDialog

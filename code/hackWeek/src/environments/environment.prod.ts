@@ -1,0 +1,19 @@
+export const environment = {
+  production: true,
+  firebase: {
+    apiKey: "AIzaSyD4DmwBjHAIWXVu7lz8jDIPuwEpz3OpNXQ",
+    authDomain: "group70-50ea3.firebaseapp.com",
+    databaseURL: "https://group70-50ea3.firebaseio.com",
+    projectId: "group70-50ea3",
+    storageBucket: "group70-50ea3.appspot.com",
+    messagingSenderId: "360596105603",
+    appId: "1:360596105603:web:54e8110b6af20698856eb6",
+    measurementId: "G-ET18K52JH0"
+  },
+  tmdb: {
+    apiKey: "59a4d94af159f2d5a71a45127ee989e1",
+    url: "https://api.themoviedb.org/3",
+    img_baseurl: "https://image.tmdb.org/t/p",
+    country: 'US'
+  }
+};

@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>{{movie.title}}</h1>
+<p>{{movie.release_date}}</p>
+<div mat-dialog-content>
+        <mat-card>
+                <mat-card-content>
+                        <div>
+                                <img mat-card-image  class="poster" src="{{movie.poster}}" onError="this.src='../../../assets/images/placeholder.png'" alt="poster">
+                                <h3>Abstract</h3>
+                                <p>{{movie.description}}</p>
+                        </div>
+                        <br>
+                        <div>
+                                <h3>Recent Reviews:</h3>
+                                <div *ngIf="reviews.reviews.length>0 else none">
+                                        <div *ngFor="let review of reviews.reviews | slice:0:3">
+                                                <h4>{{review.title}}</h4>
+                                                <p>{{review.comment}} - {{review.user}} on {{review.date}}</p>
+                                        </div>
+                                </div>
+                                <ng-template #none>
+                                        <p>No recent reviews.</p>
+                                </ng-template>
+                        </div>
+
+                      </mat-card-content>
+        </mat-card>
+</div>
+
+<div mat-dialog-actions align="center">
+  <button mat-raised-button (click)="onCloseClick()">Close</button>
+  <button mat-raised-button (click)="onCloseClick()" [routerLink]="['/details', movie.id]">View More</button>
+</div>
