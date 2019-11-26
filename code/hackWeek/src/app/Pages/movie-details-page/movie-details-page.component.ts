@@ -4,7 +4,7 @@ import { Person, Reply, Movie_Detail, Reviews, Review } from 'src/type';
 import { ReviewService } from 'src/app/Services/review.service';
 
 import { AddReviewComponent } from 'src/app/Components/add-review/add-review.component';
-import { TmdbServiceService } from 'src/app/Services/tmdb-service.service';
+import { TmdbService } from 'src/app/Services/tmdb-service.service';
 import { ActivatedRoute } from '@angular/router';
 
 import { AuthenticationService } from 'src/app/Services/authentication.service';
@@ -17,7 +17,7 @@ import { NestedTreeControl } from '@angular/cdk/tree';
 @Component({
   selector: 'app-movie-details-page',
   templateUrl: './movie-details-page.component.html',
-  styleUrls: ['./movie-details-page.component.css']
+  styleUrls: ['./movie-details-page.component.scss']
 })
 
 export class MovieDetailsPageComponent implements OnInit {
@@ -34,10 +34,47 @@ export class MovieDetailsPageComponent implements OnInit {
   castRest: Person[];
   peopleCol = 5;
 
+  // Test Reviews
+  // testReviews: Review[] = [
+  //   {
+  //     user: 'User1',
+  //     score: 3,
+  //     date: '2019-12-18',
+  //     title: 'Title1',
+  //     comment: 'Turned it up should no valley cousin he. Speaking numerous ask did horrible packages set. Ashamed herself has distant can studied mrs. Led therefore its middleton perpetual fulfilled provision frankness. Small he drawn after among every three no. All having but you edward genius though remark one.',
+  //     replies: []
+  //   },
+  //   {
+  //     user: 'User2',
+  //     score: 5,
+  //     date: '2019-1-18',
+  //     title: 'Title2',
+  //     comment: 'Cause dried no solid no an small so still widen. Ten weather evident smiling bed against she examine its. Rendered far opinions two yet moderate sex striking. Sufficient motionless compliment by stimulated assistance at. Convinced resolving extensive agreeable in it on as remainder. Cordially say affection met who propriety him. Are man she towards private weather pleased. In more part he lose need so want rank no. At bringing or he sensible pleasure. Prevent he parlors do waiting be females an message society. ',
+  //     replies: [
+  //       {
+  //         user: 'User 999',
+  //         body: 'Yet bed any for travelling assistance indulgence unpleasing. Not thoughts all exercise blessing. Indulgence way everything joy alteration boisterous the attachment. Party we years to order allow asked of. We so opinion friends me message as delight. Whole front do of plate heard oh ought. His defective nor convinced residence own. Connection has put impossible own apartments boisterous. At jointure ladyship an insisted so humanity he. Friendly bachelor entrance to on by. ',
+  //         replies: [
+  //           {
+  //             user: 'User 2000',
+  //             body: 'Now indulgence dissimilar for his thoroughly has terminated. Agreement offending commanded my an. Change wholly say why eldest period. Are projection put celebrated particular unreserved joy unsatiable its. In then dare good am rose bred or. On am in nearer square wanted. ',
+  //             replies: []
+  //           }
+  //         ]
+  //       },
+  //       {
+  //         user: 'User 998',
+  //         body: 'Excited him now natural saw passage offices you minuter. At by asked being court hopes. Farther so friends am to detract. Forbade concern do private be. Offending residence but men engrossed shy. Pretend am earnest offered arrived company so on. Felicity informed yet had admitted strictly how you. ',
+  //         replies: []
+  //       }
+  //     ]
+  //   }
+  // ];
+
 
   constructor(
     private reviewService: ReviewService,
-    private tmdbService: TmdbServiceService,
+    private tmdbService: TmdbService,
     private route: ActivatedRoute,
     private authService: AuthenticationService,
     private dialog: MatDialog
