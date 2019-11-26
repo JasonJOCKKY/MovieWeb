@@ -4,14 +4,15 @@ import { PageNotFoundComponent } from './Pages/page-not-found/page-not-found.com
 import { HomePageComponent } from './Pages/home-page/home-page.component';
 import { MovieDetailsPageComponent } from './Pages/movie-details-page/movie-details-page.component';
 import { LoginComponent } from './Components/login/login.component';
-import { ProfilePageComponent } from './Pages/profile-page/profile-page.component'
+import { ProfilePageComponent } from './Pages/profile-page/profile-page.component';
+import { AuthGuard } from './Guards/auth.guard';
 
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'details/:movie_id', component: MovieDetailsPageComponent },
   { path: 'login', component: LoginComponent},
-  { path: 'profile/:user_id', component: ProfilePageComponent},
+  { path: 'profile/:user_id', component: ProfilePageComponent, canActivate: [AuthGuard]},
   {
     path: '',
     redirectTo: 'home',

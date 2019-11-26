@@ -60,3 +60,9 @@ export interface UserReview{
   movieID: string;
   reviewID: string;
 }
+
+export interface AuthUser {
+  first: string;
+  email: string;
+  uid: string;
+}
