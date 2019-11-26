@@ -22,10 +22,12 @@ export class ReviewService {
 
   addReply(data: Reply, movieID: string, reviewID: string, replyID: string) {
     let movieReviews: Reviews;
+    let flag = true;
 
     this.retrieveMovieReviews(movieID).subscribe(reviews => {
 
-      if (reviews && reviews.reviews) {
+      if (reviews && reviews.reviews && flag) {
+        flag = false;
         for (let i = 0; i < reviews.reviews.length; i++) {
           if (reviewID == reviews.reviews[i].id) {
             movieReviews = reviews;
@@ -48,7 +50,7 @@ export class ReviewService {
     });
   }
 
-  addReplyToReply(replies: Reply[], data: Reply, replyID: string) {
+  private addReplyToReply(replies: Reply[], data: Reply, replyID: string) {
   
     // if replies exits
     if (replies) {

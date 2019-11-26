@@ -36,6 +36,7 @@ export interface Reply {
   id: string,
   user: string,
   body: string,
+  date: string,
   replies: Reply[]
 }
 
