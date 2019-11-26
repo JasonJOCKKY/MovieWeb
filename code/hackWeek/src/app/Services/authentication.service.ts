@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
+import { UserService } from './user.service';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -8,28 +10,28 @@ import { auth } from 'firebase/app';
 })
 export class AuthenticationService {
 
-  authState: any = null;
-  constructor(private afAuth: AngularFireAuth) {
-    this.afAuth.authState.subscribe(data => this.authState = data);
+  authState: Observable<firebase.User> = null;
+  constructor(
+    private afAuth: AngularFireAuth,
+    public userService: UserService
+    ) {
+    this.authState = this.afAuth.authState;
   }
 
 
 
-  authenticated() : boolean {
-    return this.authState !== null;
-  }
+  // authenticated() : boolean {
+  //   return this.authState !== null;
+  // }
 
-  currentUserId() : string {
-    return this.authenticated() ? this.authState.uid : null;
-  }
-
-  currentUserName() : string {
-    return this.authenticated() ? this.authState.displayName : null;
-  }
-
+  // currentUserId() : string {
+  //   return this.authenticated() ? this.authState.uid : null;
+  // }
 
   loginWithGoogle() {
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
+      cred => this.userService.addUser(cred.user.uid, cred.user.displayName)
+    );
   }
 
   async login(email: string, password: string) {
@@ -48,6 +50,7 @@ export class AuthenticationService {
   async signUp(email: string, password: string, first: string) {
     try {
       const cred = await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+      this.userService.addUser(cred.user.uid, first);
       // const newUser: User = {
       //   first,
       //   email,

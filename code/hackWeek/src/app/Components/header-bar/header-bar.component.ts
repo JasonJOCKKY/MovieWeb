@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { MatDialog } from '@angular/material';
 import { LoginComponent } from '../../Components/login/login.component'
+import { UserService } from 'src/app/Services/user.service';
 
 
 @Component({
@@ -11,13 +12,22 @@ import { LoginComponent } from '../../Components/login/login.component'
 })
 export class HeaderBarComponent implements OnInit {
 
+  userName: string;
+  authenticated: boolean = false;
 
   constructor(
     private dialog: MatDialog,
-    private authService: AuthenticationService
-  ) { }
+    private authService: AuthenticationService,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
+    this.authService.authState.subscribe(authState =>  {
+      this.authenticated = authState ? true : false;
+      if(this.authenticated){
+        this.getCurrentUserName(authState.uid);
+      }
+    });
   }
 
   login() {
@@ -26,14 +36,11 @@ export class HeaderBarComponent implements OnInit {
     });
   }
 
-  getCurrentUserName(){
-    return this.authService.currentUserName();
+  getCurrentUserName(uid: string){
+    this.userService.retrieveUser(uid).subscribe(user => {
+      this.userName = user.username;
+    });
   }
-
-  isAuthenticated(){
-    return this.authService.authenticated();
-  }
-
 
   signOut(){
     this.authService.logout();
