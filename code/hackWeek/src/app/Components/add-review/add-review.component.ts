@@ -19,12 +19,18 @@ export class AddReviewComponent implements OnInit {
 
   movie: Movie_Detail;
   displayScore = 5;
+  authenticated : boolean = false;
+  userName = null;
+  uid = null;
 
   reviewForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z\\s]+")]),
     comment: new FormControl('', [Validators.required]),
     score: new FormControl(5)
   });
+
+  get titleControl(){ return this.reviewForm.get('title') }
+  get commentControl(){ return this.reviewForm.get('comment') }
 
 
   constructor(
@@ -38,6 +44,13 @@ export class AddReviewComponent implements OnInit {
 
   ngOnInit() {
     this.movie = this.data['movie'];
+    this.authService.currentAuth.subscribe(authState =>  {
+      this.authenticated = authState ? true : false;
+      if(this.authenticated){
+        this.uid = authState.uid;
+        this.getCurrentUserName(authState.uid);
+      }
+    });
   }
 
   // form and data
@@ -49,17 +62,18 @@ export class AddReviewComponent implements OnInit {
     const newReview: Reviews = {
       reviews: [{
         id: this.createId(),
-        user: this.getCurrentUserName(),
+        user: this.userName,
         score: this.reviewForm.get('score').value,
         date: myDate,
         title: this.reviewForm.get('title').value,
         comment: this.reviewForm.get('comment').value,
         replies: []
-      }]
+      }],
+      averageScore: this.reviewForm.get('score').value 
     }
     this.reviewService.addMovieReview(newReview, this.movie.id.toString());
+    this.userService.addUserReview(this.uid, this.movie.id.toString(),newReview.reviews[0].id);
     this.dialogRef.close(newReview);
-
   }
 
   // Score functions
@@ -79,8 +93,10 @@ export class AddReviewComponent implements OnInit {
     return this.reviewService.createId();
   }
 
-  getCurrentUserName(): string{
-    return "guest";
-  }
+  getCurrentUserName(uid: string){
+    this.userService.retrieveUser(uid).subscribe(user => {
+    this.userName = user.username;
+  });
+}
 
 }

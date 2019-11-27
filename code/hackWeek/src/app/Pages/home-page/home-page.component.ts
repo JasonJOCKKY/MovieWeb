@@ -12,14 +12,20 @@ import { Movie, Genre, Certification} from '../../../type';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent{
+
   searchForm = new FormGroup({
     title: new FormControl('', [Validators.required]),
   });
+  get titleControl(){ return this.searchForm.get('title'); }
+
   exploreForm = new FormGroup({
     year: new FormControl(2019, [Validators.min(1888), Validators.max(2019)]),
     genres: new FormControl([]),
     rating: new FormControl(''),
   });
+  get yearControl(){ return this.exploreForm.get('year'); }
+  get genreControl(){ return this.exploreForm.get('genre'); }
+
   searchResults: Movie[];
   movieGenres: Genre[];
   certifications: Certification[];

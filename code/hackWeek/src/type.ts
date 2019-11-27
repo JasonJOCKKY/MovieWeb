@@ -20,6 +20,7 @@ export interface Person {
 
 export interface Reviews{
   reviews: Review[];
+  averageScore: number;
 }
 
 export interface Review {
@@ -60,4 +61,9 @@ export interface User{
 export interface UserReview{
   movieID: string;
   reviewID: string;
+}
+
+export interface UserReview_D{
+  reviewMovie: Movie_Detail,
+  review: Review 
 }

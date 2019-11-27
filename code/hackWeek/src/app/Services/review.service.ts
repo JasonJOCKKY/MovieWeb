@@ -10,11 +10,11 @@ import { map } from 'rxjs/operators';
 export class ReviewService {
 
   private movieReviewCollection: AngularFirestoreCollection<Reviews>;
-  private movieReviewDocument: AngularFirestoreDocument<Reviews>;
+  // private movieReviewDocument: AngularFirestoreDocument<Reviews>;
   
-  private allMovieReviews: Observable<Reviews[]>;
+  // private allMovieReviews: Observable<Reviews[]>;
 
-  private movieReviews: Observable<Reviews>;
+  // private movieReviews: Observable<Reviews>;
 
   constructor(private afs: AngularFirestore) {
     this.movieReviewCollection = this.afs.collection<Reviews>('Group70Movies');
@@ -72,53 +72,62 @@ export class ReviewService {
 
   addMovieReview(data: Reviews, movieID: string){
     let newReview: Review;
-    let movieReviews : Reviews = {reviews: []};
+    let movieReviews : Reviews = {reviews: [],averageScore: 0};
     newReview = data.reviews[0];    
     let flag = true;
 
     console.log("call");
     this.retrieveMovieReviews(movieID).subscribe(reviews => {
-      if (reviews && flag) {
+      if(flag){
         flag = false;
+      
+      if (reviews) {
         console.log(reviews);
         movieReviews = reviews;
         movieReviews.reviews.push(newReview);
-        this.movieReviewCollection.doc(movieID).set(movieReviews);
+        // set average score
+        console.log(reviews.averageScore);
+        console.log(reviews.reviews.length);
+        console.log(data.averageScore);
+        movieReviews.averageScore = (reviews.averageScore*(reviews.reviews.length-1) + data.averageScore)/(reviews.reviews.length);
+       
       }
-      else if(flag) {
-        flag = false;
+      else{
         movieReviews = data;
-        this.movieReviewCollection.doc(movieID).set(movieReviews);
-      }      
+        
+      }    
+      this.movieReviewCollection.doc(movieID).set(movieReviews);  
+    }
       
       console.log(movieReviews);
     });
   }
 
-  retrieveAllMovieReviews(): Observable<Reviews[]>{
+  // retrieveAllMovieReviews(): Observable<Reviews[]>{
 
-    this.allMovieReviews = this.movieReviewCollection.snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Reviews;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      }))
-    );
+  //   this.allMovieReviews = this.movieReviewCollection.snapshotChanges().pipe(
+  //     map(actions => actions.map(a => {
+  //       const data = a.payload.doc.data() as Reviews;
+  //       const id = a.payload.doc.id;
+  //       return { id, ...data };
+  //     }))
+  //   );
 
-    return this.allMovieReviews;
-  }
+  //   return this.allMovieReviews;
+  // }
 
   retrieveMovieReviews(movieID: string): Observable<Reviews>{
 
-    this.movieReviewDocument = this.movieReviewCollection.doc<Reviews>(movieID);
+    let movieReviewDocument = this.movieReviewCollection.doc<Reviews>(movieID);
     
-    this.movieReviews = this.movieReviewDocument.valueChanges();
+    let movieReviews = movieReviewDocument.valueChanges();
 
-    return this.movieReviews;
+    return movieReviews;
   }
 
   createId(): string{
     return this.afs.createId();
   }
+
 
 }

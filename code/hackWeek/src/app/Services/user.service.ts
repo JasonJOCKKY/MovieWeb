@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { User, UserReview } from 'src/type';
+import { User, UserReview, UserReview_D } from 'src/type';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -23,8 +23,14 @@ export class UserService {
 
   addUser(newUserID: string, newUsername: string){
     let newUser: User = {userID: newUserID, username: newUsername, userReviews: []};
+    this.userCollection.doc(newUserID).set(newUser);
+    console.log("User added to firebase");
+  }
+
+  //must check that user does not exist
+  addUserWithGoogle(newUserID: string, newUsername: string){
+    let newUser: User = {userID: newUserID, username: newUsername, userReviews: []};
     let flag=false;
-    //check if user already exists
     this.retrieveUser(newUserID).subscribe(user => {
       if (flag || user) {
         console.log("User already exists!");
@@ -46,14 +52,19 @@ export class UserService {
 
   addUserReview(userID: string, newMovieID: string, newReviewID: string){
     let newUserReview: UserReview = {movieID: newMovieID, reviewID: newReviewID};
-    let flag = false;
+    let flag = true;
     this.retrieveUser(userID).subscribe(user => {
+      if(flag){
       if(user){
         user.userReviews.push(newUserReview);
+        this.userCollection.doc(userID).update(user);
       }
       else{
         console.log("invalid user id");
       }
+      flag = false;
+    }
     });
   }
+
 }

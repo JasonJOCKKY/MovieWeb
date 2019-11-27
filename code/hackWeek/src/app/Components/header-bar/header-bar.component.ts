@@ -22,9 +22,7 @@ export class HeaderBarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    
-    this.authService.authState.subscribe(authState =>  {
-      console.log("run3");
+    this.authService.currentAuth.subscribe(authState =>  {
       this.authenticated = authState ? true : false;
       if(this.authenticated){
         this.getCurrentUserName(authState.uid);
@@ -39,9 +37,15 @@ export class HeaderBarComponent implements OnInit {
   }
 
   getCurrentUserName(uid: string){
-    this.userService.retrieveUser(uid).subscribe(user => {
-      this.userName = user.username;
-    });
+      try{
+        console.log("trying");
+        this.userService.retrieveUser(uid).subscribe(user => {
+          this.userName = user.username;
+        });
+      }catch(err){
+        console.log("err");
+        throw new Error('Could not username');
+      }
   }
 
   signOut(){
