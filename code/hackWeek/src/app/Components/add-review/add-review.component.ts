@@ -29,6 +29,9 @@ export class AddReviewComponent implements OnInit {
     score: new FormControl(5)
   });
 
+  get titleControl(){ return this.reviewForm.get('title') }
+  get commentControl(){ return this.reviewForm.get('comment') }
+
 
   constructor(
     private authService: AuthenticationService,
