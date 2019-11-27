@@ -4,15 +4,19 @@
 [link here]
 
 ## Introduction
-Our group is named Group 70, which is in reference to the UNIX epoch. The members of this group are Weiyu Feng, Jingsong Tan, and Joseph Vitale. For our project, we created a movie review site using Angular, Firebase, Material, Bootstrap, and The Movie Database (TMDb) API. As Jingson was the most comfortable with backend, he worked on the Firbase, API, and authentication services as well as the login page. Weiyu and Joseph both worked on the front-end. Weiyu worked on the movie-details and add-review pages. Joseph worked on the home and movie-preview pages.
+Our group is named Group 70, which is in reference to the UNIX epoch. The members of this group are Weiyu Feng, Jingsong Tan, and Joseph Vitale. For our project, we created a movie review website using Angular, Firebase, Material, Bootstrap, and The Movie Database (TMDb) API. 
+To use the app, navigate to the link given above. You can choose to search for a film, which can be done in one of three ways: search by title, explore based off criteria (genre, rating, year), and find movies by popularity. You may also decide to login or sign up. After a search, you can select one of the results to view a quick preview of the film, then decide to view more information, or continue searching. If you decide to view more information, you will be able to view more information about the film, as well as leave a review or reply to an existing review. If you have not logged-in, this will all be done as a guest. If you login, reviews and replies will contain your username (or display name if you login through Google). By selecting your username in the header, you may also choose to view your profile or logout. Viewing your profile will allow you to view all reviews you have left. 
 
 ## Problem
 Nowadays there are so many movies available for us to watch at our fingertips, that it often becomes difficult to decide on which film to choose. There needs to be an easier way for people to search and filter through movies and decide if it is worth their time. On top of this, the title and synopsis of the film is often not enough to base this decision off of. Often a more  useful piece of information for films is reviews from other people. We want to create a way that allows users to efficiently search for movies and view information and reviews of these films in order to determine if it will fit their preferences. On top of this, we want to allow users to leave reviews.  
 
 ## Solution
 To solve this problem, we have devided to create a website that facilitates searching for movies, viewing information about the film, and leaving reviews. 
+
 The search page should allow the user to search for films in three different ways: search by title, explore by genre, certification (PG, R, etc), or year, or find movies based off popularity. Users should be able to view a quick preview of a film from the search, and can choose to view more information about the fim or continue searching. 
+
 If they choose to view more information for a film, they will be able to see details about that film as well as any reviews left by users. Users should also be able to leave a review on this page, as well as reply to other reviews. The reply feature will provide even more information for users as other users will be able to voice agreement or disagreement with any given review.  
+
 There will also be a login feature. A review left by a logged-in user will contain their username. A review left by a user who is not logged-in will simply say 'left by guest'. A logged-in user should be able to view a list of all reviews they have given. 
 
 ## Implementation
