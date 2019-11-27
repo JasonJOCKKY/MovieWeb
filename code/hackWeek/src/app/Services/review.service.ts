@@ -10,11 +10,11 @@ import { map } from 'rxjs/operators';
 export class ReviewService {
 
   private movieReviewCollection: AngularFirestoreCollection<Reviews>;
-  private movieReviewDocument: AngularFirestoreDocument<Reviews>;
+  // private movieReviewDocument: AngularFirestoreDocument<Reviews>;
   
-  private allMovieReviews: Observable<Reviews[]>;
+  // private allMovieReviews: Observable<Reviews[]>;
 
-  private movieReviews: Observable<Reviews>;
+  // private movieReviews: Observable<Reviews>;
 
   constructor(private afs: AngularFirestore) {
     this.movieReviewCollection = this.afs.collection<Reviews>('Group70Movies');
@@ -95,26 +95,26 @@ export class ReviewService {
     });
   }
 
-  retrieveAllMovieReviews(): Observable<Reviews[]>{
+  // retrieveAllMovieReviews(): Observable<Reviews[]>{
 
-    this.allMovieReviews = this.movieReviewCollection.snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Reviews;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      }))
-    );
+  //   this.allMovieReviews = this.movieReviewCollection.snapshotChanges().pipe(
+  //     map(actions => actions.map(a => {
+  //       const data = a.payload.doc.data() as Reviews;
+  //       const id = a.payload.doc.id;
+  //       return { id, ...data };
+  //     }))
+  //   );
 
-    return this.allMovieReviews;
-  }
+  //   return this.allMovieReviews;
+  // }
 
   retrieveMovieReviews(movieID: string): Observable<Reviews>{
 
-    this.movieReviewDocument = this.movieReviewCollection.doc<Reviews>(movieID);
+    let movieReviewDocument = this.movieReviewCollection.doc<Reviews>(movieID);
     
-    this.movieReviews = this.movieReviewDocument.valueChanges();
+    let movieReviews = movieReviewDocument.valueChanges();
 
-    return this.movieReviews;
+    return movieReviews;
   }
 
   createId(): string{

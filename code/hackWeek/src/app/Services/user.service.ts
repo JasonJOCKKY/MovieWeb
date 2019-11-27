@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { User, UserReview } from 'src/type';
+import { User, UserReview, UserReview_D } from 'src/type';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -46,14 +46,19 @@ export class UserService {
 
   addUserReview(userID: string, newMovieID: string, newReviewID: string){
     let newUserReview: UserReview = {movieID: newMovieID, reviewID: newReviewID};
-    let flag = false;
+    let flag = true;
     this.retrieveUser(userID).subscribe(user => {
+      if(flag){
       if(user){
         user.userReviews.push(newUserReview);
+        this.userCollection.doc(userID).update(user);
       }
       else{
         console.log("invalid user id");
       }
+      flag = false;
+    }
     });
   }
+
 }
