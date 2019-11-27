@@ -27,6 +27,7 @@ export class MovieDetailsPageComponent implements OnInit {
   reviewsExpandControl: Boolean[] = [];
   replyTreeControls: NestedTreeControl<Reply>[] = [];
   reviews: Review[];
+  averageScore: number;
 
   crewFirstRow: Person[];
   castFirstRow: Person[];
@@ -64,6 +65,8 @@ export class MovieDetailsPageComponent implements OnInit {
     this.reviewService.retrieveMovieReviews(this.movie.id.toString()).subscribe(reviews => {
       if(reviews) {
         this.reviews = reviews.reviews;
+        this.averageScore = +reviews.averageScore.toFixed(1);
+        console.log(this.averageScore);
         this.replyTreeControls = [];
         this.reviewsExpandControl = [];
         this.reviews.forEach(testReview => {
@@ -197,5 +200,6 @@ export class MovieDetailsPageComponent implements OnInit {
   formateDate(date: string) {
     return new Date(date).toLocaleDateString();
   }
+
 
 }

@@ -75,4 +75,8 @@ export class ProfilePageComponent implements OnInit {
     }
   }
 
+  formateDate(date: string) {
+    return new Date(date).toLocaleDateString();
+  }
+
 }
