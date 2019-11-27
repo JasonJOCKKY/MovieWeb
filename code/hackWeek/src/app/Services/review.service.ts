@@ -72,24 +72,32 @@ export class ReviewService {
 
   addMovieReview(data: Reviews, movieID: string){
     let newReview: Review;
-    let movieReviews : Reviews = {reviews: []};
+    let movieReviews : Reviews = {reviews: [],averageScore: 0};
     newReview = data.reviews[0];    
     let flag = true;
 
     console.log("call");
     this.retrieveMovieReviews(movieID).subscribe(reviews => {
-      if (reviews && flag) {
+      if(flag){
         flag = false;
+      
+      if (reviews) {
         console.log(reviews);
         movieReviews = reviews;
         movieReviews.reviews.push(newReview);
-        this.movieReviewCollection.doc(movieID).set(movieReviews);
+        // set average score
+        console.log(reviews.averageScore);
+        console.log(reviews.reviews.length);
+        console.log(data.averageScore);
+        movieReviews.averageScore = (reviews.averageScore*(reviews.reviews.length-1) + data.averageScore)/(reviews.reviews.length);
+       
       }
-      else if(flag) {
-        flag = false;
+      else{
         movieReviews = data;
-        this.movieReviewCollection.doc(movieID).set(movieReviews);
-      }      
+        
+      }    
+      this.movieReviewCollection.doc(movieID).set(movieReviews);  
+    }
       
       console.log(movieReviews);
     });
@@ -120,5 +128,6 @@ export class ReviewService {
   createId(): string{
     return this.afs.createId();
   }
+
 
 }

@@ -65,12 +65,12 @@ export class AddReviewComponent implements OnInit {
         title: this.reviewForm.get('title').value,
         comment: this.reviewForm.get('comment').value,
         replies: []
-      }]
+      }],
+      averageScore: this.reviewForm.get('score').value 
     }
     this.reviewService.addMovieReview(newReview, this.movie.id.toString());
     this.userService.addUserReview(this.uid, this.movie.id.toString(),newReview.reviews[0].id);
     this.dialogRef.close(newReview);
-
   }
 
   // Score functions

@@ -20,6 +20,7 @@ export interface Person {
 
 export interface Reviews{
   reviews: Review[];
+  averageScore: number;
 }
 
 export interface Review {
