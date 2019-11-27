@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Person, Reply, Movie_Detail, Reviews, Review } from 'src/type';
+import { Person, Reply, Movie_Detail, Review } from 'src/type';
 import { ReviewService } from 'src/app/Services/review.service';
 
 import { AddReviewComponent } from 'src/app/Components/add-review/add-review.component';
@@ -27,12 +27,15 @@ export class MovieDetailsPageComponent implements OnInit {
   reviewsExpandControl: Boolean[] = [];
   replyTreeControls: NestedTreeControl<Reply>[] = [];
   reviews: Review[];
+  averageScore: number;
 
   crewFirstRow: Person[];
   castFirstRow: Person[];
   crewRest: Person[];
   castRest: Person[];
   peopleCol = 5;
+
+  authenticated : boolean = false;
 
 
   constructor(
@@ -53,12 +56,17 @@ export class MovieDetailsPageComponent implements OnInit {
       this.getPeople();
       this.retrieveReviews();
     });
+    this.authService.currentAuth.subscribe(authState =>  {
+      this.authenticated = authState ? true : false;
+    });
   }
 
   retrieveReviews(){
     this.reviewService.retrieveMovieReviews(this.movie.id.toString()).subscribe(reviews => {
       if(reviews) {
         this.reviews = reviews.reviews;
+        this.averageScore = +reviews.averageScore.toFixed(1);
+        console.log(this.averageScore);
         this.replyTreeControls = [];
         this.reviewsExpandControl = [];
         this.reviews.forEach(testReview => {
@@ -140,7 +148,7 @@ export class MovieDetailsPageComponent implements OnInit {
 
   // Add Review
   onAddReview() {
-    if(this.authService.authState){
+    if(this.authenticated){
       const addReviewDialog = this.dialog.open(AddReviewComponent, {
         width: '900px',
         data: {
@@ -160,7 +168,7 @@ export class MovieDetailsPageComponent implements OnInit {
   }
 
   onAddReply(reviewId: string, replyId: string) {
-    if(this.authService.authState){
+    if(this.authenticated){
 
     } else {
       this.dialog.open(LoginComponent, {
@@ -192,5 +200,6 @@ export class MovieDetailsPageComponent implements OnInit {
   formateDate(date: string) {
     return new Date(date).toLocaleDateString();
   }
+
 
 }

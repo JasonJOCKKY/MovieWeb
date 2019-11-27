@@ -18,11 +18,21 @@ export class AddReplyComponent implements OnInit {
 
   hidden: boolean = true;
 
+  authenticated: boolean = false;
+  userName = null;
+
   constructor(
     private authService: AuthenticationService,
     private userService: UserService,
     private reviewService: ReviewService,
-  ) { }
+  ) {
+    this.authService.currentAuth.subscribe(authState =>  {
+      this.authenticated = authState ? true : false;
+      if(this.authenticated){
+        this.getCurrentUserName(authState.uid);
+      }
+    });
+   }
 
   ngOnInit() {
   }
@@ -31,6 +41,8 @@ export class AddReplyComponent implements OnInit {
     reply: new FormControl('', [Validators.required])
   });
 
+  get replyControl(){ return this.replyForm.get('reply'); }
+
   onSubmit() {
     console.log('submit called');
     let myDate = new Date().toString();
@@ -38,7 +50,7 @@ export class AddReplyComponent implements OnInit {
     // Return the new review when closing the dialog
     const newReply: Reply = {
       id: this.createId(),
-      user: this.getCurrentUserName(),
+      user: this.userName,
       body: this.replyForm.get('reply').value,
       date: myDate,
       replies: []
@@ -50,9 +62,11 @@ export class AddReplyComponent implements OnInit {
   createId(): string {
     return this.reviewService.createId();
   }
-  getCurrentUserName(): string {
-    return "guest"
-  }
+  getCurrentUserName(uid: string){
+    this.userService.retrieveUser(uid).subscribe(user => {
+    this.userName = user.username;
+  });
+}
 
   showAddReply(){
     this.replyForm.reset();

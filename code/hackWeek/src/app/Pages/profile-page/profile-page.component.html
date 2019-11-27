@@ -1,5 +1,38 @@
 <h1> Profile of {{userName}} </h1>
 <h2>Past reviews:</h2>
-<div *ngFor="let review of reviews">
-    <p>{{review.comment}}</p>
+
+
+<!-- Movies -->
+<div class="movie-container row mt-3">
+    <!-- Card Container -->
+    <div class="p-2 col-12 col-md-6" *ngFor="let userReview of userReviews">
+        <!-- Card -->
+        <div class="w-100 p-0 shadow card">
+            <!-- Card Header-->
+            <h5 class="card-title text-truncate m-0 card-header">{{ userReview.reviewMovie.title }}</h5>
+            <!-- Card Body-->
+            <div class="w-100 pt-3 pr-3 pb-0 pl-3">
+                <div class="row w-100 p-0 row">
+                    <!-- Poster -->
+                    <div class="col-5">
+                        <img class="w-100 h-auto rounded"
+                            src="{{ userReview.reviewMovie.poster ? userReview.reviewMovie.poster : '../../../assets/images/placeholder.png' }}">
+                    </div>
+                    <!-- Movie Info -->
+                    <div class="card-body p-0 col-7">
+                        <h5 class="card-title text-truncate">{{ userReview.review.title }}</h5>
+                        <h6 class="card-subtitle text-muted">{{formateDate(userReview.review.date)}}</h6>
+                        <p class="description">{{ userReview.review.comment }}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card Footer-->
+            <div class="text-right">
+                <button mat-button color="primary" [routerLink]="['/details', userReview.reviewMovie.id]">
+                    Detail
+                    <mat-icon>arrow_forward</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
