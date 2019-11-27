@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Person, Reply, Movie_Detail, Reviews, Review } from 'src/type';
+import { Person, Reply, Movie_Detail, Review } from 'src/type';
 import { ReviewService } from 'src/app/Services/review.service';
 
 import { AddReviewComponent } from 'src/app/Components/add-review/add-review.component';
