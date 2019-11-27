@@ -34,6 +34,8 @@ export class MovieDetailsPageComponent implements OnInit {
   castRest: Person[];
   peopleCol = 5;
 
+  authenticated : boolean = false;
+
 
   constructor(
     private reviewService: ReviewService,
@@ -52,6 +54,9 @@ export class MovieDetailsPageComponent implements OnInit {
       this.deleteDuplicate();
       this.getPeople();
       this.retrieveReviews();
+    });
+    this.authService.currentAuth.subscribe(authState =>  {
+      this.authenticated = authState ? true : false;
     });
   }
 
@@ -140,7 +145,7 @@ export class MovieDetailsPageComponent implements OnInit {
 
   // Add Review
   onAddReview() {
-    if(this.authService.authState){
+    if(this.authenticated){
       const addReviewDialog = this.dialog.open(AddReviewComponent, {
         width: '900px',
         data: {
@@ -160,7 +165,7 @@ export class MovieDetailsPageComponent implements OnInit {
   }
 
   onAddReply(reviewId: string, replyId: string) {
-    if(this.authService.authState){
+    if(this.authenticated){
 
     } else {
       this.dialog.open(LoginComponent, {

@@ -1,5 +1,6 @@
 <h1> Profile of {{userName}} </h1>
 <h2>Past reviews:</h2>
-<div *ngFor="let review of reviews">
-    <p>{{review.comment}}</p>
+<div *ngFor="let userReview of userReviews">
+    <p>Movie Title: {{userReview.reviewMovie.title}}</p>
+    <p>My comment: {{userReview.review.comment}}</p>
 </div>

@@ -61,3 +61,8 @@ export interface UserReview{
   movieID: string;
   reviewID: string;
 }
+
+export interface UserReview_D{
+  reviewMovie: Movie_Detail,
+  review: Review 
+}
