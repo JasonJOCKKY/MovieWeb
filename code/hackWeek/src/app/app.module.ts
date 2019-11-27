@@ -37,7 +37,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule, MatProgressBarModule, MatTooltipModule, MatTreeModule, MatButtonToggleModule } from '@angular/material';
+import { MatInputModule, MatProgressBarModule, MatTooltipModule, MatTreeModule, MatButtonToggleModule, MatProgressSpinnerModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -101,7 +101,8 @@ import { ProfilePageComponent } from './Pages/profile-page/profile-page.componen
     MatProgressBarModule,
     MatTooltipModule,
     MatTreeModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
