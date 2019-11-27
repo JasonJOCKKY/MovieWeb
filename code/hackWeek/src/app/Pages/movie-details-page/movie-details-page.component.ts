@@ -59,6 +59,7 @@ export class MovieDetailsPageComponent implements OnInit {
     this.reviewService.retrieveMovieReviews(this.movie.id.toString()).subscribe(reviews => {
       if(reviews) {
         this.reviews = reviews.reviews;
+        console.log(this.reviews);
         this.replyTreeControls = [];
         this.reviewsExpandControl = [];
         this.reviews.forEach(testReview => {
