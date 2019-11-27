@@ -41,6 +41,8 @@ export class AddReplyComponent implements OnInit {
     reply: new FormControl('', [Validators.required])
   });
 
+  get replyControl(){ return this.replyForm.get('reply'); }
+
   onSubmit() {
     console.log('submit called');
     let myDate = new Date().toString();
