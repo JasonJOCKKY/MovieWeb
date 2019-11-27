@@ -24,29 +24,28 @@
         <mat-grid-tile [colspan]=2>
           <div class="w-100 h-100">
             <h1 class="mt-3 mb-3">{{ movie.title }}</h1>
-            <h4>Director: {{ movie.crews[0].name }}</h4>
-            <h4>Release Date: {{ movie.release_date ? movie.release_date : 'Not Released Yet' }}</h4>
-            <h1>Score: {{averageScore}}</h1>
-            <!-- Review Chart -->
-            <!-- <h4>
-              Score:
-              <mat-icon *ngFor="let i of [1, 2, 3, 4, 5]">star</mat-icon>
-              <button mat-raised-button class="float-right w-50" color="primary" (click)="onAddReview()">Add Review</button>
+            <h4>Director: <a class="text-muted">{{ director }}</a></h4>
+            <h4>Release Date: <a class="text-muted">{{ movie.release_date ? movie.release_date : 'Not Released Yet' }}</a></h4>
+            <h4 *ngIf="averageScore">
+              Score: ({{ averageScore }})
+              <mat-icon *ngFor="let i of [1,2,3,4,5]" color="accent">
+                {{ starIcon(i, averageScore) }}
+              </mat-icon>
             </h4>
-            <div class="barChart">
-              <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets"
-              [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
-              [legend]="false" (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)"></canvas>
-            </div> -->
+            <!-- Overview -->
+            <h3 mt-5>Overview</h3>
+            <p>{{ movie.description }}</p>
           </div>
         </mat-grid-tile>
-
       </mat-grid-list>
 
-      <!-- Overview -->
-      <h3>Overview</h3>
-      <p>{{ movie.description }}</p>
+      <!-- Add Review -->
+      <mat-card-footer>
+        <button mat-flat-button color="accent" class="w-100 ml-auto mr-auto" (click)="onAddReview()">
+          <mat-icon>add</mat-icon>
+          Add Review
+        </button>
+      </mat-card-footer>
     </mat-card>
 
     <!-- Crews and Casts -->
@@ -125,75 +124,76 @@
     </div>
 
     <!-- Reviews -->
-    <h3 class="mt-5">Reiviews</h3>
-    <div class="w-100">
-      <div *ngFor="let review of reviews; index as k" class="border-top border-bottom pt-3 pb-3">
-          <h6><strong>{{ review.user }}</strong> <p class="text-muted float-right">Posted: {{ formateDate(review.date) }}</p></h6>
-          <!-- Stars -->
-          <div>
-            <mat-icon *ngFor="let i of [1, 2, 3, 4, 5]">
-              {{ i <= review.score ? 'star' : 'star_outline' }}
-            </mat-icon>
-          </div>
-          <h5><strong>{{ review.title }}</strong></h5>
-          <p class="mb-0">
-            {{ review.comment }}
-          </p>
-          <app-add-reply [movieID]=this.movie.id [reviewID]="review.id"></app-add-reply>
+    <div *ngIf="reviews.length > 0">
+      <h3 class="mt-5">Reviews</h3>
+      <div class="w-100">
+        <div *ngFor="let review of reviews; index as k" class="border-top border-bottom pt-3 pb-3">
+            <h6><strong>{{ review.user }}</strong> <p class="text-muted float-right">Posted: {{ formateDate(review.date) }}</p></h6>
+            <!-- Stars -->
+            <div>
+              <mat-icon *ngFor="let i of [1, 2, 3, 4, 5]">
+                {{ i <= review.score ? 'star' : 'star_outline' }}
+              </mat-icon>
+            </div>
+            <h5><strong>{{ review.title }}</strong></h5>
+            <p class="mb-0">
+              {{ review.comment }}
+            </p>
+            <app-add-reply [movieID]=this.movie.id [reviewID]="review.id"></app-add-reply>
 
-          <!-- Reply Section -->
-          <div *ngIf="review.replies.length > 0">
-            <button mat-button (click)="reviewsExpandControl[k] = !reviewsExpandControl[k]">
-              <mat-icon>{{ reviewsExpandControl[k] ? 'expand_more' : 'chevron_right' }}</mat-icon>
-              View Reply
-            </button>
+            <!-- Reply Section -->
+            <div *ngIf="review.replies.length > 0">
+              <button mat-button (click)="reviewsExpandControl[k] = !reviewsExpandControl[k]">
+                <mat-icon>{{ reviewsExpandControl[k] ? 'expand_more' : 'chevron_right' }}</mat-icon>
+                View Reply
+              </button>
 
-            <ul [class.d-none]="!reviewsExpandControl[k]">
-              <li>
-                <mat-tree [dataSource]="getReplyDataSource(review.replies)" [treeControl]="replyTreeControls[k]">
-                    <!-- Leaf Node -->
-                    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
-                      <li>
-                        <p class="mb-0"><strong>{{ node.user }}</strong></p>
-                        <p>
-                          {{ node.body }}
-                        </p>
-                        <app-add-reply [movieID]="this.movie.id" [reviewID]="review.id" [replyID]="node.id"></app-add-reply>
-                      </li>
-                    </mat-tree-node>
-                    <!-- Nested Node -->
-                    <mat-nested-tree-node *matTreeNodeDef="let node; when: whenNested">
-                      <li>
-                        <!-- Node Content -->
-                        <div>
+              <ul [class.d-none]="!reviewsExpandControl[k]">
+                <li>
+                  <mat-tree [dataSource]="getReplyDataSource(review.replies)" [treeControl]="replyTreeControls[k]">
+                      <!-- Leaf Node -->
+                      <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+                        <li>
                           <p class="mb-0"><strong>{{ node.user }}</strong></p>
                           <p>
                             {{ node.body }}
                           </p>
-                          <app-add-reply [movieID]=this.movie.id [reviewID]="review.id" [replyID]="node.id"></app-add-reply>
-                        </div>
-                        <!-- Expansion Button -->
-                        <button mat-button matTreeNodeToggle>
-                          <mat-icon class="mat-icon-rtl-mirror">
-                              {{ replyTreeControls[k].isExpanded(node) ? 'expand_more' : 'chevron_right' }}
-                          </mat-icon>
-                          View Reply
-                        </button>
-                        <!-- Expanded Children -->
-                        <ul [class.d-none]="!replyTreeControls[k].isExpanded(node)">
-                          <ng-container matTreeNodeOutlet></ng-container>
-                        </ul>
-                      </li>
-                    </mat-nested-tree-node>
-                  </mat-tree>
-              </li>
-            </ul>
-          </div>
+                          <app-add-reply [movieID]="this.movie.id" [reviewID]="review.id" [replyID]="node.id"></app-add-reply>
+                        </li>
+                      </mat-tree-node>
+                      <!-- Nested Node -->
+                      <mat-nested-tree-node *matTreeNodeDef="let node; when: whenNested">
+                        <li>
+                          <!-- Node Content -->
+                          <div>
+                            <p class="mb-0"><strong>{{ node.user }}</strong></p>
+                            <p>
+                              {{ node.body }}
+                            </p>
+                            <app-add-reply [movieID]=this.movie.id [reviewID]="review.id" [replyID]="node.id"></app-add-reply>
+                          </div>
+                          <!-- Expansion Button -->
+                          <button mat-button matTreeNodeToggle>
+                            <mat-icon class="mat-icon-rtl-mirror">
+                                {{ replyTreeControls[k].isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+                            </mat-icon>
+                            View Reply
+                          </button>
+                          <!-- Expanded Children -->
+                          <ul [class.d-none]="!replyTreeControls[k].isExpanded(node)">
+                            <ng-container matTreeNodeOutlet></ng-container>
+                          </ul>
+                        </li>
+                      </mat-nested-tree-node>
+                    </mat-tree>
+                </li>
+              </ul>
+            </div>
 
+        </div>
       </div>
     </div>
+    <!-- End of Reviews -->
 
   </div>
 </div>
-
-<button (click) = "onAddReview()">Add Review</button>

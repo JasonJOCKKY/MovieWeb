@@ -26,9 +26,10 @@ export class MovieDetailsPageComponent implements OnInit {
 
   reviewsExpandControl: Boolean[] = [];
   replyTreeControls: NestedTreeControl<Reply>[] = [];
-  reviews: Review[];
+  reviews: Review[] = [];
   averageScore: number;
 
+  director: string;
   crewFirstRow: Person[];
   castFirstRow: Person[];
   crewRest: Person[];
@@ -100,6 +101,10 @@ export class MovieDetailsPageComponent implements OnInit {
     flag = false;
 
     for(let i = 0; i < this.movie.crews.length; i++){
+      if (this.movie.crews[i].role === 'Director') {
+        this.director = this.movie.crews[i].name;
+      }
+
       for(let j = i+1; j < this.movie.crews.length; j++){
         if(this.movie.crews[i].name == this.movie.crews[j].name){
           flag = true;
@@ -178,10 +183,6 @@ export class MovieDetailsPageComponent implements OnInit {
     }
   }
 
-  testReply() {
-
-  }
-
   // Nested tree functions
   getReplyTreeControl() {
     return new NestedTreeControl<Reply>(node => node.replies);
@@ -202,5 +203,14 @@ export class MovieDetailsPageComponent implements OnInit {
     return new Date(date).toLocaleDateString();
   }
 
+  starIcon(i: number, score: number) {
+    if (i <= Math.floor(score)) {
+      return 'star';
+    } else if (i == Math.ceil(score)) {
+      return 'star_half';
+    } else {
+      return 'star_outline';
+    }
+  }
 
 }
