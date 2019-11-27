@@ -137,8 +137,8 @@
           <h5><strong>{{ review.title }}</strong></h5>
           <p class="mb-0">
             {{ review.comment }}
-            <button mat-button color="primary" (click)="testReply()">Reply</button>
           </p>
+          <app-add-reply [movieID]=this.movie.id [reviewID]="review.id"></app-add-reply>
 
           <!-- Reply Section -->
           <div *ngIf="review.replies.length > 0">
@@ -156,8 +156,8 @@
                         <p class="mb-0"><strong>{{ node.user }}</strong></p>
                         <p>
                           {{ node.body }}
-                          <button mat-button color="primary" (click)="testReply()">Reply</button>
                         </p>
+                        <app-add-reply [movieID]="this.movie.id" [reviewID]="review.id" [replyID]="node.id"></app-add-reply>
                       </li>
                     </mat-tree-node>
                     <!-- Nested Node -->
@@ -168,8 +168,8 @@
                           <p class="mb-0"><strong>{{ node.user }}</strong></p>
                           <p>
                             {{ node.body }}
-                            <button mat-button color="primary" (click)="testReply()">Reply</button>
                           </p>
+                          <app-add-reply [movieID]=this.movie.id [reviewID]="review.id" [replyID]="node.id"></app-add-reply>
                         </div>
                         <!-- Expansion Button -->
                         <button mat-button matTreeNodeToggle>
@@ -194,3 +194,5 @@
 
   </div>
 </div>
+
+<button (click) = "onAddReview()">Add Review</button>

@@ -1,0 +1,14 @@
+.user{
+    margin-left: auto;
+}
+@media (min-width: 768px) {  
+    .equalWidth{
+        width: 130px;
+    }
+
+    .user{
+        margin: 0;
+    }
+   
+}
+

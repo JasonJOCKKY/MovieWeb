@@ -36,6 +36,7 @@ export interface Reply {
   id: string,
   user: string,
   body: string,
+  date: string,
   replies: Reply[]
 }
 
@@ -48,4 +49,15 @@ export interface Certification {
   certification: string,
   meaning : string,
   order: string
+}
+
+export interface User{
+  userID;
+  username: string;
+  userReviews: UserReview[];
+}
+
+export interface UserReview{
+  movieID: string;
+  reviewID: string;
 }

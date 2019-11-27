@@ -42,6 +42,7 @@ import {MatSelectModule} from '@angular/material/select'
 import { PreviewComponent } from './Components/preview/preview.component'
 import { AddReviewComponent } from './Components/add-review/add-review.component';
 import { LoginComponent } from './Components/login/login.component';
+import { ProfilePageComponent } from './Pages/profile-page/profile-page.component';
 import { AddReplyComponent } from './Components/add-reply/add-reply.component';
 
 
@@ -56,6 +57,7 @@ import { AddReplyComponent } from './Components/add-reply/add-reply.component';
     PreviewComponent,
     AddReviewComponent,
     LoginComponent,
+    ProfilePageComponent,
     AddReplyComponent
   ],
   entryComponents: [
