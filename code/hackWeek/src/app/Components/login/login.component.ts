@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, FormGroupDirective, NgForm } from '@angular/forms';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatDialogRef } from '@angular/material';
+import {ErrorStateMatcher} from '@angular/material/core';
+
+
 
 @Component({
   selector: 'app-login',
@@ -13,13 +16,26 @@ export class LoginComponent implements OnInit {
   loginFormGroup: FormGroup;
   registerFormGroup: FormGroup;
 
-  constructor(private authService: AuthenticationService, private snackBar: MatSnackBar, private router: Router, private formBuilder: FormBuilder, private dialogRef:MatDialogRef<LoginComponent>) {
+  get loginEmailControl(){ return this.loginFormGroup.get('email'); }
+  get loginPasswordControl(){ return this.loginFormGroup.get('password'); }
+
+  get registerNameControl() { return this.registerFormGroup.get('name'); }
+  get registerEmailControl() { return this.registerFormGroup.get('email'); }
+  get registerPasswordControl() { return this.registerFormGroup.get('password'); }
+  get registerConfirmPasswordControl() { return this.registerFormGroup.get('confirmPassword'); }
+
+
+  constructor(
+    private authService: AuthenticationService, 
+    private snackBar: MatSnackBar, private router: 
+    Router, private formBuilder: FormBuilder, 
+    private dialogRef:MatDialogRef<LoginComponent>
+    ) {
     this.loginFormGroup = new FormGroup(
       {
-        email: new FormControl(''),
-        password: new FormControl('')
-      },
-      Validators.required
+        email: new FormControl('', Validators.required),
+        password: new FormControl('', Validators.required)
+      }
     );
 
     this.registerFormGroup = this.formBuilder.group(
@@ -32,6 +48,7 @@ export class LoginComponent implements OnInit {
         validator: this.MustMatch('password', 'confirmPassword')
     });
   }
+
 
 
   MustMatch(controlName: string, matchingControlName: string) {

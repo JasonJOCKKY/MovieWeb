@@ -38,7 +38,7 @@ export class AuthenticationService {
 
   loginWithGoogle() {
     this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
-      cred => this.userService.addUser(cred.user.uid, cred.user.displayName)
+      cred => this.userService.addUserWithGoogle(cred.user.uid, cred.user.displayName)
     );
   }
 
@@ -58,6 +58,7 @@ export class AuthenticationService {
   async signUp(email: string, password: string, first: string) {
     try {
       const cred = await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+      //this.userService.addUser(cred.user.uid, first);
       this.userService.addUser(cred.user.uid, first);
     } catch (err) {
       throw new Error('Could not create account');
