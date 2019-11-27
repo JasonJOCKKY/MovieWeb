@@ -25,7 +25,8 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userID = this.route.snapshot.paramMap.get('user_id');
+    //this.userID = this.route.snapshot.paramMap.get('user_id');
+    this.userID = this.authService.currentUserId();
     this.user = {userID:this.userID, username:"", userReviews:[] };
     this.userService.retrieveUser(this.userID).subscribe(user=>{
       if(user){

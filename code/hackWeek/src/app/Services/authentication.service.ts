@@ -13,7 +13,7 @@ import { switchMap, map } from 'rxjs/operators';
 })
 export class AuthenticationService {
 
-  authState: any = null;
+  authState: Observable<firebase.User> = null;
   currentUser: Observable<User>;
   currentAuth: Observable<firebase.User | null>;  
   private userCollection: AngularFirestoreCollection<User>;
@@ -24,7 +24,7 @@ export class AuthenticationService {
     private afs: AngularFirestore,
     public userService: UserService
     ) {
-    this.afAuth.authState.subscribe(data => this.authState = data);
+    this.authState = this.afAuth.authState;
     this.userCollection = this.afs.collection<User>('Group70Users');
     this.currentAuth = this.afAuth.authState;
     this.currentUser = this.currentAuth.pipe(
@@ -40,6 +40,7 @@ export class AuthenticationService {
     );
   }
 
+  /*
   authenticated() : boolean {
     return this.authState !== null;
   }
@@ -51,6 +52,7 @@ export class AuthenticationService {
   currentUserName() : string {
     return this.authenticated() ? this.authState.displayName : null;
   }
+  */
 
   loginWithGoogle() {
     this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(

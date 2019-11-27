@@ -13,7 +13,7 @@
         {{getCurrentUserName()}}
       </button>
       <mat-menu #userMenu="matMenu" xPosition="before">
-        <button mat-menu-item [routerLink]="['/profile', getCurrentUserID()]">View Profile</button>
+        <button mat-menu-item [routerLink]="['/profile']">View Profile</button>
         <button mat-menu-item (click)="signOut()">Sign Out</button>
       </mat-menu>
     </span>

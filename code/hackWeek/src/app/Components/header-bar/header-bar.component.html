@@ -8,10 +8,10 @@
 
     <div class="text-center">Movie Application</div>
 
-    <div class="equalWidth user" *ngIf="isAuthenticated(); else showLogin">
+    <div class="equalWidth user" *ngIf="authenticated; else showLogin">
       <button mat-button [matMenuTriggerFor]="userMenu" class="pl-2 pr-2 float-right">
         <mat-icon>account_circle</mat-icon>
-        <span class="d-none d-sm-inline pl-1">{{getCurrentUserName()}}</span>
+        <span class="d-none d-sm-inline pl-1">{{userName}}</span>
       </button>
       <mat-menu #userMenu="matMenu" xPosition="before">
         <button mat-menu-item (click)="signOut()">Sign Out</button>

@@ -18,7 +18,6 @@ export class UserService {
     private afs: AngularFirestore,
     ) {
     this.userCollection = this.afs.collection<User>('Group70Users');
-
    }
 
 
@@ -43,6 +42,7 @@ export class UserService {
     this.user = this.userDocument.valueChanges();
     return this.user;
   }
+
 
   addUserReview(userID: string, newMovieID: string, newReviewID: string){
     let newUserReview: UserReview = {movieID: newMovieID, reviewID: newReviewID};

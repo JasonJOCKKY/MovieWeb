@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'details/:movie_id', component: MovieDetailsPageComponent },
   { path: 'login', component: LoginComponent},
-  { path: 'profile/:user_id', component: ProfilePageComponent, canActivate: [AuthGuard]},
+  { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard]},
   {
     path: '',
     redirectTo: 'home',

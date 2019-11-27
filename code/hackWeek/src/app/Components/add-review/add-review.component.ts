@@ -6,6 +6,7 @@ import { ReviewService } from 'src/app/Services/review.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Movie_Detail, Review, Reviews } from 'src/type';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
+import { UserService } from 'src/app/Services/user.service';
 
 
 
@@ -28,6 +29,7 @@ export class AddReviewComponent implements OnInit {
 
   constructor(
     private authService: AuthenticationService,
+    private userService: UserService,
     private reviewService: ReviewService,
     private dialogRef:MatDialogRef<AddReviewComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any
@@ -78,7 +80,7 @@ export class AddReviewComponent implements OnInit {
   }
 
   getCurrentUserName(): string{
-    return this.authService.currentUserName();
+    return "guest";
   }
 
 }
