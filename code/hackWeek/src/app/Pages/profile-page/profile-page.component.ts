@@ -8,14 +8,15 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
-  styleUrls: ['./profile-page.component.css']
+  styleUrls: ['./profile-page.component.scss']
 })
 export class ProfilePageComponent implements OnInit {
 
-  reviews: Review[] = [];
-  username: string = "";
-  userID: string;
   user: User;
+  userName: string = "";
+  userID: string;
+  reviews: Review[] = [];
+  authenticated: boolean = false;
 
   constructor(
     public authService: AuthenticationService,
@@ -25,18 +26,17 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.userID = this.route.snapshot.paramMap.get('user_id');
-    this.userID = this.authService.currentUserId();
-    this.user = {userID:this.userID, username:"", userReviews:[] };
-    this.userService.retrieveUser(this.userID).subscribe(user=>{
-      if(user){
-        this.user = user;
-        
-      }
-      else{
-        console.log("no user");
+    this.authService.authState.subscribe(authState =>  {
+      this.authenticated = authState ? true : false;
+      if(this.authenticated){
+        this.getCurrentUserName(authState.uid);
       }
     });
   }
 
+  getCurrentUserName(uid: string){
+    this.userService.retrieveUser(uid).subscribe(user => {
+      this.userName = user.username;
+    });
+  }
 }

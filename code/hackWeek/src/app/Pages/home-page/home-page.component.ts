@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
@@ -33,6 +33,10 @@ export class HomePageComponent{
     this.searchResults = [];
     this.loadGenres();
     this.loadCertifications();
+  }
+
+  ngOnInit() {
+    this.searchPopular();
   }
 
   loadGenres(){

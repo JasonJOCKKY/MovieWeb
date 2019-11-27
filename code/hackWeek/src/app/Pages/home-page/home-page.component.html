@@ -1,5 +1,5 @@
 <div>
-  <mat-tab-group (selectedTabChange)="onTabChange($event)">
+  <mat-tab-group (selectedTabChange)="onTabChange($event)" [selectedIndex]="3">
     <mat-tab label="Search by Title">
         <form [formGroup]="searchForm" (ngSubmit)="searchTitle()" class="p-3">
           <mat-form-field  class="w-100">

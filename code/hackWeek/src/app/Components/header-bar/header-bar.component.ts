@@ -22,7 +22,9 @@ export class HeaderBarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    
     this.authService.authState.subscribe(authState =>  {
+      console.log("run3");
       this.authenticated = authState ? true : false;
       if(this.authenticated){
         this.getCurrentUserName(authState.uid);
