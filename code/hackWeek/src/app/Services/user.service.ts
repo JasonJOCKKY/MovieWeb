@@ -23,8 +23,14 @@ export class UserService {
 
   addUser(newUserID: string, newUsername: string){
     let newUser: User = {userID: newUserID, username: newUsername, userReviews: []};
+    this.userCollection.doc(newUserID).set(newUser);
+    console.log("User added to firebase");
+  }
+
+  //must check that user does not exist
+  addUserWithGoogle(newUserID: string, newUsername: string){
+    let newUser: User = {userID: newUserID, username: newUsername, userReviews: []};
     let flag=false;
-    //check if user already exists
     this.retrieveUser(newUserID).subscribe(user => {
       if (flag || user) {
         console.log("User already exists!");
