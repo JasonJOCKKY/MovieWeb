@@ -18,19 +18,16 @@ export class PreviewComponent implements OnInit {
     this.movie = data.movie;
     this.reviewService.retrieveMovieReviews(this.movie.id.toString()).subscribe((result: Reviews) => {
       this.isLoading = false;
-      this.reviews = result.reviews;
+      if(result){
+        this.reviews = result.reviews;
+      }
     });
   }
 
   isLoading: boolean = true;
   movie: Movie;
   reviews: Review[] = [];
-  //  [{user: "bob", id: "lkdjfsf", score: 5, date: "2019-11-24", title: "good film!", comment: "I liked this film", replies: [] },
-  //   {user: "bob2", id: "lkdjfsf", score: 5, date: "2019-11-24", title: "good film!", comment: "I liked this film", replies: [] },
-  //   {user: "bob3", id: "lkdjfsf", score: 5, date: "2019-11-24", title: "good film!", comment: "I liked this film", replies: [] },
-  //   {user: "bob4", id: "lkdjfsf", score: 5, date: "2019-11-24", title: "good film!", comment: "I liked this film", replies: [] },
-  //   {user: "bob5", id: "lkdjfsf", score: 5, date: "2019-11-24", title: "good film!", comment: "I liked this film", replies: [] }
-  // ];
+
 
   ngOnInit() {
 
