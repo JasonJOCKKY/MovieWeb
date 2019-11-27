@@ -5,6 +5,7 @@
 
 ## Introduction
 Our group is named Group 70, which is in reference to the UNIX epoch. The members of this group are Weiyu Feng, Jingsong Tan, and Joseph Vitale. For our project, we created a movie review website using Angular, Firebase, Material, Bootstrap, and The Movie Database (TMDb) API. 
+
 To use the app, navigate to the link given above. You can choose to search for a film, which can be done in one of three ways: search by title, explore based off criteria (genre, rating, year), and find movies by popularity. You may also decide to login or sign up. After a search, you can select one of the results to view a quick preview of the film, then decide to view more information, or continue searching. If you decide to view more information, you will be able to view more information about the film, as well as leave a review or reply to an existing review. If you have not logged-in, this will all be done as a guest. If you login, reviews and replies will contain your username (or display name if you login through Google). By selecting your username in the header, you may also choose to view your profile or logout. Viewing your profile will allow you to view all reviews you have left. 
 
 ## Problem
@@ -21,14 +22,15 @@ There will also be a login feature. A review left by a logged-in user will conta
 
 ## Implementation
 ### Technologies
-To build the website, we used Angular, as we are all familiar with the framework. Angular helped us neatly seperate our code into components and services. This made it easy to develop different aspects of the app simultaneuously. 
+To build the website, we decided to use Angular, as we are all familiar with the framework as well as for its ability to quickly and easily create dynamic web applications. Angular also made it easy to neatly seperate our code into front-end components and back-end services. This aided collaboration and allowed us to develop different components of the app simultaneously. 
 
-Typescript was used for communication between front-end componentsand services as well as between the services and back-end components (API calls, storing and retrieving data from Firebase). 
+Typescript was used for communication between front-end components and services as well as between the services and back-end components (API calls, storing and retrieving data from Firebase, Firebase authentication). 
 
 On top of HTML and CSS, we styled the front-end using Angular Material which allowed us to quickly build functional and professional-looking UI components.
 
 Bootstrap was also used for the front-end for quick, professional styling. 
-To get movie data, we used the API for The Movie Database (TMDb). It allows us to search for data in our desired manner (search by title, explore by genre/certification/year, or find popular movies). 
+
+To get movie data, we used the API for The Movie Database (TMDb). It allows us to search for data in our desired manner (search by title, explore by genre/certification/year, and find popular movies). 
 
 To store review data and user information, we used Firebase, which is good for connecting to an Angular apps. 
 
@@ -36,12 +38,14 @@ To authorize users, we used Angular Firebase Auth.
 
 An AWS EC2 instance was used to serve the running code. 
 
-### Division of Labor
-Jingson implemented the services for the API calls, user authorization, and adding/retrieving reviews. He also implemented the login page. Weiyu implemented the movie-details page and the add-review component. Joseph implemented the search page and the preview component. 
+### Who Implemented What
+Jingsong implemented the services for the API calls, user authentication, and leaving reviews and replies. Weiyu also helped develop the review and reply service. The user service and auth guard were implemented by Joseph. 
 
-### Grading Criteria
+The front-end for search (home) page, preview component, and profile page were initially implemented by Joseph. Weiyu implemented the movie details page, add review component, and add reply component. Jingsong helped to restyle and clean-up these front-end components. 
+
+### Grading Criteria (Where to Look for Grading Purposes)
 **Consistent Design and User Experience** 
-The application has a consisten color scheme. Similar material components are used to build each front-end component. Everypage shares the header bar, which allows a user to login or redirect to the home page. 
+The application has a consistetn color scheme. Similar material components are used to build each front-end component. Everypage shares the header bar, which allows a user to login or redirect to the home page. 
 
 **Well-Structured**
 All interfaces are defined in one file, type.ts. The header bar, which is present on everypage, is its own component (/Components/header-bar). Back-end code is organized into three services for the three main functionalities (API calls, user authorization, and movie reviews). Front-end components are organized into two folders, Pages (home page, details page) and Components (headers and modals). 
