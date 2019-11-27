@@ -41,7 +41,7 @@ An AWS EC2 instance was used to serve the running code.
 ### Who Implemented What
 Jingsong implemented the services for the API calls, user authentication, and leaving reviews and replies. Weiyu also helped develop the review and reply service. The user service and auth guard were implemented by Joseph. 
 
-The front-end for search (home) page, preview component, and profile page were initially implemented by Joseph. Weiyu implemented the movie details page, add review component, and add reply component. Jingsong helped to restyle and clean-up these front-end components. 
+The front-end for search (home) page, preview component, and profile page were initially implemented by Joseph. Weiyu implemented the movie details page, add review component, and add reply component. Jingsong helped to restyle and clean-up these front end components. 
 
 ### Grading Criteria (Where to Look for Grading Purposes)
 **Consistent Design and User Experience** 
@@ -51,13 +51,13 @@ The application has a consistetn color scheme. Similar material components are u
 All interfaces are defined in one file, type.ts. The header bar, which is present on everypage, is its own component (/Components/header-bar). Back-end code is organized into three services for the three main functionalities (API calls, user authorization, and movie reviews). Front-end components are organized into two folders, Pages (home page, details page) and Components (headers and modals). 
 
 **Authentication**
-In order to leave a review, the user must be logged in.
+Our app implements the auth guard as shown in the "Grade Distribution App" class example. Only a logged-in user can navigate to the user profile page. A user does not have to be logged in to leave reviews, but only logged-in users can leave a name for the review. 
 
 **Architecture**
 Our code is organized according to Model-View-Controller architecture. The M, model, is the API and our Firebase database. The View, our front-end components, are organized into pages and components. Main page components (home page, details page, and page-not-found page) are organized into the Pages directory. Components for modals and headers are organized into the Components directory. The Controllers are the services, which are organized into the Services directory. The three services are used to communicate the front-end view components to the model (API and Firebase) which never communicate directly. 
 
 **Persistent**
-Users can register and leave reviews on the site. Data for registered users and reviews are stored persistently using Firebase. 
+Users can register accounts and leave reviews or replies on the site. Data for registered users and reviews are stored persistently using Firebase. 
 
 **Provide some Security**
 
