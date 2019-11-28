@@ -55,7 +55,7 @@ export interface Certification {
 export interface User{
   userID;
   username: string;
-  userReviews: UserReview[];
+  userReviews?: UserReview[];
 }
 
 export interface UserReview{

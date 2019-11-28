@@ -24,7 +24,7 @@ export class AddReviewComponent implements OnInit {
   uid = null;
 
   reviewForm = new FormGroup({
-    title: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z\\s]+")]),
+    title: new FormControl('', [Validators.required]),
     comment: new FormControl('', [Validators.required]),
     score: new FormControl(5)
   });

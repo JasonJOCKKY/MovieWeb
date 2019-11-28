@@ -36,10 +36,31 @@ export class AuthenticationService {
     );
   }
 
-  loginWithGoogle() {
+  async loginWithGoogle() {
+    try {
+      const cred = await this.afAuth.auth.signInWithPopup( new auth.GoogleAuthProvider());
+      
+      this.userService.addUserWithGoogle(cred.user.uid, cred.user.displayName);
+      
+     /*
+      this.userCollection.doc(cred.user.uid).delete().then(function() {
+        console.log("Document successfully deleted!");
+       }).catch(function(error) {
+        console.error("Error removing document: ", error);
+       });
+       */
+
+    } catch (err) {
+      throw new Error('Could not create account/login google');
+    }
+    /*
     this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
       cred => this.userService.addUserWithGoogle(cred.user.uid, cred.user.displayName)
     );
+    */
+    //const cred = await this.afAuth.auth.signInWithPopup( new auth.GithubAuthProvider());
+    //this.userService.addUserWithGoogle(cred.user.uid, cred.user.displayName);
+  
   }
 
   async login(email: string, password: string) {
@@ -52,6 +73,7 @@ export class AuthenticationService {
 
   logout() {
     this.afAuth.auth.signOut();
+    location.reload();
     console.log(this.afAuth.auth.currentUser);
   }
 
