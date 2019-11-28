@@ -4,6 +4,8 @@ import { Reply } from 'src/type';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { ReviewService } from 'src/app/Services/review.service';
 import { UserService } from 'src/app/Services/user.service';
+import { MatDialog } from '@angular/material';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-add-reply',
@@ -25,6 +27,7 @@ export class AddReplyComponent implements OnInit {
     private authService: AuthenticationService,
     private userService: UserService,
     private reviewService: ReviewService,
+    private dialog: MatDialog
   ) {
     this.authService.currentAuth.subscribe(authState =>  {
       this.authenticated = authState ? true : false;
@@ -74,5 +77,14 @@ export class AddReplyComponent implements OnInit {
   }
   close(){
     this.hidden = true;
+  }
+  onAddReply() {
+    if(this.authenticated){
+      this.showAddReply();
+    } else {
+      this.dialog.open(LoginComponent, {
+        width: '500px'
+      });
+    }
   }
 }
