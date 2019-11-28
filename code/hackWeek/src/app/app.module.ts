@@ -19,6 +19,7 @@ import { HomePageComponent } from './Pages/home-page/home-page.component';
 import { PageNotFoundComponent } from './Pages/page-not-found/page-not-found.component';
 import { HeaderBarComponent } from './Components/header-bar/header-bar.component';
 import { MovieDetailsPageComponent } from './Pages/movie-details-page/movie-details-page.component';
+import { ProfilePageComponent } from './Pages/profile-page/profile-page.component';
 
 // Dialogs
 import { PreviewComponent } from './Components/preview/preview.component'
@@ -44,7 +45,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
-import { ProfilePageComponent } from './Pages/profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
