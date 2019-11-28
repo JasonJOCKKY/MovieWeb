@@ -173,15 +173,7 @@ export class MovieDetailsPageComponent implements OnInit {
     }
   }
 
-  onAddReply(reviewId: string, replyId: string) {
-    if(this.authenticated){
-
-    } else {
-      this.dialog.open(LoginComponent, {
-        width: '500px'
-      });
-    }
-  }
+  
 
   // Nested tree functions
   getReplyTreeControl() {

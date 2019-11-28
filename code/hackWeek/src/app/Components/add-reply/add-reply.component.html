@@ -1,5 +1,5 @@
 
-<button mat-button color="primary" (click)="showAddReply()">Reply</button>
+<button mat-button color="primary" (click)="onAddReply()">Reply</button>
 <form [formGroup]="replyForm" (ngSubmit)="onSubmit()" class="w-100" [hidden]="this.hidden">
     <mat-form-field appearance="outline" class="w-100">
       <mat-label>Reply</mat-label>

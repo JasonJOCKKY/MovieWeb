@@ -40,7 +40,7 @@
       <form class="pl-5 pr-5 mt-3 mb-2" [formGroup]="registerFormGroup" (ngSubmit)="register()">
           <mat-form-field class="w-100">
             <mat-label>Username:</mat-label>
-            <input matInput formControlName="name" [errorStateMatcher]="parentErrorStateMatcher">
+            <input matInput formControlName="name">
             <mat-error *ngIf="registerNameControl.errors && registerNameControl.errors.required">
               Username required!
             </mat-error>
