@@ -16,6 +16,7 @@ export class HomePageComponent{
   searchForm = new FormGroup({
     title: new FormControl('', [Validators.required]),
   });
+
   get titleControl(){ return this.searchForm.get('title'); }
 
   exploreForm = new FormGroup({
@@ -122,14 +123,10 @@ export class HomePageComponent{
 
   onTabChange(tab){
     this.noResult = false;
+    this.searchResults = [];
     if(tab.index==0){
-      this.searchResults = [];
       this.searchForm.get('title').reset();
-    }
-    else if(tab.index==1){
-      this.searchResults = [];
-    }
-    else if(tab.index==2){
+    } else if(tab.index == 2) {
       this.searchPopular();
     }
   }
