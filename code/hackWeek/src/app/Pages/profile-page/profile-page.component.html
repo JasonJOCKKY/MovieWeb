@@ -1,4 +1,4 @@
-<div *ngIf="userReviews; else noReview">
+<div *ngIf="userReviews.length > 0; else noReview">
     <h4 class="pl-4 mt-3">My reviews:</h4>
     <!-- Movies -->
     <div class="movie-container row mt-3">
