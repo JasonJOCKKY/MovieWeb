@@ -1,0 +1,30 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="d-flex justify-content-md-between">
+    <div class="equalWidth home pr-sm-2">
+      <button mat-icon-button [routerLink]="['/']">
+        <mat-icon>home</mat-icon>
+      </button>
+    </div>
+
+    <div class="text-center">Movie Application</div>
+
+    <div class="equalWidth user" *ngIf="authenticated; else showLogin">
+      <button mat-button [matMenuTriggerFor]="userMenu" class="pl-2 pr-2 float-right">
+        <mat-icon>account_circle</mat-icon>
+        <span class="d-none d-sm-inline pl-1">{{userName}}</span>
+      </button>
+      <mat-menu #userMenu="matMenu" xPosition="before">
+        <button mat-menu-item [routerLink]="['/profile']">View Profile</button>
+        <button mat-menu-item (click)="signOut()">Sign Out</button>
+      </mat-menu>
+    </div>
+
+    
+
+    <ng-template #showLogin>
+      <div class="order-3 equalWidth user">
+        <button mat-raised-button (click)="login()" class="float-right">Login</button>
+      </div>
+    </ng-template>
+  </mat-toolbar-row>
+</mat-toolbar>
