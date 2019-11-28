@@ -1,5 +1,5 @@
 <div>
-  <mat-tab-group (selectedTabChange)="onTabChange($event)" [selectedIndex]="3">
+  <mat-tab-group (selectedTabChange)="onTabChange($event)" [selectedIndex]="2">
     <mat-tab label="Search by Title">
         <form [formGroup]="searchForm" (ngSubmit)="searchTitle()" class="p-3">
           <mat-form-field  class="w-100">
@@ -8,7 +8,7 @@
                 Title
               </mat-label>
               <input matInput formControlName="title">
-              <mat-error *ngIf="titleControl.errors && titleControl.errors.required">
+              <mat-error *ngIf="titleControl.invalid">
                 Please enter a title.
               </mat-error>
           </mat-form-field>
@@ -50,6 +50,30 @@
     </mat-tab>
 
     <mat-tab label="View Popular Movies"></mat-tab>
+
+    <mat-tab label="About Us">
+      <div class="wrapper pt-3">
+        <h2>Team Members</h2>
+        <mat-divider></mat-divider>
+        <!-- <p class="mt-3">
+          Weiyu Feng
+          Joseph Vitale
+          Jingsong Tan
+        </p> -->
+        <h5 class="mt-3">Weiyu Feng: <a href="mailto:wfghd@mail.missouri.edu">wfghd@mail.missouri.edu</a></h5>
+        <h5>Joseph Vitale: <a href="mailto:jcv3m4@mail.missouri.edu">jcv3m4@mail.missouri.edu</a></h5>
+        <h5>Jingsong Tan: <a href="mailto:jtnfx@mail.missouri.edu">jtnfx@mail.missouri.edu</a></h5>
+
+        <h4 class="mt-5">This Application</h4>
+        <mat-divider></mat-divider>
+        <p class="mt-3">
+          This application pulls data from "The Movie Data Base" using their api, and allows users to write reviews that stored in our own database.  We provide tools for writing reviews, comments and display movie informations.  User experience has always been our top priority, therefore, this website is fully responsive so it can be used across all devices.
+        </p>
+        <div class="clearfix">
+          <img src="../../../assets/images/tmdb.png" class="d-block float-right" style="width: 200px;">
+        </div>
+      </div>
+    </mat-tab>
   </mat-tab-group>
 </div>
 
