@@ -1,10 +1,12 @@
 # Report
 
 ## Link to Running Code
-[link here]
+'''
+https://hackweekgroup70.web.app
+'''
 
 ## Introduction
-Our group is named Group 70, which is in reference to the UNIX epoch. The members of this group are Weiyu Feng, Jingsong Tan, and Joseph Vitale. For our project, we created a movie review website using Angular, Firebase, Material, Bootstrap, and The Movie Database (TMDb) API. 
+Our group is named Group 70. The members of this group are Weiyu Feng, Jingsong Tan, and Joseph Vitale. For our project, we created a movie review website using Angular, Firebase, Material, Bootstrap, and The Movie Database (TMDb) API. 
 
 To use the app, navigate to the link given above. You can choose to search for a film, which can be done in one of three ways: search by title, explore based off criteria (genre, rating, year), and find movies by popularity. You may also decide to login or sign up. After a search, you can select one of the results to view a quick preview of the film, then decide to view more information, or continue searching. If you decide to view more information, you will be able to view more information about the film, as well as leave a review or reply to an existing review. If you have not logged-in, this will all be done as a guest. If you login, reviews and replies will contain your username (or display name if you login through Google). By selecting your username in the header, you may also choose to view your profile or logout. Viewing your profile will allow you to view all reviews you have left. 
 
