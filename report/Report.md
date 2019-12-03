@@ -80,8 +80,11 @@ We would also like to add a feature on the website that allows users to search b
 
 ## References
 (to be formatted)
-https://material.angular.io/
+[Angular Material Documentation](https://material.angular.io/)
+
 https://github.com/angular/angularfire/tree/master/docs/firestore
+
 https://angularfirebase.com/lessons/angular-firebase-authentication-tutorial-oauth/
+
 https://angular.io/docs
 
