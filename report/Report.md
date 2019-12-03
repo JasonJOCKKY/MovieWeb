@@ -75,6 +75,8 @@ Users can register accounts and leave reviews or replies on the site. Data for r
 Pointers, knowledge, tricks to inform the rest of the class
 
 ## Future Work
-What needs to be finished before the due date
+Our app is responsive and looks presentable on all devices, however if we had more time, we would ideally develop mobile apps of iOS and Android. 
+We would also like to add a feature on the website that allows users to search by cast or crew member. 
 
 ## References
+
