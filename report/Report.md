@@ -6,7 +6,7 @@
 ## Introduction
 We are Group 70. This group is comprised of Weiyu Feng, Jingsong Tan, and Joseph Vitale. For our project, we created a movie search and review website using Angular, Firestore, Firebase OAuth, Material, Bootstrap, and The Movie Database (TMDb) API. 
 
-To use the app, navigate to the link given above. At the home page, you can choose to search for a film, which can be done in one of three ways: search by title, explore based off criteria (genre, rating, year), and find movies by popularity. You may also decide to login or sign up (in the header bar). After a search, results will dynamically generate on the page. You can select one of the results to view a quick preview of the film and decide to view more information or continue searching. 
+To use the app, navigate to the link given above. At the home page, you can choose to search for a film, which can be done in one of three ways: search by title, explore based off criteria (genre, rating, year), and find movies by popularity. You may also decide to login or sign up (in the header bar). You may also view the About Us page for more information about the developers of the app. After a search, results will dynamically generate on the page. You can select one of the results to view a quick preview of the film and decide to view more information or continue searching. 
 
 If you decide to view more information, you will be taken to a movie details page. There you are able to view more information about the film. If you are logged-in, you can also leave a review for the film or make a reply to an existing review. If you have not logged-in, and you attempt to review or reply, instead you will be prompted to login. 
 
@@ -111,26 +111,26 @@ All of our form inputs utilize a FormControl with Validators to ensure valid inp
 We used Bootstrap and Angular Material UI Components to create the front-end. Using these made it very easy to create an user interface that looks presentable on all window sizes. The site looks presentable on all screen sizes.
 
 **Content**
-Your application should have data 
-I recommend you connect with an API and/or use a Scraper to pull data from proper sites 
-If you collect user input, then make sure there is data (user inputs already inserted) in the application so when we grade the app, it is not just a blank application 
-We want to see what you have implemented, we may insert a few records and make sure it works, but you will be responsible for having data in your application so we can see a good representation of your application 
+We get movie data from a large movie database (TMDb). We call the database's API to retireve this data, which is later displayed on the site.
+
+We also collect user input. A user can register an account, leave a review on a film, or make a reply to a review. We have left some sample reviews and replies which can be seen under the film Frozen (not the sequel), which can be found by searching "Frozen" under the search by title option. (Note: The film Frozen II may not have any available reviews). 
+
+There is also a test user. To login, select login, then login by email. The email for this user is 'test100@test.com' and the password is 'password'. This user should also have left some reviews, which can be viewed under their profile page. 
 
 **Error Handling**
 All of our form inputs utilize a FormControl with Validators to ensure valid input before submission. Error messages are showns dynamically using <mat-error> tags. There are form inputs on the following pages and components:
   Search page (/home): Form inputs under search by title and explore films tabs.
   Details page (/details/:movieID): Form inputs under 
  
- If a user enters incorrect login information, they are given a message "Unable to login".
+ If a user enters incorrect login information, they are given a popup message "Unable to login".
 
 **Publicly Viewable**
-Your application should be hosted on Amazon AWS, Firebase, or other web services which is publicly viewable 
-If you are making a mobile application, make sure you have and submit a built application on Android (.apk) or iOS (.ipa)  
-Publishing to the app store would be a good way to earn bonus points 
+Our app is publically available on a Firebase server. The app can be viewed by navigating the to link provided above.
 
 **Overall Purpose**
-The web application you build is not to be trivial in simply meeting the technical requirements set forth in this document. Yes, you are to meet the requirements but you are also to build a web application that has a purpose and delivers functionality or capability. The requirements are parameters to be used in design and implementation of the application; they are not intended to be the end product. You should build a web application that you would be happy to show to a prospective employer or client. You should also make sure that you can complete the development by the due date.
-There must be a way to access “About” information that includes information about your team and the application.
+This application serves a clear overall purpose, and is very practical and useful. The purpose is describes in the Problem and Solution selections of this report.
+
+There is also an About US page on the site, which can be found under the About Us tab on the home page where you can view information about the team and the application.
 
 ## Knowledge Gained
 In developing this app, we gained a lot of knowledge over API calls, Firestore, Firebase OAuth, and Angular Material. We learned how to handle data retireved from an API asyncronously using RxJS Observables and Promises. We learned how to structure and handle data in a NoSQL, document-based database by utilizing collections and nesting. We learned how to keep track on if a user is logged in and authorized and limit access to certain areas on the site using an Auth Guard. We learned about many Material UI Components to quickly create a highly functional user interface.
