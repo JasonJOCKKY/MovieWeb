@@ -1,5 +1,4 @@
 # Report
-Implementation
 
 ## Link to Running Code
 [https://hackweekgroup70.web.app](https://hackweekgroup70.web.app)
@@ -85,8 +84,6 @@ A user can logout by selecting their username in the header bar, then selecting 
 
 If a user logs in, but then logs out, they will not be able to review, reply, or view their profile page.
 
-
-
 **Architecture**
 Our code is organized according to Model-View-Controller architecture. 
 
@@ -98,8 +95,6 @@ The View, our Angular front-end components, are organized into Pages and Compone
 
 We use Angular and utilize services and define all our interfaces in the type.ts file.
 
-
-
 **Persistent**
 Users can register accounts and leave reviews or replies on the site. Data for registered users and reviews are stored persistently using Firebase's Firestore. User authentication information is stored persistently using Firebase OAuth. 
 
@@ -110,21 +105,32 @@ Our site uses HTTPS and has a valid SSL certificate, which can be proven by the 
 
 We use Firebase OAuth to store sensitive user information such as passwords. We use an Auth Guard so that only logged-in users can view their profile page and leave a review. The profile page cannot be URL-hacked because it checks that a user is authenticated and logged-in.
 
-All form inputs have error handling before
+All of our form inputs utilize a FormControl with Validators to ensure valid input before submission. These can be seen in the components for home-page, review-component, reply-component, and login-component. 
 
 **Responsive**
-We used Bootstrap and Angular Material UI Components to create the front-end. Using these made it very easy to create an user interface that looks presentable on all window sizes. 
+We used Bootstrap and Angular Material UI Components to create the front-end. Using these made it very easy to create an user interface that looks presentable on all window sizes. The site looks presentable on all screen sizes.
 
 **Content**
+Your application should have data 
+I recommend you connect with an API and/or use a Scraper to pull data from proper sites 
+If you collect user input, then make sure there is data (user inputs already inserted) in the application so when we grade the app, it is not just a blank application 
+We want to see what you have implemented, we may insert a few records and make sure it works, but you will be responsible for having data in your application so we can see a good representation of your application 
 
 **Error Handling**
 All of our form inputs utilize a FormControl with Validators to ensure valid input before submission. Error messages are showns dynamically using <mat-error> tags. There are form inputs on the following pages and components:
   Search page (/home): Form inputs under search by title and explore films tabs.
   Details page (/details/:movieID): Form inputs under 
+ 
+ If a user enters incorrect login information, they are given a message "Unable to login".
 
 **Publicly Viewable**
+Your application should be hosted on Amazon AWS, Firebase, or other web services which is publicly viewable 
+If you are making a mobile application, make sure you have and submit a built application on Android (.apk) or iOS (.ipa)  
+Publishing to the app store would be a good way to earn bonus points 
 
 **Overall Purpose**
+The web application you build is not to be trivial in simply meeting the technical requirements set forth in this document. Yes, you are to meet the requirements but you are also to build a web application that has a purpose and delivers functionality or capability. The requirements are parameters to be used in design and implementation of the application; they are not intended to be the end product. You should build a web application that you would be happy to show to a prospective employer or client. You should also make sure that you can complete the development by the due date.
+There must be a way to access “About” information that includes information about your team and the application.
 
 ## Knowledge Gained
 In developing this app, we gained a lot of knowledge over API calls, Firestore, Firebase OAuth, and Angular Material. We learned how to handle data retireved from an API asyncronously using RxJS Observables and Promises. We learned how to structure and handle data in a NoSQL, document-based database by utilizing collections and nesting. We learned how to keep track on if a user is logged in and authorized and limit access to certain areas on the site using an Auth Guard. We learned about many Material UI Components to quickly create a highly functional user interface.
