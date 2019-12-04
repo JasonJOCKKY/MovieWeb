@@ -143,13 +143,16 @@ We would add a responsive chart for a film's rating.
 We would also like to add a feature on the website that allows users to search by cast or crew member. 
 
 ## References
-(to be formatted)
 
-[Angular Material Documentation](https://material.angular.io/)
+Angular. (n.d.). Angular Material. Retrieved December 2, 2019, from https://material.angular.io/.
 
-https://github.com/angular/angularfire/tree/master/docs/firestore
+Angular Firebase Authentication Tutorial - OAuth. (n.d.). Retrieved December 2, 2019, from https://angularfirebase.com/lessons/angular-firebase-authentication-tutorial-oauth/.
 
-https://angularfirebase.com/lessons/angular-firebase-authentication-tutorial-oauth/
+angular/angularfire. (2019, May 21). Retrieved December 2, 2019, from https://github.com/angular/angularfire/tree/master/docs/firestore.
 
-https://angular.io/docs
+Get started with Bootstrap. (n.d.). Retrieved December 2, 2019, from https://getbootstrap.com/docs/4.1/getting-started/introduction/.
+
+Introduction to the Angular Docs. (n.d.). Retrieved December 2, 2019, from https://angular.io/docs.
+
+The Movie DB - API Overview. (n.d.). Retrieved from https://www.themoviedb.org/documentation/api.
 
