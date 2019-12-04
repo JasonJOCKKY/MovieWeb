@@ -6,7 +6,7 @@
 ## Introduction
 Our group is named Group 70. The members of this group are Weiyu Feng, Jingsong Tan, and Joseph Vitale. For our project, we created a movie review website using Angular, Firebase, Material, Bootstrap, and The Movie Database (TMDb) API. 
 
-To use the app, navigate to the link given above. You can choose to search for a film, which can be done in one of three ways: search by title, explore based off criteria (genre, rating, year), and find movies by popularity. You may also decide to login or sign up. After a search, you can select one of the results to view a quick preview of the film, then decide to view more information, or continue searching. If you decide to view more information, you will be able to view more information about the film, as well as leave a review or reply to an existing review. If you have not logged-in, this will all be done as a guest. If you login, reviews and replies will contain your username (or display name if you login through Google). By selecting your username in the header, you may also choose to view your profile or logout. Viewing your profile will allow you to view all reviews you have left. 
+To use the app, navigate to the link given above. You can choose to search for a film, which can be done in one of three ways: search by title, explore based off criteria (genre, rating, year), and find movies by popularity. You may also decide to login or sign up. After a search, you can select one of the results to view a quick preview of the film, then decide to view more information, or continue searching. If you decide to view more information, you will be able to view more information about the film, as well as leave a review or reply to an existing review, if you are logged-in. If you have not logged-in, you will be prompted to do so. If you login, reviews and replies will contain your username (or display name if you login through Google). By selecting your username in the header, you may also choose to view your profile or logout. Viewing your profile will allow you to view all reviews you have left. 
 
 ## Problem
 Nowadays there are so many movies available for us to watch at our fingertips, that it often becomes difficult to decide on which film to choose. There needs to be an easier way for people to search and filter through movies and decide if it is worth their time. On top of this, the title and synopsis of the film is often not enough to base this decision off of. Often a more  useful piece of information for films is reviews from other people. We want to create a way that allows users to efficiently search for movies and view information and reviews of these films in order to determine if it will fit their preferences. On top of this, we want to allow users to leave reviews.  
@@ -18,7 +18,7 @@ The search page should allow the user to search for films in three different way
 
 If they choose to view more information for a film, they will be able to see details about that film as well as any reviews left by users. Users should also be able to leave a review on this page, as well as reply to other reviews. The reply feature will provide even more information for users as other users will be able to voice agreement or disagreement with any given review.  
 
-There will also be a login feature. A review left by a logged-in user will contain their username. A review left by a user who is not logged-in will simply say 'left by guest'. A logged-in user should be able to view a list of all reviews they have given. 
+There will also be a login feature. A logged-in user should be able to view a list of all reviews they have given as well. 
 
 ## Implementation
 ### Technologies
@@ -26,22 +26,34 @@ To build the website, we decided to use Angular, as we are all familiar with the
 
 Typescript was used for communication between front-end components and services as well as between the services and back-end components (API calls, storing and retrieving data from Firebase, Firebase authentication). 
 
-On top of HTML and CSS, we styled the front-end using Angular Material which allowed us to quickly build functional and professional-looking UI components.
+On top of HTML and CSS, we styled the front-end using Angular Material which allowed us to quickly build functional, responsive, and professional-looking UI components.
 
-Bootstrap was also used for the front-end for quick, professional styling. 
+Bootstrap was also used for the front-end for quick, professional, and responsive styling. 
 
 To get movie data, we used the API for The Movie Database (TMDb). It allows us to search for data in our desired manner (search by title, explore by genre/certification/year, and find popular movies). 
 
 To store review data and user information, we used Firebase, which is good for connecting to an Angular apps. 
 
-To authorize users, we used Angular Firebase Auth. 
+To authorize users, we used Firebase OAuth and allow users to sign-up using email and password or their google account.
 
 An AWS EC2 instance was used to serve the running code. 
 
 ### Who Implemented What
-Jingsong implemented the services for the API calls, user authentication, and leaving reviews and replies. Weiyu also helped develop the review and reply service. The user service and auth guard were implemented by Joseph. 
+Jingsong Tan:
+  API calls (TMDB)
+  Movie details page, add-review component, add-reply component. (Angular Material, Bootstrap) 
+  General website styling. (Angular Material, Bootstrap)
+  
+Weiyu Feng:
+  Movie details page, add-review component (Angular Material, Bootstrap)
+  Authentication service. (Firebase OAuth)
+  Review and reply services. (Firestore)
+  
+Joseph Vitale:
+  Search page, preview component, profile page (Angular, Material)
+  User service (Firestore, typescript)
+  Auth guard (Firebase OAuth, typescript)
 
-The front-end for search (home) page, preview component, and profile page were initially implemented by Joseph. Weiyu implemented the movie details page, add review component, and add reply component. Jingsong helped to restyle and clean-up these front end components. 
 
 ### Grading Criteria (Where to Look for Grading Purposes)
 **Consistent Design and User Experience** 
@@ -57,29 +69,38 @@ Our app implements the auth guard as shown in the "Grade Distribution App" class
 Our code is organized according to Model-View-Controller architecture. The M, model, is the API and our Firebase database. The View, our front-end components, are organized into pages and components. Main page components (home page, details page, and page-not-found page) are organized into the Pages directory. Components for modals and headers are organized into the Components directory. The Controllers are the services, which are organized into the Services directory. The three services are used to communicate the front-end view components to the model (API and Firebase) which never communicate directly. 
 
 **Persistent**
-Users can register accounts and leave reviews or replies on the site. Data for registered users and reviews are stored persistently using Firebase. 
+Users can register accounts and leave reviews or replies on the site. Data for registered users and reviews are stored persistently using Firebase's Firestore. User authentication information is stored persistently using Firebase OAuth. 
 
 **Provide some Security**
+We use Firebase OAuth to store sensitive user information such as passwords. We use an Auth Guard so that only logged-in users can view their profile page and leave a review. The profile page cannot be URL-hacked.
 
 **Responsive**
+We used Bootstrap and Angular Material UI Components to create the front-end. Using these made it very easy to create an user interface that looks presentable on all window sizes. 
 
 **Content**
 
 **Error Handling**
+All of our form inputs utilize a FormControl with Validators to ensure valid input before submission. Error messages are showns dynamically using <mat-error> tags. There are form inputs on the following pages and components:
+  Search page (/home): Form inputs under search by title and explore films tabs.
+  Details page (/details/:movieID): Form inputs under 
 
 **Publicly Viewable**
 
 **Overall Purpose**
 
 ## Knowledge Gained
-Pointers, knowledge, tricks to inform the rest of the class
+In developing this app, we gained a lot of knowledge over API calls, Firestore, Firebase OAuth, and Angular Material. We learned how to handle data retireved from an API asyncronously using RxJS Observables and Promises. We learned how to structure and handle data in a NoSQL, document-based database by utilizing collections and nesting. We learned how to keep track on if a user is logged in and authorized and limit access to certain areas on the site using an Auth Guard. We learned about many Material UI Components to quickly create a highly functional user interface.
 
 ## Future Work
 Our app is responsive and looks presentable on all devices, however if we had more time, we would ideally develop mobile apps of iOS and Android. 
+
+We would add a responsive chart for a film's rating.
+
 We would also like to add a feature on the website that allows users to search by cast or crew member. 
 
 ## References
 (to be formatted)
+
 [Angular Material Documentation](https://material.angular.io/)
 
 https://github.com/angular/angularfire/tree/master/docs/firestore
