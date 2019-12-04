@@ -32,32 +32,33 @@ Bootstrap was also used for the front-end for quick, professional, and responsiv
 
 To get movie data, we used the API for The Movie Database (TMDb). It allows us to search for data in our desired manner (search by title, explore by genre/certification/year, and find popular movies). 
 
-To store review data and user information, we used Firebase, which is good for connecting to an Angular apps. 
+To store review data and user information, we used Firebase, which is good for connecting to an Angular apps. Firebase is also used to serve the application.
 
 To authorize users, we used Firebase OAuth and allow users to sign-up using email and password or their google account.
 
-An AWS EC2 instance was used to serve the running code. 
-
 ### Who Implemented What
 Jingsong Tan:
-  -API calls (TMDB)
-  -Movie details page, add-review component, add-reply component. (Angular Material, Bootstrap) 
-  -General website styling. (Angular Material, Bootstrap)
+  *API calls (TMDB)
+  *Movie details page, add-review component, add-reply component. (Angular Material, Bootstrap) 
+  *General website styling. (Angular Material, Bootstrap)
   
 Weiyu Feng:
-  -Movie details page, add-review component (Angular Material, Bootstrap)
-  -Authentication service. (Firebase OAuth)
-  -Review and reply services. (Firestore)
+  *Movie details page, add-review component (Angular Material, Bootstrap)
+  *Authentication service. (Firebase OAuth)
+  *Review and reply services. (Firestore)
   
 Joseph Vitale:
-  -Search page, preview component, profile page (Angular, Material)
-  -User service (Firestore, typescript)
-  -Auth guard (Firebase OAuth, typescript)
-
+  *Search page, preview component, profile page (Angular, Material)
+  *User service (Firestore, typescript)
+  *Auth guard (Firebase OAuth, typescript)
 
 ### Grading Criteria (Where to Look for Grading Purposes)
 **Consistent Design and User Experience** 
-The application has a consistetn color scheme. Similar material components are used to build each front-end component. Everypage shares the header bar, which allows a user to login or redirect to the home page. 
+The application has a consistent color and font scheme. Similar material components are used to build each front-end component. Every page shares the header bar, which allows a user to login or redirect to the home page. 
+
+The flow of site navigation is very intuitive. The search page leads to the preview modal, which can lead to the details page or back to search. From the details page the review and reply modals can be found. The header which is present on every page, allows the user to navigate to home, login, logout, or view profile page (if logged-in). 
+
+The search page changes based on the tab selected (search by title, explore, find popular). Depending on the search method and input entered, the page is populated with different movie results. The preview and details page show different information depending on the movie selected. The profile page also only shows information specific to the logged-in user.
 
 **Well-Structured**
 All interfaces are defined in one file, type.ts. The header bar, which is present on everypage, is its own component (/Components/header-bar). Back-end code is organized into three services for the three main functionalities (API calls, user authorization, and movie reviews). Front-end components are organized into two folders, Pages (home page, details page) and Components (headers and modals). 
