@@ -40,19 +40,19 @@ An AWS EC2 instance was used to serve the running code.
 
 ### Who Implemented What
 Jingsong Tan:
-  API calls (TMDB)
-  Movie details page, add-review component, add-reply component. (Angular Material, Bootstrap) 
-  General website styling. (Angular Material, Bootstrap)
+  -API calls (TMDB)
+  -Movie details page, add-review component, add-reply component. (Angular Material, Bootstrap) 
+  -General website styling. (Angular Material, Bootstrap)
   
 Weiyu Feng:
-  Movie details page, add-review component (Angular Material, Bootstrap)
-  Authentication service. (Firebase OAuth)
-  Review and reply services. (Firestore)
+  -Movie details page, add-review component (Angular Material, Bootstrap)
+  -Authentication service. (Firebase OAuth)
+  -Review and reply services. (Firestore)
   
 Joseph Vitale:
-  Search page, preview component, profile page (Angular, Material)
-  User service (Firestore, typescript)
-  Auth guard (Firebase OAuth, typescript)
+  -Search page, preview component, profile page (Angular, Material)
+  -User service (Firestore, typescript)
+  -Auth guard (Firebase OAuth, typescript)
 
 
 ### Grading Criteria (Where to Look for Grading Purposes)
