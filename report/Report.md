@@ -18,7 +18,7 @@ Nowadays there are so many movies available for us to watch at our fingertips, t
 Also, when deciding to watch a film or not, often the film's title and synopsis are not enough information to base a decision off of. Often a more useful piece of information for films is reviews from other people. We want to create a way that allows users to efficiently search for movies and view information and reviews of these films in order to determine if it will fit their preferences. Other sites have similar review options, but many lacked the feature to reply to a review, which can yeild even more information about a film by encouraging community participation and debate.  
 
 ## Solution
-To solve this problem, we have devided to create a website that facilitates searching for movies, viewing information about the film, and leaving reviews. 
+To solve this problem, we have devided to create an ad-free website that facilitates searching for movies, viewing information about the film, and leaving reviews. 
 
 There should be a search page which will allow a user to search for films in three different ways: search by title, find movies by popularity, or explore by genre, year, and rating (e.g. PG, R, etc.). Users should be able to view a quick preview of a film from the search results (which are generated dynamically), and can choose to view more information about the film or continue searching. 
 
