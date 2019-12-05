@@ -26,21 +26,28 @@ If they choose to view more information for a film, they will be able to see det
 
 There should also be a login feature. A logged-in user should be able to view a list of all reviews they have left. 
 
+Angular. (n.d.). Angular Material. Retrieved December 2, 2019, from https://material.angular.io/.
+
+
+angular/angularfire. (2019, May 21). Retrieved December 2, 2019, from https://github.com/angular/angularfire/tree/master/docs/firestore.
+
+
+
 ## Implementation
 ### Technologies
-To build the website, we decided to use Angular, as we are all familiar with the framework as well as for its ability to quickly and easily create dynamic web applications. Angular also made it easy to neatly seperate our code into front-end components and back-end services. This aided collaboration and allowed us to develop different components of the app simultaneously. 
+To build the website, we decided to use Angular, as we are all familiar with the framework as well as for its ability to quickly and easily create dynamic web applications. Angular also made it easy to neatly seperate our code into front-end components and back-end services. This aided collaboration and allowed us to develop different components of the app simultaneously. For reference, we used the official angular documentation (https://angular.io/docs).
 
 Typescript was used for communication between front-end components and services as well as between the services and back-end components (API calls, storing and retrieving data from Firebase, Firebase authentication). 
 
-On top of HTML and CSS, we styled the front-end using Angular Material which allowed us to quickly build functional, responsive, and professional-looking UI components.
+On top of HTML and CSS, we styled the front-end using Angular Material which allowed us to quickly build functional, responsive, and professional-looking UI components. The official documentation (https://material.angular.io/) was extremely helpful.
 
-Bootstrap was also used for the front-end for quick, professional, and responsive styling. 
+Bootstrap was also used for the front-end for quick, professional, and responsive styling. The official documentation (https://getbootstrap.com/docs/4.1/getting-started/introduction/) was also helpful here.
 
-To get movie data, we used the API for The Movie Database (TMDb). It allows us to search for data in our desired manner (search by title, explore by genre/certification/year, and find popular movies). 
+To get movie data, we used the API for The Movie Database (TMDb). It allows us to search for data in our desired manner (search by title, explore by genre/certification/year, and find popular movies). The API is fully documented (https://www.themoviedb.org/documentation/api) which made it easy to implement. 
 
-To store review data and user information, we used a Firebase Firestore database, as it is well-designed for connecting to Angular apps. Additionally, Firebase is used to host the application.
+To store review data and user information, we used a Firebase Firestore database, as it is well-designed for connecting to Angular apps, especially with the help of this documentation (https://github.com/angular/angularfire/tree/master/docs/firestore). Additionally, Firebase was used to host the application.
 
-To authorize users, we used Firebase OAuth which we use to allow users to sign-up using either an email and password or their Google account.
+To authorize users, we used Firebase OAuth which we use to allow users to sign-up using either an email and password or their Google account. The official documentation (https://angularfirebase.com/lessons/angular-firebase-authentication-tutorial-oauth/) was used.
 
 ### Who Implemented What
 Jingsong Tan:
@@ -118,6 +125,7 @@ All of our form inputs utilize a FormControl with Validators to ensure valid inp
 We used Bootstrap and Angular Material UI Components to create the front-end. Using these made it very easy to create an user interface that looks presentable on all window sizes. The site looks presentable on all screen sizes.
 
 **Content**
+
 We get movie data from a large movie database (TMDb). We call the database's API to retireve this data, which is later displayed on the site.
 
 We also collect user input. A user can register an account, leave a review on a film, or make a reply to a review. We have left some sample reviews and replies which can be seen under the film Frozen (not the sequel), which can be found by searching "Frozen" under the search by title option. (Note: The film Frozen II may not have any available reviews). 
