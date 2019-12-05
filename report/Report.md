@@ -44,22 +44,23 @@ To authorize users, we used Firebase OAuth which we use to allow users to sign-u
 
 ### Who Implemented What
 Jingsong Tan:
-  *API calls (TMDB)
-  *Movie details page, add-review component, add-reply component. (Angular Material, Bootstrap) 
-  *General website styling. (Angular Material, Bootstrap)
+  * API calls (TMDB)
+  * Movie details page, add-review component, add-reply component. (Angular Material, Bootstrap) 
+  * General website styling. (Angular Material, Bootstrap)
   
 Weiyu Feng:
-  *Movie details page, add-review component (Angular Material, Bootstrap)
-  *Authentication service. (Firebase OAuth)
-  *Review and reply services. (Firestore)
+  * Movie details page, add-review component (Angular Material, Bootstrap)
+  * Authentication service. (Firebase OAuth)
+  * Review and reply services. (Firestore)
   
 Joseph Vitale:
-  *Search page, preview component, profile page (Angular, Material)
-  *User service (Firestore, typescript)
-  *Auth guard (Firebase OAuth, typescript)
+  * Search page, preview component, profile page (Angular, Material)
+  * User service (Firestore, typescript)
+  * Auth guard (Firebase OAuth, typescript)
 
 ### Where to Look for Grading Purposes
 **Consistent Design and User Experience** 
+
 The application has a consistent font and color scheme. Similar Material UI components and Bootstrap were used to build the front-end components in order to give everything a cohesive and consistent look. Additionally, every main page (home, details, profile) shares the header bar, which allows a user to login, logout, navigat to profile page, or redirect to the home page. 
 
 The flow of site navigation is very intuitive. The search page generates results. By clicking on a result you view a preview modal (Material dialog) for a film result. From the preview modal, you can choose to navigate to the details page or continue searching. At the details pagem, the user may view informaiton, leave a review, or make a reply. If the user has not logged-in and tries to make a review or reply, they are prompted to do so. A user can also login at anytime through the login option in the header bar. When they are done viewing movie information, reviewing, or replying, they can navigate back home by clicking the home icon on the header bar or navigate to their profile page by selecting the option "View Profile" which appears by selecting their username in the header bar.
@@ -67,6 +68,7 @@ The flow of site navigation is very intuitive. The search page generates results
 The search page changes based on the tab selected (search by title, explore, find popular). Also, depending on the search method and input entered, the page is populated with different movie results. The preview and details page show information specific to the selected film. The profile page also only shows information specific to the current, logged-in user.
 
 **Well-Structured**
+
 All interfaces, which are used in many components and services, are all defined in one file, type.ts. Therefore, if one component needs to alter an interface due to an unforeseen need, it automatically updates all other components so they are all compatible without needing to go through each component that uses the interface and changing it manually. 
 
 The header bar, which is present on everypage, is its own component (/Components/header-bar) with its own .ts, .html, and .css files. We display this component along with the root component on every page. This way, the root can change based on the routing module, while the header remains constantly rendered at the top of the page.
@@ -76,6 +78,7 @@ Back-end code is organized into three services for the three main functionalitie
 Front-end components are organized into two folders, Pages for main pages (home page, details page, profile page) and Components for smaller page components (headers, modals, dialogs). 
 
 **Authentication**
+
 Our app implements the auth guard as shown in the "Grade Distribution App" class example. There is private content. A user must be logged-in to leave a review, make a reply, or view their profile page. If they are viewing their profile page and logout, they are redirected to the homepage and cannot navigate back. There is also public content. A user does not need to be logged-in the search films or view movie information. 
 
 There are visual cues as well. If they are not logged-in, the header bar has a 'login' button. If they are logged-in, the header bar displays their username.
@@ -85,6 +88,7 @@ A user can logout by selecting their username in the header bar, then selecting 
 If a user logs in, but then logs out, they will not be able to review, reply, or view their profile page.
 
 **Architecture**
+
 Our code is organized according to Model-View-Controller architecture. 
 
 The M, model, is the database API and our Firebase Firestore database. These two entities together store the data on films, reviews, replies, and users.
@@ -96,11 +100,13 @@ The View, our Angular front-end components, are organized into Pages and Compone
 We use Angular and utilize services and define all our interfaces in the type.ts file.
 
 **Persistent**
+
 Users can register accounts and leave reviews or replies on the site. Data for registered users and reviews are stored persistently using Firebase's Firestore. User authentication information is stored persistently using Firebase OAuth. 
 
 A user can sign-up, leave a review, or make a reply (save data). The user stays logged-in and the reviews and replies remain even after a refresh. After a log out, they can login again (load data). Also, when they navigate to their profile page, their review data is loaded onto the page. 
 
-**Provide some Security**
+**Security**
+
 Our site uses HTTPS and has a valid SSL certificate, which can be proven by the secured symbol in the browser's URL. 
 
 We use Firebase OAuth to store sensitive user information such as passwords. We use an Auth Guard so that only logged-in users can view their profile page and leave a review. The profile page cannot be URL-hacked because it checks that a user is authenticated and logged-in.
@@ -108,6 +114,7 @@ We use Firebase OAuth to store sensitive user information such as passwords. We 
 All of our form inputs utilize a FormControl with Validators to ensure valid input before submission. These can be seen in the components for home-page, review-component, reply-component, and login-component. 
 
 **Responsive**
+
 We used Bootstrap and Angular Material UI Components to create the front-end. Using these made it very easy to create an user interface that looks presentable on all window sizes. The site looks presentable on all screen sizes.
 
 **Content**
@@ -118,6 +125,7 @@ We also collect user input. A user can register an account, leave a review on a 
 There is also a test user. To login, select login, then login by email. The email for this user is 'test100@test.com' and the password is 'password'. This user should also have left some reviews, which can be viewed under their profile page. 
 
 **Error Handling**
+
 All of our form inputs utilize a FormControl with Validators to ensure valid input before submission. Error messages are showns dynamically using <mat-error> tags. There are form inputs on the following pages and components:
   Search page (/home): Form inputs under search by title and explore films tabs.
   Details page (/details/:movieID): Form inputs under 
@@ -125,17 +133,21 @@ All of our form inputs utilize a FormControl with Validators to ensure valid inp
  If a user enters incorrect login information, they are given a popup message "Unable to login".
 
 **Publicly Viewable**
+
 Our app is publically available on a Firebase server. The app can be viewed by navigating the to link provided above.
 
 **Overall Purpose**
-This application serves a clear overall purpose, and is very practical and useful. The purpose is describes in the Problem and Solution selections of this report.
 
-There is also an About US page on the site, which can be found under the About Us tab on the home page where you can view information about the team and the application.
+This application serves a clear overall purpose, and is very practical and useful. The purpose is described in the Problem and Solution sections of this report.
+
+There is also an About US page on the site, which can be found under the "About Us" tab on the home page where you can view information about the team and the application.
 
 ## Knowledge Gained
+
 In developing this app, we gained a lot of knowledge over API calls, Firestore, Firebase OAuth, and Angular Material. We learned how to handle data retireved from an API asyncronously using RxJS Observables and Promises. We learned how to structure and handle data in a NoSQL, document-based database by utilizing collections and nesting. We learned how to keep track on if a user is logged in and authorized and limit access to certain areas on the site using an Auth Guard. We learned about many Material UI Components to quickly create a highly functional user interface.
 
 ## Future Work
+
 Our app is responsive and looks presentable on all devices, however if we had more time, we would ideally develop mobile apps of iOS and Android. 
 
 We would add a responsive chart for a film's rating.
