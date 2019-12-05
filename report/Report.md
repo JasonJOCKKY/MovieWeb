@@ -123,7 +123,7 @@ We get movie data from a large movie database (TMDb). We call the database's API
 
 We also collect user input. A user can register an account, leave a review on a film, or make a reply to a review. We have left some sample reviews and replies which can be seen under the film Frozen (not the sequel), which can be found by searching "Frozen" under the search by title option. (Note: The film Frozen II may not have any available reviews). 
 
-There is also a test user. To login, select login, then login by email. The email for this user is 'test100@test.com' and the password is 'password'. This user should also have left some reviews, which can be viewed under their profile page. 
+There is also a test user. To login, select login, then login by email. The email for this user is 'test@test.com' and the password is 'Password'. This user should also have left some reviews, which can be viewed under their profile page. 
 
 **Error Handling**
 
