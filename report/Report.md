@@ -26,13 +26,6 @@ If they choose to view more information for a film, they will be able to see det
 
 There should also be a login feature. A logged-in user should be able to view a list of all reviews they have left. 
 
-Angular. (n.d.). Angular Material. Retrieved December 2, 2019, from https://material.angular.io/.
-
-
-angular/angularfire. (2019, May 21). Retrieved December 2, 2019, from https://github.com/angular/angularfire/tree/master/docs/firestore.
-
-
-
 ## Implementation
 ### Technologies
 To build the website, we decided to use Angular, as we are all familiar with the framework as well as for its ability to quickly and easily create dynamic web applications. Angular also made it easy to neatly seperate our code into front-end components and back-end services. This aided collaboration and allowed us to develop different components of the app simultaneously. For reference, we used the official angular documentation (https://angular.io/docs).
